@@ -1,0 +1,23 @@
+OVERVIEW
+
+The purpose of the Arch Decision plugin for Redmine is to allow teams to collaborate on project decisions (primarily technical ones), 
+to encourage explicit statements of assumptions and prioritizations, and to provide tracking after the decision has been made so that
+teams can have a collective memory as to how decisions were made in the past.
+
+CURRENT FEATURES
+
+* List Arch Decisions (currently only manually, via the /arch_decisions URL)
+* List Factors (currently only manually, via the /factors URL)
+* CRUD Arch Decisions (with only basic info)
+* CRUD Factors (with only basic info)
+* Associate Factors with ADs, and remove associations
+
+ROADMAP
+
+* Add menu options to access the plugin pages
+* Associate Factors and ADs with projects (currently, not sure whether or not their scope should be limited to projects, since they often will be useful to more than one)
+* Add statuses to Factors and ADs for a basic workflow (including an investigative phase, a resolution phase, implementation and deprecation)
+* Add a discussion forum to both ADs and Factors
+* Allow configuration of notifications for these discussions and status change events
+* Allow associations between ADs and Issues
+* Allow tagging of ADs and Factors for easy and flexible categorization and search
