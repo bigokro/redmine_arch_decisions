@@ -1,0 +1,54 @@
+<div class="contextual">
+<!-- TODO: Change to link_to_if_authorized --> 
+<%= link_to(l(:button_edit), {:action => 'edit', :id => @factor}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+</div>
+<h2><%=l(:label_factor)%> #<%= @factor.id %></h2> 
+	
+<div class="issue details">
+	<h3><%=h @factor.summary%></h3>
+	<p class="author">
+		<%= l(:label_created_time, distance_of_time_in_words(Time.now, @factor.created_on)) + '.' %>
+		<%= l(:label_updated_time, distance_of_time_in_words(Time.now, @factor.updated_on)) + '.' if @factor.created_on != @factor.updated_on %>
+	</p>
+
+	<hr />
+	<p><strong><%=l(:field_details)%></strong></p>
+	<div class="wiki">
+		<%= textilizable @factor.details%>	
+	</div>
+
+	<hr />
+	<p><strong><%=l(:field_evidence)%></strong></p>
+	<div class="wiki">
+		<%= textilizable @factor.evidence%>	
+	</div>
+
+</div>
+
+<table class="list">
+  <thead><tr>
+	<th><%=l(:field_id)%></th>
+	<th><%=l(:label_arch_decisions_related)%></th>
+    <th></th>
+  </tr></thead>
+  <tbody>
+<% for ad in @factor.arch_decisions %>
+  <tr class="<%= cycle("odd", "even") %>">
+	<td><%= ad.id %></td>
+	<td><%= link_to(h(ad.summary), :controller => 'arch_decisions', :action => 'show', :id => ad) %></td>
+	<td align="center" style="width:10%"></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+<div class="splitcontentright">
+<% content_for :sidebar do %>
+    <h3><%= l(:field_created_on) %></h3>
+    <p><span class="icon icon-time"><%= @factor.created_on %></span></p>
+
+    <h3><%= l(:field_updated_on) %></h3>
+    <p><span class="icon icon-time"><%= @factor.updated_on %></span></p>
+<% end %>
+
+<% html_title(l(:label_factor)) -%>

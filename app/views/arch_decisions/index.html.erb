@@ -1,0 +1,44 @@
+<div class="contextual">
+<%= link_to l(:label_arch_decision_new), {:controller => 'arch_decisions', :action => 'new'}, :class => 'icon icon-add' %>
+</div>
+
+<h2><%=l(:label_arch_decision_plural)%></h2>
+
+<% form_tag({}, :method => :get) do %>
+<fieldset><legend><%= l(:label_filter_plural) %></legend>
+<label><%= l(:label_arch_decision) %>:</label>
+<%= text_field_tag 'summary', params[:summary], :size => 30 %>
+<%= submit_tag l(:button_apply), :class => "small", :name => nil %>
+</fieldset>
+<% end %>
+&nbsp;
+
+<table class="list">
+  <thead><tr>
+	<%= sort_header_tag('id', :caption => l(:label_id)) %>
+	<%= sort_header_tag('summary', :caption => l(:label_arch_decision)) %>
+	<th><%=l(:field_details)%></th>
+	<%= sort_header_tag('created_on', :caption => l(:field_created_on), :default_order => 'desc') %>
+    <th></th>
+  </tr></thead>
+  <tbody>
+<% for ad in @arch_decisions %>
+  <tr class="<%= cycle("odd", "even") %>">
+	<td><%= ad.id %></td>
+	<td><%= link_to(h(ad.summary), :action => 'show', :id => ad) %></td>
+	<td><%= textilizable ad.problem_description, :arch_decision => ad %></td>
+	<td align="center"><%= format_date(ad.created_on) %></td>
+	  <td align="center" style="width:10%">
+	    <small><%= link_to(l(:button_delete), 
+							{ :action => 'destroy', :id => ad }, 
+							:confirm => l(:text_arch_decision_destroy_confirmation, ad.id), 
+							:class => 'icon icon-del') %></small>
+ 	 </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+<p class="pagination"><%= pagination_links_full @arch_decision_pages, @arch_decision_count %></p>
+
+<% html_title(l(:label_arch_decision_plural)) -%>

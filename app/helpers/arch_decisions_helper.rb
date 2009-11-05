@@ -1,0 +1,2 @@
+module ArchDecisionsHelper
+end

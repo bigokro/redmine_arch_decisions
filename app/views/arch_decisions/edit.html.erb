@@ -1,0 +1,4 @@
+<% labelled_tabular_form_for :arch_decision, @arch_decision, :url => { :action => "edit", :id => @arch_decision } do |f| %>
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_save) %>
+<% end %>

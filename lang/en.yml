@@ -1,0 +1,26 @@
+field_id: ID
+field_summary: Summary
+field_details: Details
+field_evidence: Evidence
+field_problem_description: Problem Description
+field_resolution: Resolution
+field_created_on: Created on
+field_updated_on: Updated on
+
+label_id: ID
+label_factor: Factor
+label_factor_plural: Factors
+label_factor_new: New Factor
+label_factor_add: Add Factor
+label_factors_prioritized: Factors (in order of importance)
+label_created_time: Created %s ago
+label_arch_decision: Arch Decision
+label_arch_decision_plural: Arch Decisions
+label_arch_decision_new: New Arch Decision
+label_arch_decisions_related: Related Arch Decisions
+
+button_remove: Remove
+
+text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;%s and all its content ?
+text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;%s and all its content ?
+text_arch_decision_factor_remove_confirmation: Remove Factor &#35;%s from this Arch Decision ?
