@@ -2,11 +2,11 @@
 
 <div class="box">
 <!--[form:factor]-->
-<p><%= f.text_field :summary, :size => 100, :required => true %><br /><em><%= l(:text_caracters_maximum, Factor::SUMMARY_MAX_SIZE) %></em></p>
+<p><%= f.text_field :summary, :size => 100, :required => true, :tabindex => autotab %><br /><em><%= l(:text_caracters_maximum, Factor::SUMMARY_MAX_SIZE) %></em></p>
 
-<p><%= f.text_area :details, :rows => 5, :class => 'wiki-edit' %></p>
+<p><%= f.text_area :details, :rows => 5, :class => 'wiki-edit', :tabindex => autotab %></p>
 
-<p><%= f.text_area :evidence, :rows => 5, :class => 'wiki-edit' %></p>
+<p><%= f.text_area :evidence, :rows => 5, :class => 'wiki-edit', :tabindex => autotab %></p>
 
 <%= wikitoolbar_for 'factor_details' %>
 <%= wikitoolbar_for 'factor_evidence' %>

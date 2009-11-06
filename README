@@ -4,6 +4,19 @@ The purpose of the Arch Decision plugin for Redmine is to allow teams to collabo
 to encourage explicit statements of assumptions and prioritizations, and to provide tracking after the decision has been made so that
 teams can have a collective memory as to how decisions were made in the past.
 
+VERSION: 0.0.2
+
+RELEASE NOTES
+*IMPORTANT NOTICE* If you've previously installed Arch Decisions, you may have to start over (or manually update the database). There were some 
+changes made to the pre-existing migration scripts. All future changes will be incremental, but these were fundamental enough that I wanted to
+start over.
+
+* Added project menus
+* Arch Decisions now an optional project module
+* ADs now linked to a specific project
+* Added easy form tabbing
+* Users now associated with factors and ADs via "created_by" and "assigned_to" (although not yet visible on the screens)
+
 CURRENT FEATURES
 
 * List Arch Decisions (currently only manually, via the /arch_decisions URL)
@@ -14,10 +27,25 @@ CURRENT FEATURES
 
 ROADMAP
 
-* Add menu options to access the plugin pages
-* Associate Factors and ADs with projects (currently, not sure whether or not their scope should be limited to projects, since they often will be useful to more than one)
+* Ability to reorder factor prioritization
 * Add statuses to Factors and ADs for a basic workflow (including an investigative phase, a resolution phase, implementation and deprecation)
+* Integration with standard Redmine users and security
 * Add a discussion forum to both ADs and Factors
 * Allow configuration of notifications for these discussions and status change events
 * Allow associations between ADs and Issues
 * Allow tagging of ADs and Factors for easy and flexible categorization and search
+
+KNOWN ISSUES
+
+  ################################
+  # [timothy.high@gmail.com] 
+  # There is a problem in development mode with classes reloading / not reloading
+  # It shows up as errors in the web page such as:
+  #   Project(#51730400) expected, got Project(#50128210)
+  # For more information, see http://dev.rubyonrails.org/ticket/8246
+  ################################
+  
+  A number of solutions are recommended in the ticket above. Of all the ones recommended (there are several changes to environment.rb), the only one
+  that worked was to patch association_proxy.rb. For more info, see:
+  http://groups.google.com/group/rubyonrails-talk/browse_thread/thread/d2adc451ff0236c2/b95a3bc9cb97f988?#b95a3bc9cb97f988
+  

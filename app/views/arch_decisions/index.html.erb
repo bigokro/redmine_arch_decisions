@@ -1,5 +1,5 @@
 <div class="contextual">
-<%= link_to l(:label_arch_decision_new), {:controller => 'arch_decisions', :action => 'new'}, :class => 'icon icon-add' %>
+<%= link_to l(:label_arch_decision_new), {:controller => 'arch_decisions', :project_id => @project, :action => 'new'}, :class => 'icon icon-add' %>
 </div>
 
 <h2><%=l(:label_arch_decision_plural)%></h2>
@@ -7,6 +7,7 @@
 <% form_tag({}, :method => :get) do %>
 <fieldset><legend><%= l(:label_filter_plural) %></legend>
 <label><%= l(:label_arch_decision) %>:</label>
+<%= hidden_field_tag('project_id', value = @project.id) %>
 <%= text_field_tag 'summary', params[:summary], :size => 30 %>
 <%= submit_tag l(:button_apply), :class => "small", :name => nil %>
 </fieldset>
@@ -25,12 +26,12 @@
 <% for ad in @arch_decisions %>
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= ad.id %></td>
-	<td><%= link_to(h(ad.summary), :action => 'show', :id => ad) %></td>
+	<td><%= link_to(h(ad.summary), :project_id => @project, :action => 'show', :id => ad) %></td>
 	<td><%= textilizable ad.problem_description, :arch_decision => ad %></td>
 	<td align="center"><%= format_date(ad.created_on) %></td>
 	  <td align="center" style="width:10%">
 	    <small><%= link_to(l(:button_delete), 
-							{ :action => 'destroy', :id => ad }, 
+							{ :action => 'destroy', :project_id => @project, :id => ad }, 
 							:confirm => l(:text_arch_decision_destroy_confirmation, ad.id), 
 							:class => 'icon icon-del') %></small>
  	 </td>

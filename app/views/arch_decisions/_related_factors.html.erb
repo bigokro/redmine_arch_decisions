@@ -6,20 +6,22 @@
   <thead><tr>
 	<th><%=l(:field_id)%></th>
 	<th><%=l(:label_factors_prioritized)%></th>
-    <th><%= link_to l(:label_factor_add), {:controller => 'factors', :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision}, :popup => ['choose_factor', 'height=400,width=680'], :class => 'icon icon-add' %></th>
+    <th><%= link_to l(:label_factor_add), {:controller => 'factors', :project_id => @project, :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision}, :popup => ['choose_factor', 'height=400,width=680'], :class => 'icon icon-add' %></th>
   </tr></thead>
   <tbody>
 <% for factor in @arch_decision.factors %>
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= factor.id %></td>
-	<td><%= link_to(h(factor.summary), :controller => 'factors', :action => 'show', :id => factor) %></td>
+	<td><%= link_to(h(factor.summary), :controller => 'factors', :project_id => @project, :action => 'show', :id => factor) %></td>
     <td align="center" style="width:10%; white-space:nowrap;">
       <small><%= link_to_remote (l(:button_remove), 
-								{ :url => "/arch_decisions/remove_factor/#{@arch_decision.id}/#{factor.id}",
+								#{ :url => "projects/#{@project.identifier}/arch_decisions/remove_factor/#{@arch_decision.id}/#{factor.id}",
+								{ :url => { :project_id => @project, :action => 'remove_factor', :id => @arch_decision, :factor_id => factor},
 									:confirm => l(:text_arch_decision_factor_remove_confirmation, factor.id) },
 								:class => 'icon icon-del')  %></small>
       <small><%= link_to_remote l(:button_delete), 
-								{ :url => "/arch_decisions/destroy_factor/#{@arch_decision.id}/#{factor.id}", 
+								#{ :url => "projects/#{@project.identifier}/arch_decisions/destroy_factor/#{@arch_decision.id}/#{factor.id}", 
+								{ :url => { :project_id => @project, :action => 'destroy_factor', :id => @arch_decision, :factor_id => factor},
 									:confirm => l(:text_factor_destroy_confirmation, factor.id) },  
 								:class => 'icon icon-del' %></small>
     </td>
@@ -28,7 +30,7 @@
   <tr class="<%= cycle("odd", "even") %>" id="new_factor_form_row">
 	<td></td>
 	<td colspan="2">
-<% remote_form_for(:factor, @arch_decision, :url => { :action => "new_factor", :id => @arch_decision }, :html => { :id => "factor" }) do |f| %>
+<% remote_form_for(:factor, @arch_decision, :url => { :project_id => @project, :action => "new_factor", :id => @arch_decision }, :html => { :id => "factor" }) do |f| %>
 	  <%= f.text_field :summary, :size => 100, :required => true %>
 	  <small>
 	  <%= submit_tag l(:button_save) %>

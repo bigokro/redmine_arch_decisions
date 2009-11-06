@@ -1,8 +1,11 @@
 class FactorsController < ApplicationController
   unloadable
+  before_filter :load_project
+#  before_filter :authorize
 
   helper :sort
   include SortHelper  
+  helper :arch_decisions
 
   def index
     sort_init 'id', 'asc'
@@ -46,12 +49,11 @@ class FactorsController < ApplicationController
 
   def new
     @factor = Factor.new(params[:factor])
-    if request.get?
-      # Do something?
-    else
+    if request.post?
+      @factor.created_by = User.current
       if @factor.save
         flash[:notice] = l(:notice_successful_create)
-        redirect_to( :action => 'show', :id => @factor )
+        redirect_to( :action => 'show', :project_id => @project, :id => @factor )
         return
       end   
     end
@@ -63,7 +65,7 @@ class FactorsController < ApplicationController
       @factor = Factor.find(params[:id])
       if @factor.update_attributes(params[:factor])
         flash[:notice] = l(:notice_successful_update)
-        redirect_to :action => 'show', :id => @factor
+        redirect_to :action => 'show', :project_id => @project, :id => @factor
       else
         show
         render :action => 'show'
@@ -79,7 +81,13 @@ class FactorsController < ApplicationController
     if @factor.destroy
       flash[:notice] = l(:notice_successful_delete)
     end
-    redirect_to :action => 'index'
+    redirect_to :action => 'index', :project_id => @project
+  end
+
+  private
+
+  def load_project
+    @project = Project.find(params[:project_id])
   end
 
 end

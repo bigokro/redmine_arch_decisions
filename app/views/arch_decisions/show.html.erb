@@ -1,6 +1,6 @@
 <div class="contextual">
 <!-- TODO: Change to link_to_if_authorized --> 
-<%= link_to(l(:button_edit), {:action => 'edit', :id => @arch_decision}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+<%= link_to(l(:button_edit), {:project_id => @project, :action => 'edit', :id => @arch_decision}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
 </div>
 <h2><%=l(:label_arch_decision)%> #<%= @arch_decision.id %></h2> 
 	

@@ -9,10 +9,14 @@ class ArchDecision < ActiveRecord::Base
   
   has_many :arch_decision_factors, :dependent => :destroy
   has_many :factors, :through => :arch_decision_factors, :order => "priority"
+  belongs_to :project
+  belongs_to :created_by, :class_name =>"User", :foreign_key => 'created_by_id'
+  belongs_to :assigned_to, :class_name =>"User", :foreign_key => 'assigned_to_id'
+  
   
   acts_as_searchable :columns => ['summary', 'problem_description', 'resolution'], :arch_decision_key => 'id', :permission => nil
   
-  validates_presence_of :summary
+  validates_presence_of :summary, :project, :created_by
   validates_length_of :summary, :maximum => SUMMARY_MAX_SIZE
   
   

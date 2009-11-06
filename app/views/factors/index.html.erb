@@ -1,6 +1,6 @@
 <% if !@popup %>
 	<div class="contextual">
-	<%= link_to l(:label_factor_new), {:controller => 'factors', :action => 'new'}, :class => 'icon icon-add' %>
+	<%= link_to l(:label_factor_new), {:controller => 'factors', :project_id => @project, :action => 'new'}, :class => 'icon icon-add' %>
 	</div>
 
 	<h2><%=l(:label_factor_plural)%></h2>
@@ -12,6 +12,7 @@
 <fieldset><legend><%= l(:label_filter_plural) %></legend>
 <label><%= l(:label_factor) %>:</label>
 <%= text_field_tag 'summary', params[:summary], :size => 30 %>
+<%= hidden_field_tag('project_id', value = @project.id) %>
 <%= hidden_field_tag('arch_decision_id', value = @arch_decision.id) if @popup %>
 <%= hidden_field_tag('mode', value = 'popup') if @popup %>
 <%= submit_tag l(:button_apply), :class => "small", :name => nil %>
@@ -34,16 +35,16 @@
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= factor.id %></td>
 	<% if !@popup %>
-		<td><%= link_to(h(factor.summary), :action => 'show', :id => factor) %></td>
+		<td><%= link_to(h(factor.summary), :project_id => @project, :action => 'show', :id => factor) %></td>
 	<% else %>
-		<td><%= link_to h(factor.summary), "/arch_decisions/add_factor/#{@arch_decision.id}/#{factor.id}" %></td>
+		<td><%= link_to h(factor.summary), "/projects/#{@project.id}/arch_decisions/add_factor/#{@arch_decision.id}/#{factor.id}" %></td>
 	<% end %>
 	<td><%= textilizable factor.details, :factor => factor %></td>
 	<td align="center"><%= format_date(factor.created_on) %></td>
 	<% if !@popup %>
 	  <td align="center" style="width:10%">
 	    <small><%= link_to(l(:button_delete), 
-							{ :action => 'destroy', :id => factor }, 
+							{ :project_id => @project, :action => 'destroy', :id => factor }, 
 							:confirm => l(:text_factor_destroy_confirmation, factor.id), 
 							:class => 'icon icon-del') %></small>
 	  </td>

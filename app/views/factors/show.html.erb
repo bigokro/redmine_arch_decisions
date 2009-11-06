@@ -1,6 +1,6 @@
 <div class="contextual">
 <!-- TODO: Change to link_to_if_authorized --> 
-<%= link_to(l(:button_edit), {:action => 'edit', :id => @factor}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+<%= link_to(l(:button_edit), {:action => 'edit', :project_id => @project, :id => @factor}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
 </div>
 <h2><%=l(:label_factor)%> #<%= @factor.id %></h2> 
 	
@@ -35,7 +35,7 @@
 <% for ad in @factor.arch_decisions %>
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= ad.id %></td>
-	<td><%= link_to(h(ad.summary), :controller => 'arch_decisions', :action => 'show', :id => ad) %></td>
+	<td><%= link_to(h(ad.summary), :controller => 'arch_decisions', :project_id => @project, :action => 'show', :id => ad) %></td>
 	<td align="center" style="width:10%"></td>
   </tr>
 <% end %>

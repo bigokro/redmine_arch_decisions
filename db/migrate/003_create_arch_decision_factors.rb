@@ -7,8 +7,7 @@ class CreateArchDecisionFactors < ActiveRecord::Migration
     end
     add_index :arch_decision_factors, :arch_decision_id, :name => :arch_decision_factors_arch_decision_id
     add_index :arch_decision_factors, :factor_id, :name => :arch_decision_factors_factor_id
-    add_index :arch_decision_factors, :factor_id, :name => :arch_decision_factors_factor_id
-    add_index :arch_decision_factors, :arch_decision_id, :factor_id, :unique => true, :name => :arch_decision_factors_unique_pair
+    add_index :arch_decision_factors, [:arch_decision_id, :factor_id], :unique => true, :name => :arch_decision_factors_unique_pair
   end
 
   def self.down
