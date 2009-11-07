@@ -2,10 +2,12 @@ class ArchDecisionsController < ApplicationController
   unloadable
 
   before_filter :load_page_model, :except => [:index, :new]
+  before_filter :set_updated_by, :except => [:index, :new, :destroy, :show]
 #  before_filter :authorize
 
   helper :sort
   include SortHelper  
+  helper :arch_decisions
 
   def index
     sort_init 'id', 'asc'
@@ -35,7 +37,6 @@ class ArchDecisionsController < ApplicationController
 
 
   def show
-    load_page_model
   end
 
 
@@ -45,6 +46,7 @@ class ArchDecisionsController < ApplicationController
     if request.post?
       @arch_decision.project = @project
       @arch_decision.created_by = User.current
+      @arch_decision.updated_by = User.current
       if @arch_decision.save
         flash[:notice] = l(:notice_successful_create)
         redirect_to( :action => 'show', :project_id => @project, :id => @arch_decision )
@@ -55,7 +57,6 @@ class ArchDecisionsController < ApplicationController
 
   def edit
     if request.post?
-      load_page_model
       if @arch_decision.update_attributes(params[:arch_decision])
         flash[:notice] = l(:notice_successful_update)
         redirect_to :action => 'show', :project_id => @project, :id => @arch_decision
@@ -69,7 +70,6 @@ class ArchDecisionsController < ApplicationController
   end
 
   def destroy
-    load_page_model
     if @arch_decision.destroy
       flash[:notice] = l(:notice_successful_delete)
     end
@@ -77,9 +77,10 @@ class ArchDecisionsController < ApplicationController
   end
 
   def new_factor
-    load_page_model
+    # TODO: DRY this code with the FactorsController.new method
     @factor = Factor.new(params[:factor])
     @factor.created_by = User.current
+    @factor.updated_by = User.current
     priority = @arch_decision.factors.count + 1
     if @factor.save
       adf = ArchDecisionFactor.new({ :arch_decision_id => params[:id], 
@@ -91,13 +92,11 @@ class ArchDecisionsController < ApplicationController
   end
 
   def destroy_factor
-    load_page_model
     @arch_decision.destroy_factor(params[:factor_id].to_i)
     refresh_factors_table
   end
 
   def add_factor
-    load_page_model
     priority = @arch_decision.factors.count + 1
     adf = ArchDecisionFactor.new(:arch_decision_id => @arch_decision.id, 
                                   :factor_id => params[:factor_id],
@@ -107,16 +106,29 @@ class ArchDecisionsController < ApplicationController
   end
 
   def remove_factor
-    load_page_model
     @arch_decision.remove_factor(params[:factor_id].to_i)
     refresh_factors_table
   end
+
+  def reorder_factors
+    above_id = params[:above] ? params[:above].to_i : nil
+    below_id = params[:below] ? params[:below].to_i : nil
+    @arch_decision.prioritize_factor(above_id, below_id)
+    refresh_factors_table
+  end
+
 
   private 
 
   def load_page_model
     @arch_decision = ArchDecision.find(params[:id])
     @project = Project.find(params[:project_id])
+  end
+  
+  def set_updated_by
+    @arch_decision.updated_by = User.current
+    @arch_decision.updated_on = Time.now
+    @arch_decision.save
   end
   
   def refresh_factors_table

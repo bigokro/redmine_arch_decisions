@@ -7,8 +7,8 @@
 <div class="issue details">
 	<h3><%=h @factor.summary%></h3>
 	<p class="author">
-		<%= l(:label_created_time, distance_of_time_in_words(Time.now, @factor.created_on)) + '.' %>
-		<%= l(:label_updated_time, distance_of_time_in_words(Time.now, @factor.updated_on)) + '.' if @factor.created_on != @factor.updated_on %>
+		<%= l(:label_added_time_by, user_name(@factor.created_by), distance_of_time_in_words(Time.now, @factor.created_on)) + '.' %>
+		<%= l(:label_updated_time_by, user_name(@factor.updated_by), distance_of_time_in_words(Time.now, @factor.updated_on)) + '.' if @factor.created_on != @factor.updated_on %>
 	</p>
 
 	<hr />

@@ -5,6 +5,7 @@ class CreateFactors < ActiveRecord::Migration
       t.column :details, :text
       t.column :evidence, :text
       t.references :created_by, :class_name =>"User", :foreign_key => true, :null => false
+      t.references :updated_by, :class_name =>"User", :foreign_key => true, :null => false
       t.column "created_on", :timestamp
       t.column "updated_on", :timestamp
     end

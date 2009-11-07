@@ -10,9 +10,12 @@
   </tr></thead>
   <tbody>
 <% for factor in @arch_decision.factors %>
+  <% factor_div_id = "factor_#{factor.id}" %>
+  <% factor_target_id = "factor_target_#{factor.id}" %>
+  <tr><td colspan="3"><div id="<%= factor_target_id %>" class="drag-drop-target"></div></td></tr>
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= factor.id %></td>
-	<td><%= link_to(h(factor.summary), :controller => 'factors', :project_id => @project, :action => 'show', :id => factor) %></td>
+	<td><div id="<%= factor_div_id %>" style="cursor: -moz-grab;"><%= link_to(h(factor.summary), :controller => 'factors', :project_id => @project, :action => 'show', :id => factor) %></div></td>
     <td align="center" style="width:10%; white-space:nowrap;">
       <small><%= link_to_remote (l(:button_remove), 
 								#{ :url => "projects/#{@project.identifier}/arch_decisions/remove_factor/#{@arch_decision.id}/#{factor.id}",
@@ -26,7 +29,22 @@
 								:class => 'icon icon-del' %></small>
     </td>
   </tr>
+  <%= draggable_element(factor_div_id) %>
+  <%= drop_receiving_element(factor_target_id,		# The id of the receiving element
+	  :with   => "'above=' + (element.id.split('_').last()) + '&below=#{factor.id};'",     		# The query string parameters
+	  :url    => {:action=> 'reorder_factors', :project_id => @project, :id => @arch_decision}, # The action to call
+	  :hoverclass => "drag-drop-target-hover"
+  )%>
+
 <% end %>
+  <tr><td colspan="3"><div id="drop-to-bottom" class="drag-drop-target"></div></td></tr>
+  <%= drop_receiving_element('drop-to-bottom',
+	  :with   => "'below=' + (element.id.split('_').last()) + ';'",
+	  :url    => {:action=> 'reorder_factors', :project_id => @project, :id => @arch_decision},
+	  :hoverclass => "drag-drop-target-hover"
+  )%>
+
+
   <tr class="<%= cycle("odd", "even") %>" id="new_factor_form_row">
 	<td></td>
 	<td colspan="2">
@@ -51,6 +69,7 @@
 	function showForm() {
 		Element.hide('new_factor_link');
 		Element.show('new_factor_form_row');
+		Field.activate('factor_summary')
 	}
 	function hideForm() {
 		Element.hide('new_factor_form_row');
@@ -63,6 +82,12 @@
 	function callOnSubmit() {
 		var code = document.getElementById('factor').getAttribute('onsubmit');
 		eval(code);
+	}
+	function showDropTarget(target) {
+		Element.setStyle(target, "background-color: #000000;")
+	}
+	function showDropped(target) {
+		Element.setStyle(target, "background-color: #FF0000;")
 	}
 	cancelForm();
 </script>

@@ -6,6 +6,7 @@ class CreateArchDecisions < ActiveRecord::Migration
       t.column :resolution, :text
       t.references :project, :null => false
       t.references :created_by, :class_name =>"User", :foreign_key => true, :null => false
+      t.references :updated_by, :class_name =>"User", :foreign_key => true, :null => false
       t.references :assigned_to, :class_name =>"User", :foreign_key => true
       t.column "created_on", :timestamp
       t.column "updated_on", :timestamp

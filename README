@@ -16,6 +16,7 @@ start over.
 * ADs now linked to a specific project
 * Added easy form tabbing
 * Users now associated with factors and ADs via "created_by" and "assigned_to" (although not yet visible on the screens)
+* You can now drag/drop Factors on the AD screen to reorder their priorities
 
 CURRENT FEATURES
 
@@ -24,10 +25,10 @@ CURRENT FEATURES
 * CRUD Arch Decisions (with only basic info)
 * CRUD Factors (with only basic info)
 * Associate Factors with ADs, and remove associations
+* Reorder factor priorities for each AD
 
 ROADMAP
 
-* Ability to reorder factor prioritization
 * Add statuses to Factors and ADs for a basic workflow (including an investigative phase, a resolution phase, implementation and deprecation)
 * Integration with standard Redmine users and security
 * Add a discussion forum to both ADs and Factors

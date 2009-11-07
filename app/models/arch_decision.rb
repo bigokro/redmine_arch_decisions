@@ -11,12 +11,13 @@ class ArchDecision < ActiveRecord::Base
   has_many :factors, :through => :arch_decision_factors, :order => "priority"
   belongs_to :project
   belongs_to :created_by, :class_name =>"User", :foreign_key => 'created_by_id'
+  belongs_to :updated_by, :class_name =>"User", :foreign_key => 'updated_by_id'
   belongs_to :assigned_to, :class_name =>"User", :foreign_key => 'assigned_to_id'
   
   
   acts_as_searchable :columns => ['summary', 'problem_description', 'resolution'], :arch_decision_key => 'id', :permission => nil
   
-  validates_presence_of :summary, :project, :created_by
+  validates_presence_of :summary, :project, :created_by, :updated_by
   validates_length_of :summary, :maximum => SUMMARY_MAX_SIZE
   
   
@@ -24,6 +25,7 @@ class ArchDecision < ActiveRecord::Base
     adfs = self.arch_decision_factors.select{|adf| adf.factor_id == factor_id}
     if adfs[0]
       adfs[0].destroy
+      reload
       recalc_priorities
     else
       raise "No factors were found matching id #{factor_id}"
@@ -34,19 +36,43 @@ class ArchDecision < ActiveRecord::Base
     factors = self.factors.select{|f| f.id == factor_id}
     if factors[0]
       factors[0].destroy
+      reload
       recalc_priorities
     else
       raise "No factors were found matching id #{factor_id}"
     end
   end
 
+  # Changes priorities so that the Factor with id = above_id
+  # is given a higher priority than the one with id = below_id
+  # (all others in the list are adjusted accordingly)
+  # If below_id is nil, then the above_id Factor is moved to the top;
+  # If above_id is nil, then the below_id Factor is moved to the bottom
+  def prioritize_factor(above_id, below_id = nil)
+    priority = 1
+    if below_id
+      below = self.arch_decision_factors.select{|adf| adf.factor_id == below_id}[0]
+      priority = below.priority
+    end
+    if above_id == nil
+      below.priority = self.arch_decision_factors.count + 1
+    else
+      arch_decision_factors.sort{|a,b| a.priority <=> b.priority}.each{ |adf|
+        if adf.factor_id == above_id
+          adf.priority = priority
+        elsif adf.priority >= priority
+          adf.priority += 1
+        end
+      }
+    end
+    recalc_priorities
+  end
 
   
   private
   
   def recalc_priorities
     priority = 1
-    reload
     arch_decision_factors.sort{|a,b| a.priority <=> b.priority}.each{ |adf|
       adf.priority = priority
       adf.save!

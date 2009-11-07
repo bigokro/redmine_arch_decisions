@@ -51,6 +51,7 @@ class FactorsController < ApplicationController
     @factor = Factor.new(params[:factor])
     if request.post?
       @factor.created_by = User.current
+      @factor.updated_by = User.current
       if @factor.save
         flash[:notice] = l(:notice_successful_create)
         redirect_to( :action => 'show', :project_id => @project, :id => @factor )
@@ -63,6 +64,7 @@ class FactorsController < ApplicationController
   def edit
     if request.post?
       @factor = Factor.find(params[:id])
+      @factor.updated_by = User.current
       if @factor.update_attributes(params[:factor])
         flash[:notice] = l(:notice_successful_update)
         redirect_to :action => 'show', :project_id => @project, :id => @factor
