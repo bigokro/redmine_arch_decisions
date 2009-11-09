@@ -4,12 +4,24 @@
 </div>
 <h2><%=l(:label_arch_decision)%> #<%= @arch_decision.id %></h2> 
 	
-<div class="issue details">
+<div class="<%= css_arch_decision_classes(@arch_decision) %> details">
 	<h3><%=h @arch_decision.summary%></h3>
 	<p class="author">
 		<%= l(:label_added_time_by, user_name(@arch_decision.created_by), distance_of_time_in_words(Time.now, @arch_decision.created_on)) + '.' %>
 		<%= l(:label_updated_time_by, user_name(@arch_decision.updated_by), distance_of_time_in_words(Time.now, @arch_decision.updated_on)) + '.' if @arch_decision.created_on != @arch_decision.updated_on %>
 	</p>
+
+<table width="100%">
+<tr>
+    <td style="width:15%" class="status"><b><%=l(:field_status)%>:</b></td><td style="width:35%" class="status"><%= @arch_decision.status.name %></td>
+    <td style="width:15%" class="start-date"></td><td style="width:35%"></td>
+</tr>
+<tr>
+    <td class="assigned-to"><b><%=l(:field_assigned_to)%>:</b></td><td><%= avatar(@arch_decision.assigned_to, :size => "14") %><%= @arch_decision.assigned_to ? link_to_user(@arch_decision.assigned_to) : "-" %></td>
+    <td class="progress"></td><td class="progress"></td>
+</tr>
+</table>
+
 
 	<hr />
 	<p><strong><%=l(:field_problem_description)%></strong></p>

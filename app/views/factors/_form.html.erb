@@ -8,10 +8,11 @@
 
 <p><%= f.text_area :evidence, :rows => 5, :class => 'wiki-edit', :tabindex => autotab %></p>
 
+<p><%= f.select :status_id, (@factor_statuses.collect {|s| [s.name, s.id]}), { :required => true }, { :tabindex => autotab } %></p>
+
 <%= wikitoolbar_for 'factor_details' %>
 <%= wikitoolbar_for 'factor_evidence' %>
 
-<%= call_hook(:view_factors_form, :factor => @factor, :form => f) %>
 </div>
 
 <!--[eoform:factor]-->

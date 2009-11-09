@@ -22,10 +22,11 @@
 
 <table class="list">
   <thead><tr>
-	<%= sort_header_tag('id', :caption => l(:label_id)) %>
+	<%= sort_header_tag('id', :caption => '#', :default_order => 'desc') %>
+	<%= sort_header_tag('status_id', :caption => l(:field_status)) %>
 	<%= sort_header_tag('summary', :caption => l(:label_factor)) %>
-	<th><%=l(:field_details)%></th>
-	<%= sort_header_tag('created_on', :caption => l(:field_created_on), :default_order => 'desc') %>
+	<!-- th><%=l(:field_details)%></th -->
+	<%= sort_header_tag('updated_on', :caption => l(:field_updated_on), :default_order => 'desc') %>
 <% if !@popup %>
     <th></th>
 <% end %>
@@ -34,13 +35,14 @@
 <% for factor in @factors %>
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= factor.id %></td>
+	<td align="center" style="white-space:nowrap;"><%= factor.status.name %></td>
 	<% if !@popup %>
 		<td><%= link_to(h(factor.summary), :project_id => @project, :action => 'show', :id => factor) %></td>
 	<% else %>
 		<td><%= link_to h(factor.summary), "/projects/#{@project.id}/arch_decisions/add_factor/#{@arch_decision.id}/#{factor.id}" %></td>
 	<% end %>
-	<td><%= textilizable factor.details, :factor => factor %></td>
-	<td align="center"><%= format_date(factor.created_on) %></td>
+	<!-- td><%= textilizable factor.details, :factor => factor %></td -->
+	<td align="center" style="white-space:nowrap;"><%= format_time(factor.updated_on) %></td>
 	<% if !@popup %>
 	  <td align="center" style="width:10%">
 	    <small><%= link_to(l(:button_delete), 

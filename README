@@ -4,7 +4,7 @@ The purpose of the Arch Decision plugin for Redmine is to allow teams to collabo
 to encourage explicit statements of assumptions and prioritizations, and to provide tracking after the decision has been made so that
 teams can have a collective memory as to how decisions were made in the past.
 
-VERSION: 0.0.2.1
+VERSION: 0.0.3
 
 RELEASE NOTES
 *IMPORTANT NOTICE* If you've previously installed Arch Decisions 0.1, you may have to start over (or manually update the database). There were some 
@@ -18,6 +18,7 @@ start over.
 * Users now associated with factors and ADs via "created_by" and "assigned_to" (although not yet visible on the screens)
 * You can now drag/drop Factors on the AD screen to reorder their priorities
 * The Arch Decision show page offers the hotkey shortcuts 'n' and 'f' (for New Factor) and 'a' (for Add Factor)
+* ADs and Factors now have statuses (but no explicit workflow)
 
 CURRENT FEATURES
 
@@ -30,8 +31,7 @@ CURRENT FEATURES
 
 ROADMAP
 
-* Add statuses to Factors and ADs for a basic workflow (including an investigative phase, a resolution phase, implementation and deprecation)
-* Integration with standard Redmine users and security
+* Integration with standard Redmine security
 * Add a discussion forum to both ADs and Factors
 * Allow configuration of notifications for these discussions and status change events
 * Allow associations between ADs and Issues
@@ -41,6 +41,7 @@ ROADMAP
 KNOWN ISSUES
 
   ################################
+  # Issue #1
   # [timothy.high@gmail.com] 
   # There is a problem in development mode with classes reloading / not reloading
   # It shows up as errors in the web page such as:
@@ -51,4 +52,12 @@ KNOWN ISSUES
   A number of solutions are recommended in the ticket above. Of all the ones recommended (there are several changes to environment.rb), the only one
   that worked was to patch association_proxy.rb. For more info, see:
   http://groups.google.com/group/rubyonrails-talk/browse_thread/thread/d2adc451ff0236c2/b95a3bc9cb97f988?#b95a3bc9cb97f988
+  
+  ################################
+  # Issue #2
+  # [timothy.high@gmail.com] 
+  # Currently, when reordering priorities via drag and drop,
+  # If you drag the link itself (rather than the row), it activates the link,
+  # and opens up the "show" Arch Decision page, rather than performing a reordering
+  ################################
   

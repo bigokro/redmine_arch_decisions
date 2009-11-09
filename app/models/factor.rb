@@ -20,11 +20,12 @@ class Factor < ActiveRecord::Base
 
   has_many :arch_decision_factors, :dependent => :destroy
   has_many :arch_decisions, :through => :arch_decision_factors
+  belongs_to :status, :class_name => "FactorStatus", :foreign_key => 'status_id'
   belongs_to :created_by, :class_name =>"User", :foreign_key => 'created_by_id'
   belongs_to :updated_by, :class_name =>"User", :foreign_key => 'updated_by_id'
   
   acts_as_searchable :columns => ['id', 'summary', 'details', 'evidence'], :factor_key => 'id', :permission => nil
 
-  validates_presence_of :summary
+  validates_presence_of :summary, :status
   validates_length_of :summary, :maximum => SUMMARY_MAX_SIZE
 end

@@ -8,6 +8,10 @@
 
 <p><%= f.text_area :resolution, :rows => 5, :class => 'wiki-edit', :tabindex => autotab %></p>
 
+<p><%= f.select :status_id, (@arch_decision_statuses.collect {|s| [s.name, s.id]}), { :required => true }, { :tabindex => autotab } %></p>
+
+<p><%= f.select :assigned_to_id, (@arch_decision.assignable_users.collect {|u| [u.name, u.id]}), { :include_blank => true} , { :tabindex => autotab }  %></p>
+
 <%= wikitoolbar_for 'arch_decision_problem_description' %>
 <%= wikitoolbar_for 'arch_decision_resolution' %>
 </div>

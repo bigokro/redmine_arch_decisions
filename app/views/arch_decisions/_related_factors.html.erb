@@ -5,6 +5,7 @@
 <table class="list">
   <thead><tr>
 	<th><%=l(:field_id)%></th>
+	<th><%=l(:field_status)%></th>
 	<th><%=l(:label_factors_prioritized)%></th>
     <th><%= link_to l(:label_factor_add), {:controller => 'factors', :project_id => @project, :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision}, :popup => ['choose_factor', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_factor_link' %></th>
   </tr></thead>
@@ -17,6 +18,7 @@
   <tr class="<%= row_class %>"><td colspan="3"><div id="<%= factor_target_id %>" class="drag-drop-target"></div></td></tr>
   <tr class="<%= row_class %>">
 	<td><%= factor.id %></td>
+    <td align="center" style="width:10%; white-space:nowrap;"><%= factor.status.name %></td>
 	<td><div id="<%= factor_div_id %>" style="cursor: -moz-grab;"><%= link_to(h(factor.summary), :controller => 'factors', :project_id => @project, :action => 'show', :id => factor) %></div></td>
     <td align="center" style="width:10%; white-space:nowrap;">
       <small><%= link_to_remote (l(:button_remove), 

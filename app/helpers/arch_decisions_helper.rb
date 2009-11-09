@@ -10,4 +10,13 @@ module ArchDecisionsHelper
     user.respond_to?(:name) ? user.name : user.login
   end
 
+  # Returns a string of css classes that apply to the given AD
+  def css_arch_decision_classes(ad)
+    s = "issue"
+    s << ' closed' unless ad.status.relevant?
+    s << ' created-by-me' if User.current.logged? && ad.created_by_id == User.current.id
+    s << ' assigned-to-me' if User.current.logged? && ad.assigned_to_id == User.current.id
+    s
+  end
+  
 end

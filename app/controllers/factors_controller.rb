@@ -8,8 +8,8 @@ class FactorsController < ApplicationController
   helper :arch_decisions
 
   def index
-    sort_init 'id', 'asc'
-    sort_update %w(id summary created_on)
+    sort_init 'id', 'desc'
+    sort_update %w(id summary status_id updated_on)
 
     c = ARCondition.new()
 
@@ -69,10 +69,12 @@ class FactorsController < ApplicationController
         flash[:notice] = l(:notice_successful_update)
         redirect_to :action => 'show', :project_id => @project, :id => @factor
       else
+        @factor_statuses = FactorStatus.find(:all)
         show
         render :action => 'show'
       end
     else
+      @factor_statuses = FactorStatus.find(:all)
       show
     end
   end

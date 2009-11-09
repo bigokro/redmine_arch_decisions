@@ -16,20 +16,24 @@
 
 <table class="list">
   <thead><tr>
-	<%= sort_header_tag('id', :caption => l(:label_id)) %>
+	<%= sort_header_tag('id', :caption => '#', :default_order => 'desc') %>
+	<%= sort_header_tag('status_id', :caption => l(:field_status)) %>
 	<%= sort_header_tag('summary', :caption => l(:label_arch_decision)) %>
-	<th><%=l(:field_details)%></th>
-	<%= sort_header_tag('created_on', :caption => l(:field_created_on), :default_order => 'desc') %>
+	<!-- th><%=l(:field_details)%></th -->
+	<%= sort_header_tag('assigned_to_id', :caption => l(:field_assigned_to)) %>
+	<%= sort_header_tag('updated_on', :caption => l(:field_updated_on), :default_order => 'desc') %>
     <th></th>
   </tr></thead>
   <tbody>
 <% for ad in @arch_decisions %>
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= ad.id %></td>
+	<td align="center" style="white-space:nowrap;"><%= ad.status.name %></td>
 	<td><%= link_to(h(ad.summary), :project_id => @project, :action => 'show', :id => ad) %></td>
-	<td><%= textilizable ad.problem_description, :arch_decision => ad %></td>
-	<td align="center"><%= format_date(ad.created_on) %></td>
-	  <td align="center" style="width:10%">
+	<!-- td><%= textilizable ad.problem_description, :arch_decision => ad %></td -->
+	<td align="center" style="white-space:nowrap;"><%= ad.assigned_to ? user_name(ad.assigned_to) : "-" %></td>
+	<td align="center" style="white-space:nowrap;"><%= format_time(ad.updated_on) %></td>
+	<td align="center" style="width:10%">
 	    <small><%= link_to(l(:button_delete), 
 							{ :action => 'destroy', :project_id => @project, :id => ad }, 
 							:confirm => l(:text_arch_decision_destroy_confirmation, ad.id), 

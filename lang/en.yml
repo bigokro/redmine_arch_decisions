@@ -7,11 +7,11 @@ field_resolution: Resolution
 field_created_on: Created on
 field_updated_on: Updated on
 
-label_id: ID
+label_id: #
 label_factor: Factor
 label_factor_plural: Factors
-label_factor_new: New Factor
-label_factor_add: Add Factor
+label_factor_new: <u>N</u>ew Factor
+label_factor_add: <u>A</u>dd Factor
 label_factors_prioritized: Factors (in order of importance <small>drag to reorder</small>)
 label_created_time: Created %s ago
 label_arch_decision: Arch Decision

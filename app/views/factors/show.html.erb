@@ -11,6 +11,13 @@
 		<%= l(:label_updated_time_by, user_name(@factor.updated_by), distance_of_time_in_words(Time.now, @factor.updated_on)) + '.' if @factor.created_on != @factor.updated_on %>
 	</p>
 
+<table width="100%">
+<tr>
+    <td style="width:15%" class="status"><b><%=l(:field_status)%>:</b></td><td style="width:35%" class="status"><%= @factor.status.name %></td>
+    <td style="width:15%" class="start-date"></td><td style="width:35%"></td>
+</tr>
+</table>
+
 	<hr />
 	<p><strong><%=l(:field_details)%></strong></p>
 	<div class="wiki">
