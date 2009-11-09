@@ -4,10 +4,10 @@ The purpose of the Arch Decision plugin for Redmine is to allow teams to collabo
 to encourage explicit statements of assumptions and prioritizations, and to provide tracking after the decision has been made so that
 teams can have a collective memory as to how decisions were made in the past.
 
-VERSION: 0.0.2
+VERSION: 0.0.2.1
 
 RELEASE NOTES
-*IMPORTANT NOTICE* If you've previously installed Arch Decisions, you may have to start over (or manually update the database). There were some 
+*IMPORTANT NOTICE* If you've previously installed Arch Decisions 0.1, you may have to start over (or manually update the database). There were some 
 changes made to the pre-existing migration scripts. All future changes will be incremental, but these were fundamental enough that I wanted to
 start over.
 
@@ -17,6 +17,7 @@ start over.
 * Added easy form tabbing
 * Users now associated with factors and ADs via "created_by" and "assigned_to" (although not yet visible on the screens)
 * You can now drag/drop Factors on the AD screen to reorder their priorities
+* The Arch Decision show page offers the hotkey shortcuts 'n' and 'f' (for New Factor) and 'a' (for Add Factor)
 
 CURRENT FEATURES
 
@@ -35,6 +36,7 @@ ROADMAP
 * Allow configuration of notifications for these discussions and status change events
 * Allow associations between ADs and Issues
 * Allow tagging of ADs and Factors for easy and flexible categorization and search
+* Record multiple "strategies" for each AD to track the different approaches considered, and highlight the one that was selected in the end
 
 KNOWN ISSUES
 

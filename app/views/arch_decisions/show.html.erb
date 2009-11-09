@@ -37,6 +37,8 @@
 <% end %>
 
 <% content_for :header_tags do %>
+    <%= javascript_include_tag 'shortcut', :plugin => 'redmine_arch_decisions' %>
+    <%= javascript_include_tag 'related_factors', :plugin => 'redmine_arch_decisions' %>
     <%= stylesheet_link_tag 'arch_decisions', :plugin => 'redmine_arch_decisions' %>
 <% end %>
 

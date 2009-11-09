@@ -6,14 +6,16 @@
   <thead><tr>
 	<th><%=l(:field_id)%></th>
 	<th><%=l(:label_factors_prioritized)%></th>
-    <th><%= link_to l(:label_factor_add), {:controller => 'factors', :project_id => @project, :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision}, :popup => ['choose_factor', 'height=400,width=680'], :class => 'icon icon-add' %></th>
+    <th><%= link_to l(:label_factor_add), {:controller => 'factors', :project_id => @project, :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision}, :popup => ['choose_factor', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_factor_link' %></th>
   </tr></thead>
   <tbody>
+<% is_odd_row = false  %>
 <% for factor in @arch_decision.factors %>
   <% factor_div_id = "factor_#{factor.id}" %>
   <% factor_target_id = "factor_target_#{factor.id}" %>
-  <tr><td colspan="3"><div id="<%= factor_target_id %>" class="drag-drop-target"></div></td></tr>
-  <tr class="<%= cycle("odd", "even") %>">
+  <% row_class = cycle("odd", "even") %>
+  <tr class="<%= row_class %>"><td colspan="3"><div id="<%= factor_target_id %>" class="drag-drop-target"></div></td></tr>
+  <tr class="<%= row_class %>">
 	<td><%= factor.id %></td>
 	<td><div id="<%= factor_div_id %>" style="cursor: -moz-grab;"><%= link_to(h(factor.summary), :controller => 'factors', :project_id => @project, :action => 'show', :id => factor) %></div></td>
     <td align="center" style="width:10%; white-space:nowrap;">
@@ -37,7 +39,8 @@
   )%>
 
 <% end %>
-  <tr><td colspan="3"><div id="drop-to-bottom" class="drag-drop-target"></div></td></tr>
+  <% row_class = cycle("odd", "even") %>
+  <tr class="<%= row_class %>"><td colspan="3"><div id="drop-to-bottom" class="drag-drop-target"></div></td></tr>
   <%= drop_receiving_element('drop-to-bottom',
 	  :with   => "'below=' + (element.id.split('_').last()) + ';'",
 	  :url    => {:action=> 'reorder_factors', :project_id => @project, :id => @arch_decision},
@@ -45,7 +48,7 @@
   )%>
 
 
-  <tr class="<%= cycle("odd", "even") %>" id="new_factor_form_row">
+  <tr class="<%= row_class %>" id="new_factor_form_row">
 	<td></td>
 	<td colspan="2">
 <% remote_form_for(:factor, @arch_decision, :url => { :project_id => @project, :action => "new_factor", :id => @arch_decision }, :html => { :id => "factor" }) do |f| %>
@@ -64,32 +67,5 @@
 	<%= link_to_function l(:label_factor_new), "showForm()", :class => 'icon icon-add' %>
 </div>
 
-<script type="text/javascript">
-	// TODO: refactor to external script
-	function showForm() {
-		Element.hide('new_factor_link');
-		Element.show('new_factor_form_row');
-		Field.activate('factor_summary')
-	}
-	function hideForm() {
-		Element.hide('new_factor_form_row');
-		Element.show('new_factor_link');
-	}
-	function cancelForm() {
-		hideForm();
-		Form.Element.clear('factor_summary');
-	}
-	function callOnSubmit() {
-		var code = document.getElementById('factor').getAttribute('onsubmit');
-		eval(code);
-	}
-	function showDropTarget(target) {
-		Element.setStyle(target, "background-color: #000000;")
-	}
-	function showDropped(target) {
-		Element.setStyle(target, "background-color: #FF0000;")
-	}
-	cancelForm();
-</script>
-
+<%= javascript_tag "initializeForm();" %>
 </div>

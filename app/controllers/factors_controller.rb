@@ -17,7 +17,7 @@ class FactorsController < ApplicationController
       @popup = true
       @arch_decision = ArchDecision.find(params[:arch_decision_id])
       factor_ids = @arch_decision.factors.collect{|factor| factor.id}
-      c << ["NOT id IN (?)", factor_ids]
+      c << ["NOT id IN (?)", factor_ids] if factor_ids.size > 0
     end
 
     unless params[:summary].blank?
