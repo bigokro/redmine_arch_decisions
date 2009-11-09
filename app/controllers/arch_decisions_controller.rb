@@ -43,8 +43,9 @@ class ArchDecisionsController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @arch_decision = ArchDecision.new(params[:arch_decision])
+    @arch_decision.project = @project
+    @arch_decision_statuses = ArchDecisionStatus.find(:all)
     if request.post?
-      @arch_decision.project = @project
       @arch_decision.created_by = User.current
       @arch_decision.updated_by = User.current
       if @arch_decision.save

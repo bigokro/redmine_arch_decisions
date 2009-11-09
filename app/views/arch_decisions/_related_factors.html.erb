@@ -52,6 +52,7 @@
 
   <tr class="<%= row_class %>" id="new_factor_form_row">
 	<td></td>
+	<td align="center" style="width:10%; white-space:nowrap;">Proposed</td> <!-- TODO: determine this dynamically -->
 	<td colspan="2">
 <% remote_form_for(:factor, @arch_decision, :url => { :project_id => @project, :action => "new_factor", :id => @arch_decision }, :html => { :id => "factor" }) do |f| %>
 	  <%= f.text_field :summary, :size => 100, :required => true %>
