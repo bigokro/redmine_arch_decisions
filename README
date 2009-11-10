@@ -53,6 +53,9 @@ KNOWN ISSUES
   that worked was to patch association_proxy.rb. For more info, see:
   http://groups.google.com/group/rubyonrails-talk/browse_thread/thread/d2adc451ff0236c2/b95a3bc9cb97f988?#b95a3bc9cb97f988
   
+  UPDATE: Unfortunately, this hasn't solved the problem in all cases. It seems that not only have the exact class representation changed, but whole
+  methods have gone missing from the newly loaded versions! The only workaround left for me has been to run my local server in production mode.
+  
   ################################
   # Issue #2
   # [timothy.high@gmail.com] 

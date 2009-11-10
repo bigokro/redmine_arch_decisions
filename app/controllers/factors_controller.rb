@@ -49,6 +49,7 @@ class FactorsController < ApplicationController
 
   def new
     @factor = Factor.new(params[:factor])
+    @factor_statuses = FactorStatus.find(:all)
     if request.post?
       @factor.created_by = User.current
       @factor.updated_by = User.current

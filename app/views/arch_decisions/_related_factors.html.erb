@@ -52,9 +52,10 @@
 
   <tr class="<%= row_class %>" id="new_factor_form_row">
 	<td></td>
-	<td align="center" style="width:10%; white-space:nowrap;">Proposed</td> <!-- TODO: determine this dynamically -->
-	<td colspan="2">
+	<!-- td align="center" style="width:10%; white-space:nowrap;"></td-->
+	<td colspan="3">
 <% remote_form_for(:factor, @arch_decision, :url => { :project_id => @project, :action => "new_factor", :id => @arch_decision }, :html => { :id => "factor" }) do |f| %>
+	<%= f.select :status_id, (@factor_statuses.collect {|s| [s.name, s.id]}) %>
 	  <%= f.text_field :summary, :size => 100, :required => true %>
 	  <small>
 	  <%= submit_tag l(:button_save) %>

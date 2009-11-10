@@ -37,6 +37,7 @@ class ArchDecisionsController < ApplicationController
 
 
   def show
+    @factor_statuses = FactorStatus.find(:all)
   end
 
 
@@ -135,6 +136,7 @@ class ArchDecisionsController < ApplicationController
   end
   
   def refresh_factors_table
+    @factor_statuses = FactorStatus.find(:all)
     respond_to do |format|
       format.js do
         render :update do |page|
