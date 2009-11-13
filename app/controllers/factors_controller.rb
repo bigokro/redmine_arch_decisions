@@ -1,5 +1,5 @@
 class FactorsController < ApplicationController
-  unloadable
+
   before_filter :load_project
 #  before_filter :authorize
 

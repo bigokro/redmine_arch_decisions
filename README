@@ -4,21 +4,12 @@ The purpose of the Arch Decision plugin for Redmine is to allow teams to collabo
 to encourage explicit statements of assumptions and prioritizations, and to provide tracking after the decision has been made so that
 teams can have a collective memory as to how decisions were made in the past.
 
-VERSION: 0.0.3
+VERSION: 0.0.4
 
 RELEASE NOTES
-*IMPORTANT NOTICE* If you've previously installed Arch Decisions 0.1, you may have to start over (or manually update the database). There were some 
-changes made to the pre-existing migration scripts. All future changes will be incremental, but these were fundamental enough that I wanted to
-start over.
 
-* Added project menus
-* Arch Decisions now an optional project module
-* ADs now linked to a specific project
-* Added easy form tabbing
-* Users now associated with factors and ADs via "created_by" and "assigned_to" (although not yet visible on the screens)
-* You can now drag/drop Factors on the AD screen to reorder their priorities
-* The Arch Decision show page offers the hotkey shortcuts 'n' and 'f' (for New Factor) and 'a' (for Add Factor)
-* ADs and Factors now have statuses (but no explicit workflow)
+* Arch Decisions now can have one or more "Strategies", or competing solutions
+* Strategies can be marked as "Rejected" to show that they will be disconsidered
 
 CURRENT FEATURES
 
@@ -28,6 +19,7 @@ CURRENT FEATURES
 * CRUD Factors (with only basic info)
 * Associate Factors with ADs, and remove associations
 * Reorder factor priorities for each AD
+* List and CRUD Arch Decision Strategies
 
 ROADMAP
 
@@ -36,7 +28,6 @@ ROADMAP
 * Allow configuration of notifications for these discussions and status change events
 * Allow associations between ADs and Issues
 * Allow tagging of ADs and Factors for easy and flexible categorization and search
-* Record multiple "strategies" for each AD to track the different approaches considered, and highlight the one that was selected in the end
 
 KNOWN ISSUES
 
@@ -62,5 +53,12 @@ KNOWN ISSUES
   # Currently, when reordering priorities via drag and drop,
   # If you drag the link itself (rather than the row), it activates the link,
   # and opens up the "show" Arch Decision page, rather than performing a reordering
+  ################################
+  
+  ################################
+  # Issue #3
+  # [timothy.high@gmail.com] 
+  # After the first time the New Strategies form is used on a page, subsequent uses
+  # will result in the form showing the data of the previous strategy
   ################################
   

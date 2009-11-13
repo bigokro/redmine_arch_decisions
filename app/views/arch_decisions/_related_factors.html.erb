@@ -4,7 +4,7 @@
 
 <table class="list">
   <thead><tr>
-	<th><%=l(:field_id)%></th>
+	<th><%=l(:label_id)%></th>
 	<th><%=l(:field_status)%></th>
 	<th><%=l(:label_factors_prioritized)%></th>
     <th><%= link_to l(:label_factor_add), {:controller => 'factors', :project_id => @project, :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision}, :popup => ['choose_factor', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_factor_link' %></th>
@@ -54,12 +54,12 @@
 	<td></td>
 	<!-- td align="center" style="width:10%; white-space:nowrap;"></td-->
 	<td colspan="3">
-<% remote_form_for(:factor, @arch_decision, :url => { :project_id => @project, :action => "new_factor", :id => @arch_decision }, :html => { :id => "factor" }) do |f| %>
+<% remote_form_for(:factor, @factor, :url => { :project_id => @project, :action => "new_factor", :id => @arch_decision }, :html => { :id => "new_factor" }) do |f| %>
 	<%= f.select :status_id, (@factor_statuses.collect {|s| [s.name, s.id]}) %>
 	  <%= f.text_field :summary, :size => 100, :required => true %>
 	  <small>
 	  <%= submit_tag l(:button_save) %>
-	  <%= submit_tag l(:button_cancel), :onclick => "cancelForm(); return false;" %>
+	  <%= submit_tag l(:button_cancel), :onclick => "cancelForm('new_factor'); return false;" %>
 	  </small>
 <% end %>
     </td>
@@ -68,8 +68,8 @@
 </table>
 
 <div id="new_factor_link">
-	<%= link_to_function l(:label_factor_new), "showForm()", :class => 'icon icon-add' %>
+	<%= link_to_function l(:label_factor_new), "showForm('new_factor')", :class => 'icon icon-add' %>
 </div>
 
-<%= javascript_tag "initializeForm();" %>
+<%= javascript_tag "initializeForm('new_factor');" %>
 </div>

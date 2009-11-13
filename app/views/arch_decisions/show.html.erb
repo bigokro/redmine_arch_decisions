@@ -39,6 +39,10 @@
 
 <%= render :partial => 'related_factors', :locals => { :arch_decision => @arch_decision } %>
 
+<p/>
+
+<%= render :partial => 'strategies/related_strategies', :locals => { :arch_decision => @arch_decision } %>
+
 <div class="splitcontentright">
 <% content_for :sidebar do %>
     <h3><%= l(:field_created_on) %></h3>
@@ -50,7 +54,7 @@
 
 <% content_for :header_tags do %>
     <%= javascript_include_tag 'shortcut', :plugin => 'redmine_arch_decisions' %>
-    <%= javascript_include_tag 'related_factors', :plugin => 'redmine_arch_decisions' %>
+    <%= javascript_include_tag 'related_types', :plugin => 'redmine_arch_decisions' %>
     <%= stylesheet_link_tag 'arch_decisions', :plugin => 'redmine_arch_decisions' %>
 <% end %>
 

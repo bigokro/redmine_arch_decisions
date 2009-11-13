@@ -4,8 +4,6 @@
 # This field indicates which factors are more important, or have the greatest bearing 
 # on the architecture decision at hand
 class ArchDecisionFactor < ActiveRecord::Base
-  unloadable
-
   belongs_to :arch_decision
   belongs_to :factor
 end

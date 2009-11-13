@@ -6,8 +6,11 @@ field_problem_description: Problem Description
 field_resolution: Resolution
 field_created_on: Created on
 field_updated_on: Updated on
+field_is_rejected: Rejected?
+field_reason_rejected: Reason rejected
+field_short_name: Short name
 
-label_id: #
+label_id: "#"
 label_factor: Factor
 label_factor_plural: Factors
 label_factor_new: New <u>F</u>actor
@@ -18,9 +21,13 @@ label_arch_decision: Arch Decision
 label_arch_decision_plural: Arch Decisions
 label_arch_decision_new: New Arch Decision
 label_arch_decisions_related: Related Arch Decisions
+label_strategy_plural: Strategies
+label_strategy_new: New <u>S</u>trategy
+
 
 button_remove: Remove
 
 text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;%s and all its content ?
 text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;%s and all its content ?
 text_arch_decision_factor_remove_confirmation: Remove Factor &#35;%s from this Arch Decision ?
+text_strategy_destroy_confirmation: Are you sure you want to delete Strategy &#35;%s and all its content ?

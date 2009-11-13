@@ -1,5 +1,4 @@
 class ArchDecisionsController < ApplicationController
-  unloadable
 
   before_filter :load_page_model, :except => [:index, :new]
   before_filter :set_updated_by, :except => [:index, :new, :destroy, :show]
