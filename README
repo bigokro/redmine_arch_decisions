@@ -4,12 +4,14 @@ The purpose of the Arch Decision plugin for Redmine is to allow teams to collabo
 to encourage explicit statements of assumptions and prioritizations, and to provide tracking after the decision has been made so that
 teams can have a collective memory as to how decisions were made in the past.
 
-VERSION: 0.0.4
+VERSION: 0.0.4.1
 
 RELEASE NOTES
 
 * Arch Decisions now can have one or more "Strategies", or competing solutions
 * Strategies can be marked as "Rejected" to show that they will be disconsidered
+* Issue #3 (Strategy form pre-filled) resolved
+* Rejected strategies now shown with a line-through style
 
 CURRENT FEATURES
 
@@ -56,7 +58,7 @@ KNOWN ISSUES
   ################################
   
   ################################
-  # Issue #3
+  # Issue #3 - RESOLVED
   # [timothy.high@gmail.com] 
   # After the first time the New Strategies form is used on a page, subsequent uses
   # will result in the form showing the data of the previous strategy
