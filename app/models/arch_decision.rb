@@ -18,7 +18,7 @@ class ArchDecision < ActiveRecord::Base
   
   acts_as_searchable :columns => ['summary', 'problem_description', 'resolution'], :arch_decision_key => 'id', :permission => nil
   
-  validates_presence_of :summary, :project, :status, :created_by, :updated_by, :created_on, :updated_on
+  validates_presence_of :summary, :project, :status, :created_by, :updated_by
   validates_length_of :summary, :maximum => SUMMARY_MAX_SIZE
   
   

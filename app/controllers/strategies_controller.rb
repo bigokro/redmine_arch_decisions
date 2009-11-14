@@ -12,9 +12,6 @@ class StrategiesController < ApplicationController
     if request.post?
       @strategy.created_by = User.current
       @strategy.updated_by = User.current
-      #TODO: these values aren't being set automatically... dunno why.
-      @strategy.created_on = Time.now
-      @strategy.updated_on = Time.now
       @strategy.save
       # Clear out Strategy so it doesn't pre-fill the "new" form
       @strategy = nil
