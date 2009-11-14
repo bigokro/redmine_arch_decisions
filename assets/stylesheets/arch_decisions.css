@@ -1,0 +1,23 @@
+.drag-drop-target {
+	/* background-color: #FFFFFF; */
+	height: 2px;
+}
+
+.drag-drop-target-hover {
+	background-color: #000000;
+	height: 2px;
+}
+
+.rejected {
+	text-decoration: line-through;
+}
+.rejected-highlight {
+	color: #bb0000;
+}
+
+input[disabled], input[readonly], select[disabled], select[readonly], checkbox[disabled], checkbox[readonly], textarea[disabled], textarea[readonly] 
+{ 
+ background-color: #dcdcdc; 
+ color: #000000; 
+ cursor: default; 
+}

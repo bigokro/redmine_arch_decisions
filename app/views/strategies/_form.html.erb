@@ -1,0 +1,23 @@
+<%= error_messages_for 'strategy' %>
+
+<div class="box">
+<!--[form:strategy]-->
+
+<p><%= f.text_field :short_name, :size => 40, :required => true, :tabindex => autotab %><br /><em><%= l(:text_caracters_maximum, Strategy::SHORT_NAME_MAX_SIZE) %></em></p>
+
+<p><%= f.text_field :summary, :size => 100, :required => true, :tabindex => autotab %></p>
+
+<p><%= f.text_area :details, :rows => 5, :class => 'wiki-edit', :tabindex => autotab %></p>
+
+<p>
+	<%= f.check_box :is_rejected, :tabindex => autotab, :onchange => "this.checked ? Form.Element.enable('strategy_reason_rejected') : Form.Element.disable('strategy_reason_rejected');" %><br/>
+	<%= f.text_area :reason_rejected, :rows => 5, :class => "wiki-edit", :tabindex => autotab, :disabled => @strategy.rejected? ? false : true %>
+</p>
+
+<!-- TODO: field for reject/unreject -->
+
+<%= wikitoolbar_for 'strategy_details' %>
+<%= wikitoolbar_for 'strategy_reason_rejected' %>
+</div>
+
+<!--[eoform:strategy]-->

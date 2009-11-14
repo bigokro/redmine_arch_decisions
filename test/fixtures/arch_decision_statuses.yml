@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+
+  name: MyString
+
+  is_resolved: false
+
+  is_complete: false
+
+  is_irrelevant: false
+
+  position: 1
+
+two:
+  id: 2
+
+  name: MyString
+
+  is_resolved: false
+
+  is_complete: false
+
+  is_irrelevant: false
+
+  position: 1
+

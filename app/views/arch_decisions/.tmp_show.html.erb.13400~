@@ -1,0 +1,43 @@
+<div class="contextual">
+<!-- TODO: Change to link_to_if_authorized --> 
+<%= link_to(l(:button_edit), {:project_id => @project, :action => 'edit', :id => @arch_decision}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+</div>
+<h2><%=l(:label_arch_decision)%> #<%= @arch_decision.id %></h2> 
+	
+<div class="issue details">
+	<h3><%=h @arch_decision.summary%></h3>
+	<p class="author">
+		<%= l(:label_added_time_by, user_name(@arch_decision.created_by), distance_of_time_in_words(Time.now, @arch_decision.created_on)) + '.' %>
+		<%= l(:label_updated_time_by, user_name(@arch_decision.updated_by), distance_of_time_in_words(Time.now, @arch_decision.updated_on)) + '.' if @arch_decision.created_on != @arch_decision.updated_on %>
+	</p>
+
+	<hr />
+	<p><strong><%=l(:field_problem_description)%></strong></p>
+	<div class="wiki">
+		<%= textilizable @arch_decision.problem_description%>	
+	</div>
+
+	<hr />
+	<p><strong><%=l(:field_resolution)%></strong></p>
+	<div class="wiki">
+		<%= textilizable @arch_decision.resolution%>	
+	</div>
+
+</div>
+
+<%= render :partial => 'related_factors', :locals => { :arch_decision => @arch_decision } %>
+
+<div class="splitcontentright">
+<% content_for :sidebar do %>
+    <h3><%= l(:field_created_on) %></h3>
+    <p><span class="icon icon-time"><%= @arch_decision.created_on %></span></p>
+
+    <h3><%= l(:field_updated_on) %></h3>
+    <p><span class="icon icon-time"><%= @arch_decision.updated_on %></span></p>
+<% end %>
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'arch_decisions', :plugin => 'redmine_arch_decisions' %>
+<% end %>
+
+<% html_title(l(:label_arch_decision)) -%>
