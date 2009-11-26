@@ -37,11 +37,18 @@
 
 </div>
 
+<p><br/></p>
+
 <%= render :partial => 'related_factors', :locals => { :arch_decision => @arch_decision } %>
 
-<p/>
+<p><br/></p>
 
 <%= render :partial => 'strategies/related_strategies', :locals => { :arch_decision => @arch_decision } %>
+
+<p><br/></p>
+
+<%= render :partial => 'arch_decision_discussions/related_discussions' %>
+
 
 <div class="splitcontentright">
 <% content_for :sidebar do %>

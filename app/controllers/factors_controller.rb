@@ -6,6 +6,7 @@ class FactorsController < ApplicationController
   helper :sort
   include SortHelper  
   helper :arch_decisions
+  helper :attachments
 
   def index
     sort_init 'id', 'desc'
@@ -44,6 +45,9 @@ class FactorsController < ApplicationController
 
   def show
     @factor = Factor.find(params[:id])
+    @discussions = @factor.discussions
+    @discussion = ArchDecisionDiscussion.new()
+    @discussion.subject = "Re: " + @factor.summary
   end
 
 

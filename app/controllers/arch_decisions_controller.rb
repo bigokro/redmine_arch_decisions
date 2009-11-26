@@ -7,6 +7,7 @@ class ArchDecisionsController < ApplicationController
   helper :sort
   include SortHelper  
   helper :arch_decisions
+  helper :attachments
 
   def index
     sort_init 'id', 'desc'
@@ -37,6 +38,9 @@ class ArchDecisionsController < ApplicationController
 
   def show
     @factor_statuses = FactorStatus.find(:all)
+    @discussions = @arch_decision.discussions
+    @discussion = ArchDecisionDiscussion.new()
+    @discussion.subject = "Re: " + @arch_decision.summary
   end
 
 
@@ -135,6 +139,7 @@ class ArchDecisionsController < ApplicationController
   end
   
   def refresh_factors_table
+    @factor = nil
     @factor_statuses = FactorStatus.find(:all)
     respond_to do |format|
       format.js do

@@ -20,6 +20,7 @@ class Factor < ActiveRecord::Base
 
   has_many :arch_decision_factors, :dependent => :destroy
   has_many :arch_decisions, :through => :arch_decision_factors
+  has_many :arch_decision_discussions, :dependent => :destroy, :order => "created_on"
   belongs_to :status, :class_name => "FactorStatus", :foreign_key => 'status_id'
   belongs_to :created_by, :class_name =>"User", :foreign_key => 'created_by_id'
   belongs_to :updated_by, :class_name =>"User", :foreign_key => 'updated_by_id'
@@ -28,4 +29,13 @@ class Factor < ActiveRecord::Base
 
   validates_presence_of :summary, :status
   validates_length_of :summary, :maximum => SUMMARY_MAX_SIZE
+
+  def discussions
+    arch_decision_discussions
+  end
+  
+  def refuted?
+    status.name == "Refuted"
+  end
+
 end

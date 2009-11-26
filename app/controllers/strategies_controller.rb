@@ -5,6 +5,7 @@ class StrategiesController < ApplicationController
 #  before_filter :authorize
 
   helper :arch_decisions
+  helper :attachments
 
   def new
     @strategy = Strategy.new(params[:strategy])
@@ -38,6 +39,9 @@ class StrategiesController < ApplicationController
 
 
   def show
+    @discussions = @strategy.discussions
+    @discussion = ArchDecisionDiscussion.new()
+    @discussion.subject = "Re: " + @strategy.short_name
   end
 
 

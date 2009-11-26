@@ -7,6 +7,7 @@
 class Strategy < ActiveRecord::Base
   SHORT_NAME_MAX_SIZE = 40
 
+  has_many :arch_decision_discussions, :dependent => :destroy, :order => "created_on"
   belongs_to :arch_decision
   belongs_to :created_by, :class_name =>"User", :foreign_key => 'created_by_id'
   belongs_to :updated_by, :class_name =>"User", :foreign_key => 'updated_by_id'
@@ -17,4 +18,13 @@ class Strategy < ActiveRecord::Base
   def rejected?
     return self.is_rejected
   end
+  
+  def project
+    arch_decision.project
+  end
+
+  def discussions
+    arch_decision_discussions
+  end
+
 end

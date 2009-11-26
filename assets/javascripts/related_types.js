@@ -17,6 +17,10 @@ function showForm(frm) {
 	Element.hide(frm + '_link');
 	Element.show(frm + '_form_row');
 	$(frm).elements[0].focus();
+	// TODO: get rid of this hack. Dunno why I can't call scrollTo outside this method.
+	if (frm == "new_discussion") {
+		Element.scrollTo('new_discussion_form_row');
+	}
 	deactivateShortcuts();
 }
 function hideForm(frm) {
@@ -47,11 +51,16 @@ function activateShortcuts() {
 	shortcut.add("s",function() {
 		showForm('new_strategy');
 	});
+	// New Discussion Comment
+	shortcut.add("c",function() {
+		showForm('new_discussion');
+	});
 }
 function deactivateShortcuts() {
 	shortcut.remove("f");
 	shortcut.remove("a");
 	shortcut.remove("s");
+	shortcut.remove("c");
 }
 
 /*

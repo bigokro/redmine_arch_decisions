@@ -5,7 +5,7 @@
 <h2><%=l(:label_factor)%> #<%= @factor.id %></h2> 
 	
 <div class="issue details">
-	<h3><%=h @factor.summary%></h3>
+	<h3 <%= "class='rejected'" if @factor.refuted? %>><%=h @factor.summary%></h3>
 	<p class="author">
 		<%= l(:label_added_time_by, user_name(@factor.created_by), distance_of_time_in_words(Time.now, @factor.created_on)) + '.' %>
 		<%= l(:label_updated_time_by, user_name(@factor.updated_by), distance_of_time_in_words(Time.now, @factor.updated_on)) + '.' if @factor.created_on != @factor.updated_on %>
@@ -13,7 +13,7 @@
 
 <table width="100%">
 <tr>
-    <td style="width:15%" class="status"><b><%=l(:field_status)%>:</b></td><td style="width:35%" class="status"><%= @factor.status.name %></td>
+    <td style="width:15%" class="status"><b><%=l(:field_status)%>:</b></td><td style="width:35%" class="<%= @factor.refuted? ? "rejected-highlight" : "status" %>"><%= @factor.status.name %></td>
     <td style="width:15%" class="start-date"></td><td style="width:35%"></td>
 </tr>
 </table>
@@ -49,6 +49,11 @@
   </tbody>
 </table>
 
+<p><br/></p>
+
+<%= render :partial => 'arch_decision_discussions/related_discussions' %>
+
+
 <div class="splitcontentright">
 <% content_for :sidebar do %>
     <h3><%= l(:field_created_on) %></h3>
@@ -56,6 +61,12 @@
 
     <h3><%= l(:field_updated_on) %></h3>
     <p><span class="icon icon-time"><%= @factor.updated_on %></span></p>
+<% end %>
+
+<% content_for :header_tags do %>
+    <%= javascript_include_tag 'shortcut', :plugin => 'redmine_arch_decisions' %>
+    <%= javascript_include_tag 'related_types', :plugin => 'redmine_arch_decisions' %>
+    <%= stylesheet_link_tag 'arch_decisions', :plugin => 'redmine_arch_decisions' %>
 <% end %>
 
 <% html_title(l(:label_factor)) -%>

@@ -2,7 +2,7 @@
 <!-- TODO: Change to link_to_if_authorized --> 
 <%= link_to(l(:button_edit), {:action => 'edit', :project_id => @project, :id => @strategy}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
 </div>
-<h2><%=l(:label_factor)%> #<%= @strategy.id %></h2> 
+<h2><%=l(:label_strategy)%> #<%= @strategy.id %></h2> 
 	
 <div class="issue details">
 	<h3 <%= "class='rejected'" if @strategy.rejected? %>><%=h @strategy.short_name%></h3>
@@ -51,6 +51,10 @@
   </tbody>
 </table>
 
+<p><br/></p>
+
+<%= render :partial => 'arch_decision_discussions/related_discussions' %>
+
 <div class="splitcontentright">
 <% content_for :sidebar do %>
     <h3><%= l(:field_created_on) %></h3>
@@ -61,7 +65,9 @@
 <% end %>
 
 <% content_for :header_tags do %>
+    <%= javascript_include_tag 'shortcut', :plugin => 'redmine_arch_decisions' %>
+    <%= javascript_include_tag 'related_types', :plugin => 'redmine_arch_decisions' %>
     <%= stylesheet_link_tag 'arch_decisions', :plugin => 'redmine_arch_decisions' %>
 <% end %>
 
-<% html_title(l(:label_factor)) -%>
+<% html_title(l(:label_strategy)) -%>

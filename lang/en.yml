@@ -9,6 +9,7 @@ field_updated_on: Updated on
 field_is_rejected: Rejected?
 field_reason_rejected: Reason rejected
 field_short_name: Short name
+field_content: Content
 
 label_id: "#"
 label_factor: Factor
@@ -21,11 +22,18 @@ label_arch_decision: Arch Decision
 label_arch_decision_plural: Arch Decisions
 label_arch_decision_new: New Arch Decision
 label_arch_decisions_related: Related Arch Decisions
+label_strategy: Strategy
 label_strategy_plural: Strategies
 label_strategy_new: New <u>S</u>trategy
-
+label_discussion: Discussion
+label_discussion_comment: Discussion Comment
+label_discussion_new: New <u>C</u>omment
 
 button_remove: Remove
+
+notice_create_discussion_failed: Unable to create discussion comment.
+
+error_discussion_parents_nil: The discussion entry is not associated with a decision, factor or strategy 
 
 text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;%s and all its content ?
 text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;%s and all its content ?

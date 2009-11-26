@@ -1,0 +1,16 @@
+<%= error_messages_for 'discussion' %>
+
+<div class="box">
+<%= hidden_field_tag('project_id', value = @project.id) %>
+<%= hidden_field_tag('arch_decision_id', value = @arch_decision.id) unless @arch_decision.nil? %>
+<%= hidden_field_tag('factor_id', value = @factor.id) unless @factor.nil? %>
+<%= hidden_field_tag('strategy_id', value = @strategy.id) unless @strategy.nil? %>
+
+<p><%= f.text_field :subject, :size => 120, :required => true, :tabindex => autotab %><br /><em><%= l(:text_caracters_maximum, ArchDecisionDiscussion::SUBJECT_MAX_SIZE) %></em></p>
+
+<p><%= f.text_area :content, :cols => 80, :rows => 15, :class => 'wiki-edit', :tabindex => autotab %></p>
+<%= wikitoolbar_for 'discussion_content' %>
+
+<p><%= l(:label_attachment_plural) %><br />
+<%= render :partial => 'attachments/form' %></p>
+</div>
