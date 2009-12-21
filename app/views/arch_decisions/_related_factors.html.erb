@@ -22,15 +22,13 @@
   <tr class="<%= row_class %>">
 	<td><%= factor.id %></td>
     <td align="center" <%= "class='rejected'" if factor.refuted? %> style="width:10%; white-space:nowrap;"><%= factor.status.name %></td>
-	<td><div id="<%= factor_div_id %>" <%= "class='rejected'" if factor.refuted? %> style="cursor: -moz-grab;"><%= link_to(h(factor.summary), :controller => 'factors', :project_id => @project, :action => 'show', :id => factor) %></div></td>
+	<td><div id="<%= factor_div_id %>" <%= "class='rejected'" if factor.refuted? %> style="cursor: -moz-grab;"><%= link_to(h(factor.summary) + " " + text_for_discussion_count(factor), :controller => 'factors', :project_id => @project, :action => 'show', :id => factor) %></div></td>
     <td align="center" style="width:10%; white-space:nowrap;">
-      <small><%= link_to_remote (l(:button_remove), 
-								#{ :url => "projects/#{@project.identifier}/arch_decisions/remove_factor/#{@arch_decision.id}/#{factor.id}",
+      <small><%= link_to_remote l(:button_remove), 
 								{ :url => { :project_id => @project, :action => 'remove_factor', :id => @arch_decision, :factor_id => factor},
 									:confirm => l(:text_arch_decision_factor_remove_confirmation, factor.id) },
-								:class => 'icon icon-del')  %></small>
+								:class => 'icon icon-del'  %></small>
       <small><%= link_to_remote l(:button_delete), 
-								#{ :url => "projects/#{@project.identifier}/arch_decisions/destroy_factor/#{@arch_decision.id}/#{factor.id}", 
 								{ :url => { :project_id => @project, :action => 'destroy_factor', :id => @arch_decision, :factor_id => factor},
 									:confirm => l(:text_factor_destroy_confirmation, factor.id) },  
 								:class => 'icon icon-del' %></small>

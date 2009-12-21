@@ -1,19 +1,43 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
+arch_decision_discussion_1:
+  subject: "Re: Arch Decision 1"
+  content: This is just some _simple_ content for discussion
+  created_by_id: 4
+  arch_decision: valid
 
-  subject: MyString
+arch_decision_discussion_2:
+  subject: "Re: Arch Decision 1"
+  content: This is a *response* to the simple content
+  created_by_id: 4
+  arch_decision: valid
 
-  content: MyText
+factor_discussion_1:
+  subject: "Re: Factor 1"
+  content: This is just some _simple_ content for discussion
+  created_by_id: 4
+  factor: valid
 
-  replies_count: 1
+factor_discussion_2:
+  subject: "Re: Factor 1"
+  content: This is a *response* to the simple content
+  created_by_id: 4
+  factor: valid
 
-two:
-  id: 2
+strategy_discussion_1:
+  subject: "Re: Strategy 1"
+  content: This is just some _simple_ content for discussion
+  created_by_id: 4
+  strategy: valid
 
-  subject: MyString
+strategy_discussion_2:
+  subject: "Re: Strategy 1"
+  content: This is a *response* to the simple content
+  created_by_id: 4
+  strategy: valid
 
-  content: MyText
-
-  replies_count: 1
+valid_subject_max_length:
+  subject: This subject is ok event though it's waaaay too long. If you really wanted a subject to be this long then I don't think you understand the concept of subject. But this one won't go past the limit. Capische? Get it? Got it? Good. Good. Good. Well, alright!
+  content: This is the content for the discussion comment with maximum subject length.
+  created_by_id: 4
+  arch_decision: valid
 

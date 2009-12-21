@@ -22,7 +22,7 @@
   <tr class="<%= row_class %>">
 	<td><%= strategy.id %></td>
 	<td align="center"><%= image_tag("false.png") if strategy.rejected? %></td>
-	<td <%= "class='rejected'" if strategy.rejected? %>><div id="<%= strategy_div_id %>" style="cursor: -moz-grab;"><%= link_to(h(strategy.short_name), :controller => 'strategies', :action => 'show', :id => strategy) %></div></td>
+	<td <%= "class='rejected'" if strategy.rejected? %>><div id="<%= strategy_div_id %>" style="cursor: -moz-grab;"><%= link_to(h(strategy.short_name) + " " + text_for_discussion_count(strategy), :controller => 'strategies', :action => 'show', :id => strategy) %></div></td>
     <td <%= "class='rejected'" if strategy.rejected? %>><%= h strategy.summary %></td>
     <td align="center" style="width:10%; white-space:nowrap;">
       <small><%= link_to_remote l(:button_delete), 

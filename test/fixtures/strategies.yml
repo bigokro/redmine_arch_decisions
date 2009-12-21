@@ -1,27 +1,21 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-
-  short_name: MyString
-
-  summary: MyString
-
-  details: MyText
-
+valid:
+  short_name: We could get with this
+  summary: One thing we could do is to get with this
+  details: Getting with this would really be nice
   is_rejected: false
-
   position: 1
+  arch_decision: valid
+  created_by_id: 4
+  updated_by_id: 4
 
-two:
-  id: 2
-
-  short_name: MyString
-
-  summary: MyString
-
-  details: MyText
-
+valid_short_name_max_length:
+  short_name: We could also get with that if we wanted
+  summary: Getting with that would be another choice
+  details: The nice thing about getting with that is that its short name is the absolute maximum length allowed
   is_rejected: false
-
-  position: 1
+  position: 2
+  arch_decision: valid
+  created_by_id: 4
+  updated_by_id: 4
 

@@ -96,7 +96,7 @@ class FactorsController < ApplicationController
   private
 
   def load_project
-    @project = Project.find(params[:project_id])
+    @project = Project.find_by_id(params[:project_id])
   end
 
 end

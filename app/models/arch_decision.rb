@@ -7,7 +7,7 @@
 class ArchDecision < ActiveRecord::Base
   SUMMARY_MAX_SIZE = 255
   
-  has_many :arch_decision_factors, :dependent => :destroy
+  has_many :arch_decision_factors, :dependent => :destroy, :order => "priority"
   has_many :factors, :through => :arch_decision_factors, :order => "priority"
   has_many :strategies, :dependent => :destroy, :order => "is_rejected, position"
   has_many :arch_decision_discussions, :dependent => :destroy, :order => "created_on"
@@ -17,6 +17,7 @@ class ArchDecision < ActiveRecord::Base
   belongs_to :updated_by, :class_name =>"User", :foreign_key => 'updated_by_id'
   belongs_to :assigned_to, :class_name =>"User", :foreign_key => 'assigned_to_id'
   
+  acts_as_watchable
   acts_as_searchable :columns => ['summary', 'problem_description', 'resolution'], :arch_decision_key => 'id', :permission => nil
   
   validates_presence_of :summary, :project, :status, :created_by, :updated_by
@@ -56,10 +57,10 @@ class ArchDecision < ActiveRecord::Base
       below = self.arch_decision_factors.select{|adf| adf.factor_id == below_id}[0]
       priority = below.priority
     end
-    if above_id == nil
+    if above_id.nil?
       below.priority = self.arch_decision_factors.count + 1
     else
-      arch_decision_factors.sort{|a,b| a.priority <=> b.priority}.each{ |adf|
+      arch_decision_factors.each{ |adf|
         if adf.factor_id == above_id
           adf.priority = priority
         elsif adf.priority >= priority
@@ -79,6 +80,24 @@ class ArchDecision < ActiveRecord::Base
     arch_decision_discussions
   end
 
+  # Returns the mail adresses of users that should be notified for the issue
+  def recipients
+    recipients = project.recipients
+    # Author and assignee are always notified unless they have been locked
+    recipients << created_by.mail if created_by && created_by.active?
+    recipients << assigned_to.mail if assigned_to && assigned_to.active?
+    recipients.compact.uniq
+  end
+
+  def resolved?
+    status.resolved?
+  end
+
+  def after_save
+    # Reload is needed in order to get the right status
+    reload
+  end
+  
   private
   
   def recalc_priorities

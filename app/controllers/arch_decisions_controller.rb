@@ -8,6 +8,8 @@ class ArchDecisionsController < ApplicationController
   include SortHelper  
   helper :arch_decisions
   helper :attachments
+  helper :watchers
+  include WatchersHelper
 
   def index
     sort_init 'id', 'desc'
@@ -53,16 +55,17 @@ class ArchDecisionsController < ApplicationController
       @arch_decision.created_by = User.current
       @arch_decision.updated_by = User.current
       if @arch_decision.save
+        Mailer.deliver_arch_decision_add(@arch_decision)
         flash[:notice] = l(:notice_successful_create)
         redirect_to( :action => 'show', :project_id => @project, :id => @arch_decision )
       end
     end
   end
 
-
   def edit
     if request.post?
       if @arch_decision.update_attributes(params[:arch_decision])
+        Mailer.deliver_arch_decision_edit(@arch_decision)
         flash[:notice] = l(:notice_successful_update)
         redirect_to :action => 'show', :project_id => @project, :id => @arch_decision
       else
@@ -94,12 +97,14 @@ class ArchDecisionsController < ApplicationController
                                       :factor_id => @factor.id, 
                                       :priority => priority })
       adf.save
+      register_and_notify_update
     end
     refresh_factors_table
   end
 
   def destroy_factor
     @arch_decision.destroy_factor(params[:factor_id].to_i)
+    register_and_notify_update
     refresh_factors_table
   end
 
@@ -109,11 +114,13 @@ class ArchDecisionsController < ApplicationController
                                   :factor_id => params[:factor_id],
                                   :priority => priority)
     adf.save
+    register_and_notify_update
     render :action => 'add_factor', :layout => false
   end
 
   def remove_factor
     @arch_decision.remove_factor(params[:factor_id].to_i)
+    register_and_notify_update
     refresh_factors_table
   end
 
@@ -124,12 +131,18 @@ class ArchDecisionsController < ApplicationController
     refresh_factors_table
   end
 
+  def register_and_notify_update
+    set_updated_by
+    Mailer.deliver_arch_decision_edit(@arch_decision)
+  end
 
   private 
 
   def load_page_model
     @arch_decision = ArchDecision.find(params[:id])
     @project = Project.find(params[:project_id])
+  rescue ActiveRecord::RecordNotFound
+    render_404
   end
   
   def set_updated_by
@@ -149,4 +162,5 @@ class ArchDecisionsController < ApplicationController
       end
     end
   end
+  
 end

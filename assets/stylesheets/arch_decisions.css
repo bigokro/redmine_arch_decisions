@@ -21,3 +21,8 @@ input[disabled], input[readonly], select[disabled], select[readonly], checkbox[d
  color: #000000; 
  cursor: default; 
 }
+
+.discussion-count {
+	font-style: italic;
+	font-size: smaller;
+}

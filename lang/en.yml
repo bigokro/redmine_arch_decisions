@@ -4,6 +4,8 @@ field_details: Details
 field_evidence: Evidence
 field_problem_description: Problem Description
 field_resolution: Resolution
+field_created_by: Created by
+field_updated_by: Updated by
 field_created_on: Created on
 field_updated_on: Updated on
 field_is_rejected: Rejected?
@@ -38,4 +40,11 @@ error_discussion_parents_nil: The discussion entry is not associated with a deci
 text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;%s and all its content ?
 text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;%s and all its content ?
 text_arch_decision_factor_remove_confirmation: Remove Factor &#35;%s from this Arch Decision ?
+text_arch_decision_added: Arch Decision %s has been created by %s.
+text_arch_decision_updated: Arch Decision %s has been updated by %s.
 text_strategy_destroy_confirmation: Are you sure you want to delete Strategy &#35;%s and all its content ?
+text_discussion_count_none: No comments
+text_discussion_count_singular: %s comment
+text_discussion_count_plural: %s comments
+text_arch_decision_discussion_added: %s %s has a new discussion comment posted by %s.
+text_arch_decision_discussion_updated: %s %s has had a discussion comment updated by %s.

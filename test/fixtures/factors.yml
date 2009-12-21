@@ -1,19 +1,40 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
+valid:
+  summary: Valid Factor 1
+  details: This is a valid factor
+  evidence: Trust me, this is valid
+  status: valid 
+  created_by_id: 4
+  updated_by_id: 4
+  
+valid_summary_max_length:
+  summary: This summary is ok event though it's waaaay too long. If you really wanted a summary to be this long then I don't think you understand the concept of summary. But this one won't go past the limit. Capische? Get it? Got it? Good. Good. Good. Well, alright!
+  details: This is still a valid factor.
+  evidence: The test won't fail.
+  status: valid 
+  created_by_id: 4
+  updated_by_id: 4
 
-  summary: MyString
+valid_2:
+  summary: Valid Factor 2
+  details: This is a valid factor
+  evidence: Trust me, this is valid
+  status: valid 
+  created_by_id: 4
+  updated_by_id: 4
 
-  details: MyText
+valid_3:
+  summary: Valid Factor 3
+  details: This is a valid factor
+  evidence: Trust me, this is valid
+  status: valid 
+  created_by_id: 4
+  updated_by_id: 4
 
-  evidence: MyText
-
-two:
-  id: 2
-
-  summary: MyString
-
-  details: MyText
-
-  evidence: MyText
-
+valid_4:
+  summary: Valid Factor 4
+  details: This is a valid factor
+  evidence: Trust me, this is valid
+  status: valid 
+  created_by_id: 4
+  updated_by_id: 4

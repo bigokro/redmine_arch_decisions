@@ -14,13 +14,14 @@ class ArchDecisionDiscussionsController < ApplicationController
 
   def new
     @discussion = ArchDecisionDiscussion.new(params[:discussion])
-    @discussion.arch_decision = @arch_decision
     @discussion.factor = @factor
     @discussion.strategy = @strategy
+    @discussion.arch_decision = @arch_decision if !(@factor || @strategy)
     if request.post?
       @discussion.created_by = User.current
       if @discussion.save
         attach_files(@discussion, params[:attachments])
+        Mailer.deliver_arch_decision_discussion_add(@discussion)
         flash[:notice] = l(:notice_successful_create)
       else
         flash[:error] = @discussion.errors.empty? ? l(:notice_create_discussion_failed) : @discussion.errors.full_messages.join("<br/>")
@@ -34,6 +35,7 @@ class ArchDecisionDiscussionsController < ApplicationController
     render_403 and return false unless @discussion.editable_by?(User.current)
     if request.post? && @discussion.update_attributes(params[:discussion])
       attach_files(@discussion, params[:attachments])
+      Mailer.deliver_arch_decision_discussion_edit(@discussion)
       flash[:notice] = l(:notice_successful_update)
       redirect_to_show
     end

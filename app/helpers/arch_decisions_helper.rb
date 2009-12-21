@@ -19,4 +19,14 @@ module ArchDecisionsHelper
     s
   end
   
+  def text_for_discussion_count(item)
+    
+    label = case item.arch_decision_discussions
+              when 0 then :text_discussion_count_none
+              when 1 then :text_discussion_count_singular
+              else :text_discussion_count_plural
+    end
+    return "<span class='discussion-count'>(" + l(label, item.arch_decision_discussions.size.to_s) + ")</span>"
+  end
+
 end

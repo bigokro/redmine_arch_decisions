@@ -38,12 +38,35 @@ class ArchDecisionDiscussion < ActiveRecord::Base
     user && user.logged? && self.created_by == user
   end
 
+  def parent
+    return factor unless factor.nil?
+    return strategy unless strategy.nil?
+    return arch_decision
+  end
+
+  def parent_type
+    parent.class.name.titlecase
+  end
+
+  def type
+    parent_type + " Discussion"
+  end
+
+  def recipients
+    parent.nil? ? nil : parent.recipients
+  end
+
+  def watcher_recipients
+    parent.nil? ? nil : parent.watcher_recipients
+  end
+
+
 
   protected
 
   def validate
-    if arch_decision.nil? && factor.nil? && strategy.nil?
-      errors.add(:error_discussion_parents_nil)      
+    if (arch_decision.nil? && factor.nil? && strategy.nil?)
+      errors.add_to_base :error_discussion_parents_nil
     end
   end
 

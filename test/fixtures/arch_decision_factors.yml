@@ -1,11 +1,26 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-
+valid_valid:
+  arch_decision: valid
+  factor: valid
   priority: 1
 
-two:
-  id: 2
+valid_valid_2:
+  arch_decision: valid
+  factor: valid_2
+  priority: 2
 
+valid_valid_3:
+  arch_decision: valid
+  factor: valid_3
+  priority: 3
+
+valid_valid_4:
+  arch_decision: valid
+  factor: valid_4
+  priority: 4
+
+valid_summary_max_length_valid:
+  arch_decision: valid_summary_max_length
+  factor: valid
   priority: 1
 

@@ -1,19 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-
-  summary: MyString
-
-  problem_description: MyText
-
-  resolution: MyText
-
-two:
-  id: 2
-
-  summary: MyString
-
-  problem_description: MyText
-
-  resolution: MyText
+valid:
+  summary: A very important decision
+  problem_description: Should we get with this, or should we get with that?
+  resolution: We will get with this.
+  created_by_id: 4
+  updated_by_id: 4
+  status: valid
+  project_id: 1
+  
+valid_summary_max_length:
+  summary: This summary is ok event though it's waaaay too long. If you really wanted a summary to be this long then I don't think you understand the concept of summary. But this one won't go past the limit. Capische? Get it? Got it? Good. Good. Good. Well, alright!
+  problem_description: Should we get with this, or should we get with that?
+  resolution: We will get with that.
+  created_by_id: 4
+  updated_by_id: 4
+  status: valid
+  project_id: 1
 

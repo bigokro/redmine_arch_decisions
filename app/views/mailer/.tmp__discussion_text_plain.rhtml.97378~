@@ -1,0 +1,10 @@
+<%= "#{discussion.parent_type} ##{discussion.parent.id}: #{parent_description}" %>
+
+<%=l(:label_discussion_comment)%>
+<%=l(:field_created_by)%>: <%= discussion.created_by %>
+<%=l(:field_created_on)%>: <%= discussion.created_on %>
+<%=l(:field_updated_on)%>: <%= discussion.updated_on %>
+
+Subject: <%= discussion.subject %>
+
+<%= discussion.content %>

@@ -12,11 +12,11 @@ class Strategy < ActiveRecord::Base
   belongs_to :created_by, :class_name =>"User", :foreign_key => 'created_by_id'
   belongs_to :updated_by, :class_name =>"User", :foreign_key => 'updated_by_id'
   
-  validates_presence_of :short_name, :arch_decision_id, :created_by, :updated_by
+  validates_presence_of :short_name, :arch_decision, :created_by, :updated_by
   validates_length_of :short_name, :maximum => SHORT_NAME_MAX_SIZE
   
   def rejected?
-    return self.is_rejected
+    is_rejected
   end
   
   def project
@@ -25,6 +25,14 @@ class Strategy < ActiveRecord::Base
 
   def discussions
     arch_decision_discussions
+  end
+  
+  def recipients
+    arch_decision.recipients
+  end
+
+  def watcher_recipients
+    arch_decision.watcher_recipients
   end
 
 end

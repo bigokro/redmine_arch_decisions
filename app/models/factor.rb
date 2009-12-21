@@ -38,4 +38,16 @@ class Factor < ActiveRecord::Base
     status.name == "Refuted"
   end
 
+  def recipients
+    recipient_list = []
+    arch_decisions.each{ |ad| recipient_list << ad.recipients }
+    recipient_list.compact.uniq
+  end
+    
+  def watcher_recipients
+    recipient_list = []
+    arch_decisions.each{ |ad| recipient_list << ad.watcher_recipients }
+    recipient_list.compact.uniq
+  end
+  
 end

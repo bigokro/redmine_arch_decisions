@@ -1,6 +1,7 @@
 <div class="contextual">
 <!-- TODO: Change to link_to_if_authorized --> 
 <%= link_to(l(:button_edit), {:project_id => @project, :action => 'edit', :id => @arch_decision}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+<%= watcher_tag(@arch_decision, User.current) %>
 </div>
 <h2><%=l(:label_arch_decision)%> #<%= @arch_decision.id %></h2> 
 	
@@ -34,6 +35,14 @@
 	<div class="wiki">
 		<%= textilizable @arch_decision.resolution%>	
 	</div>
+
+<% if User.current.allowed_to?(:add_issue_watchers, @project) ||
+        (@arch_decision.watchers.any? && User.current.allowed_to?(:view_issue_watchers, @project)) %>
+<hr />
+<div id="watchers">
+<%= render :partial => 'watchers/watchers', :locals => {:watched => @arch_decision} %>
+</div>
+<% end %>
 
 </div>
 
