@@ -10,6 +10,7 @@ RELEASE NOTES
 
 * Feature #583 - Implement notification features for ADs, etc. - Notifications are sent when AD, Factor, Strategy or Discussion is created or updated
 * Feature #587 - Show the number of comments for each Factor and Strategy on the main AD view
+* Feature #590 - Script for plugin migrations - can now migrate the RAD db only using "rake rad:db:migrate VERSION=..."
 * Bug #586 - Discussions created in Strategies also show up in the AD - Solution includes a migration script to fix existing discussions
 * Added unit tests for all models and some controllers 
 
