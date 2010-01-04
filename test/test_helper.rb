@@ -32,4 +32,26 @@ class Test::Unit::TestCase
       assert model.errors.on(field).include?(message)
     end
   end
+  
+  def enable_ad_module(project)
+    project.enabled_modules << EnabledModule.new(:name => "arch_decisions")
+  end
+  
+  def add_all_perms_to_role(role)
+    role.add_permission!(:edit_arch_decisions)
+    role.add_permission!(:delete_arch_decisions)
+    role.add_permission!(:edit_factors)
+    role.add_permission!(:delete_factors)
+    role.add_permission!(:comment)
+  end
+  
+  def setup_user_with_permissions(request)
+    request.session[:user_id] = 2
+    manager_role = roles(:roles_001)
+    add_all_perms_to_role(manager_role)
+  end
+  
+  def setup_user_no_permissions(request)
+    request.session[:user_id] = 4
+  end
 end

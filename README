@@ -4,15 +4,11 @@ The purpose of the Arch Decision plugin for Redmine is to allow teams to collabo
 to encourage explicit statements of assumptions and prioritizations, and to provide tracking after the decision has been made so that
 teams can have a collective memory as to how decisions were made in the past.
 
-VERSION: 0.0.6
+VERSION: 0.0.7 dev build
 
 RELEASE NOTES
 
-* Feature #583 - Implement notification features for ADs, etc. - Notifications are sent when AD, Factor, Strategy or Discussion is created or updated
-* Feature #587 - Show the number of comments for each Factor and Strategy on the main AD view
-* Feature #590 - Script for plugin migrations - can now migrate the RAD db only using "rake rad:db:migrate VERSION=..."
-* Bug #586 - Discussions created in Strategies also show up in the AD - Solution includes a migration script to fix existing discussions
-* Added unit tests for all models and some controllers 
+* Feature #582 - Enable security controls on the Arch Decisions features - Basic permissions are now required in order to perform actions other than view the entries
 
 CURRENT FEATURES
 
@@ -25,11 +21,11 @@ CURRENT FEATURES
 * List and CRUD Arch Decision Strategies
 * Arch Decisions, Factors and Strategies each have their own Discussion section
 * Project members and watchers receive email notifications for significant Arch Decision events 
+* Simple security model (using Redmine security) for enabling the creation and modification of ADs and related entities
 
 ROADMAP
 
 * Add a "scope" attribute to Factors so they can apply to the project, be universal, or apply only to the AD in which they were created
-* Integration with standard Redmine security
 * Allow associations between ADs and Issues
 * Allow tagging of ADs and Factors for easy and flexible categorization and search
 * Enable full-fledged search across all model types

@@ -1,4 +1,5 @@
 <div class="contextual">
+<!-- TODO: Change to link_to_if_authorized --> 
 <%= link_to_if_authorized(l(:button_edit), {:project_id => @project, :action => 'edit', :id => @arch_decision}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
 <%= watcher_tag(@arch_decision, User.current) %>
 </div>
@@ -66,7 +67,6 @@
     <h3><%= l(:field_updated_on) %></h3>
     <p><span class="icon icon-time"><%= @arch_decision.updated_on %></span></p>
 <% end %>
-</div>
 
 <% content_for :header_tags do %>
     <%= javascript_include_tag 'shortcut', :plugin => 'redmine_arch_decisions' %>

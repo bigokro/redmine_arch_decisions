@@ -9,6 +9,7 @@ class ArchDecisionDiscussionsControllerTest < ActionController::TestCase
 
   fixtures :projects,
            :users,
+           :roles,
            :arch_decisions,
            :factors,
            :strategies,
@@ -19,7 +20,8 @@ class ArchDecisionDiscussionsControllerTest < ActionController::TestCase
     @controller = ArchDecisionDiscussionsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    @request.session[:user_id] = 1
+    enable_ad_module(@ad.project)
+    setup_user_with_permissions(@request)
     Setting.default_language = 'en'
   end
 
@@ -64,7 +66,37 @@ class ArchDecisionDiscussionsControllerTest < ActionController::TestCase
     add_counts expected_counts, :strategies, 1
     assert_counts expected_counts
   end
-  
+
+  def test_new_ad_discussion_no_perms
+    setup_user_no_permissions(@request)
+    post :new, 
+          :project_id => 1, 
+          :arch_decision_id => @ad.id, 
+          :discussion => {:subject => "New discussion", :content => "New content"}
+    assert_response 403
+  end
+
+  def test_new_factor_discussion_no_perms
+    setup_user_no_permissions(@request)
+    factor = factors(:valid)
+    post :new, 
+          :project_id => 1, 
+          :factor_id => factor.id, 
+          :discussion => {:subject => "New discussion", :content => "New content"}
+    assert_response 403
+  end
+
+  def test_new_strategy_discussion_no_perms
+    setup_user_no_permissions(@request)
+    strategy = strategies(:valid)
+    post :new, 
+          :project_id => 1, 
+          :arch_decision_id => @ad.id, 
+          :strategy_id => strategy.id,
+          :discussion => {:subject => "New discussion", :content => "New content"}
+    assert_response 403
+  end
+
   private
   
   def get_counts

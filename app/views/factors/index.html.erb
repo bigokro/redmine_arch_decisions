@@ -1,6 +1,6 @@
 <% if !@popup %>
 	<div class="contextual">
-	<%= link_to l(:label_factor_new), {:controller => 'factors', :project_id => @project, :action => 'new'}, :class => 'icon icon-add' %>
+	<%= link_to_if_authorized l(:label_factor_new), {:controller => 'factors', :project_id => @project, :action => 'new'}, :class => 'icon icon-add' %>
 	</div>
 
 	<h2><%=l(:label_factor_plural)%></h2>
@@ -45,7 +45,7 @@
 	<td align="center" style="white-space:nowrap;"><%= format_time(factor.updated_on) %></td>
 	<% if !@popup %>
 	  <td align="center" style="width:10%">
-	    <small><%= link_to(l(:button_delete), 
+	    <small><%= link_to_if_authorized(l(:button_delete), 
 							{ :project_id => @project, :action => 'destroy', :id => factor }, 
 							:confirm => l(:text_factor_destroy_confirmation, factor.id), 
 							:class => 'icon icon-del') %></small>

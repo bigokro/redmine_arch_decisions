@@ -14,8 +14,8 @@
 	<div class="wiki"><%= textilizable d, :content, :attachments => d.attachments %></div>
 		<%= link_to_attachments d, :author => false %>
 	</div>
-<% end #discussions loop %>
-<% end #unless %>
+<% end %>
+<% end %>
 
 <% if authorize_for(:arch_decision_discussions, :new) %>
 <div id="new_discussion_form_row" style="display:none;">
@@ -30,17 +30,18 @@
                        :with => "Form.serialize('new_discussion')",
                        :complete => "Element.scrollTo('preview')"
                      }, :accesskey => accesskey(:preview) %></p>
-<% end #form %>
+<% end %>
 </div>
 <div id="new_discussion_link">
 	<br/>
 	<%= link_to_function l(:label_discussion_new), "showForm('new_discussion')", :class => 'icon icon-add' %>
 </div>
 <div id="preview" class="wiki"></div>
+</div>
 
 <%= javascript_tag "initializeForm('new_discussion');" %>
 <% end #if authorize_for %>
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag 'scm' %>
-<% end #content_for %>
+<% end %>
 </div>

@@ -1,7 +1,7 @@
 class FactorsController < ApplicationController
 
   before_filter :load_project
-#  before_filter :authorize
+  before_filter :authorize, :except => [:show]
 
   helper :sort
   include SortHelper  
@@ -96,7 +96,7 @@ class FactorsController < ApplicationController
   private
 
   def load_project
-    @project = Project.find_by_id(params[:project_id])
+    @project = Project.find_by_id(params[:project_id]) || Project.find_by_identifier(params[:project_id]) 
   end
 
 end

@@ -1,5 +1,5 @@
 <div class="contextual">
-<%= link_to l(:label_arch_decision_new), {:controller => 'arch_decisions', :project_id => @project, :action => 'new'}, :class => 'icon icon-add' %>
+<%= link_to_if_authorized l(:label_arch_decision_new), {:controller => 'arch_decisions', :project_id => @project, :action => 'new'}, :class => 'icon icon-add' %>
 </div>
 
 <h2><%=l(:label_arch_decision_plural)%></h2>
@@ -34,7 +34,7 @@
 	<td align="center" style="white-space:nowrap;"><%= ad.assigned_to ? user_name(ad.assigned_to) : "-" %></td>
 	<td align="center" style="white-space:nowrap;"><%= format_time(ad.updated_on) %></td>
 	<td align="center" style="width:10%">
-	    <small><%= link_to(l(:button_delete), 
+	    <small><%= link_to_if_authorized(l(:button_delete), 
 							{ :action => 'destroy', :project_id => @project, :id => ad }, 
 							:confirm => l(:text_arch_decision_destroy_confirmation, ad.id), 
 							:class => 'icon icon-del') %></small>

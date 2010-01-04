@@ -18,7 +18,8 @@ label_factor: Factor
 label_factor_plural: Factors
 label_factor_new: New <u>F</u>actor
 label_factor_add: <u>A</u>dd Factor
-label_factors_prioritized: Factors (in order of importance <small>drag to reorder</small>)
+label_factors_prioritized: Factors (in order of importance)
+label_factors_reorder: drag to reorder
 label_created_time: Created %s ago
 label_arch_decision: Arch Decision
 label_arch_decision_plural: Arch Decisions

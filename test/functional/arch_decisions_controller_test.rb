@@ -8,15 +8,18 @@ class ArchDecisionsControllerTest < ActionController::TestCase
 
   fixtures :projects,
            :users,
-           :arch_decisions
-  
+           :arch_decisions,
+           :members,
+           :roles,
+           :issues
+           
   def setup
     @ad = arch_decisions(:valid)
     @controller = ArchDecisionsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    @request.session[:user_id] = 1
-#    User.current = nil
+    enable_ad_module(@ad.project)
+    setup_user_with_permissions(@request)
     Setting.default_language = 'en'
   end
 
@@ -143,14 +146,14 @@ class ArchDecisionsControllerTest < ActionController::TestCase
 
   def test_index_filters_no_results
     generate_test_ads
-    get :index, :project_id => 1, :summary => 'blahblahblah no results'
+    get :index, :project_id => @ad.project.id, :summary => 'blahblahblah no results'
     assert_response :success
     arch_decisions = assigns(:arch_decisions)
     assert_equal 0, arch_decisions.size
   end
 
   def test_show
-    get :show, :project_id => 1, :id => @ad.id
+    get :show, :project_id => @ad.project.id, :id => @ad.id
     assert_response :success
     assert_template 'show'
     ad = assigns(:arch_decision)
@@ -168,6 +171,33 @@ class ArchDecisionsControllerTest < ActionController::TestCase
                 :content => 'Edit', 
                 :attributes => { :href => /#{@ad.project.identifier}\/arch_decisions\/edit\/#{@ad.id}/ }
   end
+
+  def test_show_no_perms
+    setup_user_no_permissions(@request)
+    get :show, :project_id => @ad.project.id, :id => @ad.id
+    assert_response :success
+    assert_template 'show'
+    ad = assigns(:arch_decision)
+    project = assigns(:project)
+    factor_statuses = assigns(:factor_statuses)
+    discussions = assigns(:discussions)
+    discussion = assigns(:discussion)
+    assert_equal @ad, ad
+    assert_equal @ad.project, project
+    assert_not_nil factor_statuses
+    assert_equal @ad.discussions, discussions
+    assert_no_tag :tag => 'a', :content => 'Edit'
+    assert_no_tag :tag => 'a', :content => 'New <u>F</u>actor'
+    assert_no_tag :tag => 'a', :content => '<u>A</u>dd Factor'
+    assert_no_tag :tag => 'a', :content => 'New <u>S</u>trategy'
+    assert_no_tag :tag => 'a', :content => 'New <u>C</u>omment'
+    #TODO: "Remove Factor" link should not be available
+    #TODO: "Delete Factor" link should not be available
+    #TODO: "Delete Strategy" link should not be available
+    #TODO: "Quote Discussion" link should not be available
+    #TODO: "Edit Discussion" link should not be available
+    #TODO: "Delete Discussion" link should not be available
+  end
   
   def test_show_invalid_id
     get :show, :project_id => 1, :id => 12345
@@ -175,7 +205,7 @@ class ArchDecisionsControllerTest < ActionController::TestCase
   end
   
   def test_show_hidden_forms
-    get :show, :project_id => 1, :id => @ad.id
+    get :show, :project_id => @ad.project.id, :id => @ad.id
     assert_response :success
     assert_select "a[href=?]", /.*factors\?arch_decision_id=#{@ad.id}&amp;mode=popup/, 
                   {:html => '<u>A</u>dd Factor'}
@@ -203,6 +233,35 @@ class ArchDecisionsControllerTest < ActionController::TestCase
     end
   end
   
+  def test_edit
+    get :edit, :project_id => @ad.project.id, :id => @ad.id
+    assert_response :success
+    assert_template 'edit'
+    assert_select "form[action=/projects/#{@ad.project.identifier}/arch_decisions/edit/#{@ad.id}]" do
+      assert_select 'input#arch_decision_summary'
+      assert_select 'textarea#arch_decision_problem_description'
+      assert_select 'textarea#arch_decision_resolution'
+      assert_select 'select#arch_decision_status_id'
+      assert_select 'select#arch_decision_assigned_to_id'
+    end
+    # TODO: assert that submit creates a new AD
+  end
+  
+  def test_edit_no_perms
+    setup_user_no_permissions(@request)
+    get :edit, :project_id => @ad.project.id, :id => @ad.id
+    assert_response 403
+  end
+  
+  def test_reorder_factors
+    # TODO  
+  end
+
+  def test_reorder_factors_no_perms
+    # TODO  
+    # Test also the "drag to reorder" text
+  end
+
   private
   
   def generate_test_ads(num = 25)
@@ -212,4 +271,5 @@ class ArchDecisionsControllerTest < ActionController::TestCase
       ad.save
     end
   end
+    
 end

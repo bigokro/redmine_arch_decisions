@@ -1,8 +1,9 @@
 class ArchDecisionDiscussionsController < ApplicationController
 
   before_filter :load_discussion, :except => [:new, :preview]
-  before_filter :load_project, :except => [:quote, :preview]
   before_filter :load_parent, :only => [:new]
+  before_filter :load_project
+  before_filter :authorize, :except => [:show, :preview]
 
   helper :arch_decisions
   helper :attachments
@@ -81,7 +82,8 @@ class ArchDecisionDiscussionsController < ApplicationController
   end
 
   def load_project
-    @project = Project.find(get_id_from_params("project"))
+    @project = Project.find(get_id_from_params("project")) if get_id_from_params("project")
+    @project = @discussion.project if @project.nil? && @discussion
   end
 
   # Although it tries all, only one of these should be loaded
@@ -112,6 +114,6 @@ class ArchDecisionDiscussionsController < ApplicationController
   end
 
   def get_id_from_params(type)
-    params[type + "_id"] ? params[type + "_id"] : params[:discussion][type + "_id"]
+    params[type + "_id"] ? params[type + "_id"] : (params[:discussion] ? params[:discussion][type + "_id"] : nil)
   end
 end

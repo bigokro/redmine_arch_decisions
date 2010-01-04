@@ -1,8 +1,9 @@
 class ArchDecisionsController < ApplicationController
 
-  before_filter :load_page_model, :except => [:index, :new]
+  before_filter :load_project, :except => [:index]
+  before_filter :load_arch_decision, :except => [:index, :new]
   before_filter :set_updated_by, :except => [:index, :new, :destroy, :show]
-#  before_filter :authorize
+  before_filter :authorize, :except => [:index, :show]
 
   helper :sort
   include SortHelper  
@@ -47,7 +48,6 @@ class ArchDecisionsController < ApplicationController
 
 
   def new
-    @project = Project.find(params[:project_id])
     @arch_decision = ArchDecision.new(params[:arch_decision])
     @arch_decision.project = @project
     @arch_decision_statuses = ArchDecisionStatus.find(:all)
@@ -138,8 +138,13 @@ class ArchDecisionsController < ApplicationController
 
   private 
 
-  def load_page_model
+  def load_arch_decision
     @arch_decision = ArchDecision.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render_404
+  end
+  
+  def load_project
     @project = Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
     render_404

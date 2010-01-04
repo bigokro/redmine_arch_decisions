@@ -11,9 +11,8 @@
 	<th><%=l(:field_status)%></th>
 	<th><%=l(:label_factors_prioritized)%> 
 <% if authorize_for(:arch_decisions, :reorder_factors) %>
-			<small>(<%=l(:label_factors_reorder)%>)</small>
+			<small>(<%=l(:label_factors_reorder)%>)</small></th>
 <% end %>
-	</th>
     <th>
 <% if authorize_for(:arch_decisions, :add_factor) %>
     	<%= link_to l(:label_factor_add), {:controller => 'factors', :project_id => @project, :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision}, :popup => ['choose_factor', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_factor_link' %>
