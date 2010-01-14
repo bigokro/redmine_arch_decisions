@@ -4,6 +4,8 @@ valid:
   details: This is a valid factor
   evidence: Trust me, this is valid
   status: valid 
+  scope: Project
+  project_id: 1
   created_by_id: 4
   updated_by_id: 4
   
@@ -12,6 +14,7 @@ valid_summary_max_length:
   details: This is still a valid factor.
   evidence: The test won't fail.
   status: valid 
+  scope: Global
   created_by_id: 4
   updated_by_id: 4
 
@@ -20,6 +23,8 @@ valid_2:
   details: This is a valid factor
   evidence: Trust me, this is valid
   status: valid 
+  scope: AD
+  project_id: 1
   created_by_id: 4
   updated_by_id: 4
 
@@ -28,6 +33,8 @@ valid_3:
   details: This is a valid factor
   evidence: Trust me, this is valid
   status: valid 
+  scope: AD
+  project_id: 1
   created_by_id: 4
   updated_by_id: 4
 
@@ -36,5 +43,48 @@ valid_4:
   details: This is a valid factor
   evidence: Trust me, this is valid
   status: valid 
+  scope: AD
+  project_id: 1
   created_by_id: 4
   updated_by_id: 4
+  
+valid_global:
+  summary: Valid Global Factor For Another Project
+  details: This is a valid factor for all projects
+  evidence: Trust me, this is valid
+  status: valid
+  scope: Global
+  created_by_id: 4
+  updated_by_id: 4
+  
+valid_other_project:
+  summary: Valid Factor For Another Project
+  details: This is a valid factor for a different project
+  evidence: Trust me, this is valid
+  status: valid
+  scope: Project
+  project_id: 4
+  created_by_id: 4
+  updated_by_id: 4
+  
+valid_ad_other_project:
+  summary: Valid AD Factor For Another Project
+  details: This is a valid factor with AD scope for a different project
+  evidence: Trust me, this is valid
+  status: valid
+  scope: AD
+  project_id: 4
+  created_by_id: 4
+  updated_by_id: 4
+  
+valid_ad_no_ad:
+  summary: Valid AD Factor without an AD 
+  details: This is a valid factor with AD scope, but no AD
+  evidence: Trust me, this is valid
+  status: valid 
+  scope: AD
+  project_id: 1
+  created_by_id: 4
+  updated_by_id: 4
+
+

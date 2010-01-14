@@ -38,17 +38,24 @@ class Test::Unit::TestCase
   end
   
   def add_all_perms_to_role(role)
+    role.add_permission!(:view_arch_decisions)
     role.add_permission!(:edit_arch_decisions)
     role.add_permission!(:delete_arch_decisions)
     role.add_permission!(:edit_factors)
     role.add_permission!(:delete_factors)
-    role.add_permission!(:comment)
+    role.add_permission!(:comment_arch_decisions)
   end
   
   def setup_user_with_permissions(request)
     request.session[:user_id] = 2
     manager_role = roles(:roles_001)
     add_all_perms_to_role(manager_role)
+  end
+  
+  def setup_user_view_permissions_only(request)
+    request.session[:user_id] = 3
+    role = roles(:roles_002)
+    role.add_permission!(:view_arch_decisions)
   end
   
   def setup_user_no_permissions(request)

@@ -20,7 +20,9 @@ class ArchDecisionDiscussion < ActiveRecord::Base
     if strategy
       strategy.project
     elsif arch_decision
-      arch_decision.project    
+      arch_decision.project
+    elsif factor
+      factor.project
     else
       nil
     end

@@ -1,0 +1,31 @@
+<div class="contextual">
+<%= link_to_if_authorized(l(:button_edit), {:action => 'edit', :id => @discussion}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+</div>
+<h2><%=l(:label_discussion_comment)%> #<%= @discussion.id %></h2> 
+	
+<div class="issue details">
+	<h3><%=h @discussion.subject%></h3>
+	<p class="author">
+		<%= l(:label_added_time_by, user_name(@discussion.created_by), distance_of_time_in_words(Time.now, @discussion.created_on)) + '.' %>
+		<%= l(:label_updated_time, user_name(@discussion.created_by), distance_of_time_in_words(Time.now, @discussion.updated_on)) + '.' if @discussion.created_on != @discussion.updated_on %>
+	</p>
+
+	<hr />
+	<p><strong><%=l(:field_content)%></strong></p>
+	<div class="wiki">
+		<%= textilizable @discussion.content%>	
+	</div>
+
+</div>
+
+
+<div class="splitcontentright">
+<% content_for :sidebar do %>
+    <h3><%= l(:field_created_on) %></h3>
+    <p><span class="icon icon-time"><%= @discussion.created_on %></span></p>
+
+    <h3><%= l(:field_updated_on) %></h3>
+    <p><span class="icon icon-time"><%= @discussion.updated_on %></span></p>
+<% end %>
+
+<% html_title(l(:label_discussion)) -%>

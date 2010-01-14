@@ -3,7 +3,7 @@ class ArchDecisionDiscussionsController < ApplicationController
   before_filter :load_discussion, :except => [:new, :preview]
   before_filter :load_parent, :only => [:new]
   before_filter :load_project
-  before_filter :authorize, :except => [:show, :preview]
+  before_filter :authorize
 
   helper :arch_decisions
   helper :attachments

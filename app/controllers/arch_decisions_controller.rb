@@ -1,9 +1,9 @@
 class ArchDecisionsController < ApplicationController
 
-  before_filter :load_project, :except => [:index]
+  before_filter :load_project
   before_filter :load_arch_decision, :except => [:index, :new]
   before_filter :set_updated_by, :except => [:index, :new, :destroy, :show]
-  before_filter :authorize, :except => [:index, :show]
+  before_filter :authorize
 
   helper :sort
   include SortHelper  
@@ -17,8 +17,6 @@ class ArchDecisionsController < ApplicationController
     sort_update %w(id summary status_id assigned_to_id updated_on)
 
     c = ARCondition.new()
-    
-    @project = Project.find(params[:project_id])
     c << ["project_id = ?", @project.id]
 
     unless params[:summary].blank?
@@ -89,8 +87,10 @@ class ArchDecisionsController < ApplicationController
   def new_factor
     # TODO: DRY this code with the FactorsController.new method
     @factor = Factor.new(params[:factor])
+    @factor.project = @arch_decision.project
     @factor.created_by = User.current
     @factor.updated_by = User.current
+    @factor.scope = Factor::SCOPE_ARCH_DECISION
     priority = @arch_decision.factors.count + 1
     if @factor.save
       adf = ArchDecisionFactor.new({ :arch_decision_id => params[:id], 

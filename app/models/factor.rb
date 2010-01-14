@@ -15,8 +15,15 @@
 # Instead, the point is to elevate assumptions and rationale for potential decisions (i.e. ArchDecisions) into
 # explicit (and, for the ArchDecision itself, prioritized) and validated reasons.
 #
+# As of version 0.0.7, Factors have a "scope" attribute that can be equal to one of the constant values below.
+# Iff the scope is "Project", they will also have an associated project enitity.
+# If the scope is "AD", they must have at most one AD associated with them (but no project)
+#
 class Factor < ActiveRecord::Base
   SUMMARY_MAX_SIZE = 255
+  SCOPE_GLOBAL = "Global"
+  SCOPE_PROJECT = "Project"
+  SCOPE_ARCH_DECISION = "AD"
 
   has_many :arch_decision_factors, :dependent => :destroy
   has_many :arch_decisions, :through => :arch_decision_factors
@@ -24,10 +31,11 @@ class Factor < ActiveRecord::Base
   belongs_to :status, :class_name => "FactorStatus", :foreign_key => 'status_id'
   belongs_to :created_by, :class_name =>"User", :foreign_key => 'created_by_id'
   belongs_to :updated_by, :class_name =>"User", :foreign_key => 'updated_by_id'
+  belongs_to :project
   
   acts_as_searchable :columns => ['id', 'summary', 'details', 'evidence'], :factor_key => 'id', :permission => nil
 
-  validates_presence_of :summary, :status
+  validates_presence_of :summary, :status, :scope
   validates_length_of :summary, :maximum => SUMMARY_MAX_SIZE
 
   def discussions
@@ -50,4 +58,38 @@ class Factor < ActiveRecord::Base
     recipient_list.compact.uniq
   end
   
+  def scope_name
+    Factor.scope_name(scope)
+  end
+  
+  def self.scope_name(scope)
+    case scope
+      when SCOPE_GLOBAL then l(:label_factor_scope_global)
+      when SCOPE_PROJECT then l(:label_factor_scope_project)
+      when SCOPE_ARCH_DECISION then l(:label_factor_scope_arch_decision)
+    end
+  end
+  
+  def self.scopes
+    [SCOPE_GLOBAL, SCOPE_PROJECT, SCOPE_ARCH_DECISION]
+  end
+
+  protected
+
+  def validate
+    errors.add_to_base :error_factor_scope_invalid unless Factor.scopes.include?(scope)
+    
+    if project.nil?
+      errors.add_to_base :error_factor_project_nil if scope != SCOPE_GLOBAL
+    elsif scope != SCOPE_GLOBAL
+      errors.add_to_base :error_factor_project_mismatch unless arch_decisions.select{|ad| ad.project != project}.empty?
+    else
+      errors.add_to_base :error_factor_project_not_nil 
+    end
+    
+    if scope == SCOPE_ARCH_DECISION && arch_decisions.size > 1
+      errors.add_to_base :error_factor_multiple_ads 
+    end
+  end
 end
+

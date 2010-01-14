@@ -90,6 +90,15 @@ class ArchDecisionDiscussionTest < Test::Unit::TestCase
     assert_equal "Strategy", sd1.parent_type
   end
   
+  def test_project
+    add1 = arch_decision_discussions(:arch_decision_discussion_1)
+    fd1 = arch_decision_discussions(:factor_discussion_1)
+    sd1 = arch_decision_discussions(:strategy_discussion_1)
+    assert_equal add1.project, add1.parent.project
+    assert_equal fd1.project, fd1.parent.project
+    assert_equal sd1.project, sd1.parent.project
+  end
+  
   # TODO: Test recipients
   # TODO: Test watcher_recipients
   

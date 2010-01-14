@@ -9,6 +9,8 @@ VERSION: 0.0.7 dev build
 RELEASE NOTES
 
 * Feature #582 - Enable security controls on the Arch Decisions features - Basic permissions are now required in order to perform actions other than view the entries
+* Feature #592 - Users should have view permissions in order to see ADs and related data - Permissions are now required to view AD data
+* Feature #581 - Factors should have a "scope" attribute - Factors can now be restricted to a single project, or single AD. Existing Factors will be updated according to current assignments.
 
 CURRENT FEATURES
 
@@ -25,7 +27,6 @@ CURRENT FEATURES
 
 ROADMAP
 
-* Add a "scope" attribute to Factors so they can apply to the project, be universal, or apply only to the AD in which they were created
 * Allow associations between ADs and Issues
 * Allow tagging of ADs and Factors for easy and flexible categorization and search
 * Enable full-fledged search across all model types

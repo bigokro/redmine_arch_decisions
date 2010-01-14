@@ -1,7 +1,11 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class FactorTest < Test::Unit::TestCase
-  fixtures :factors, :arch_decisions, :arch_decision_discussions, :arch_decision_factors
+  fixtures :factors, 
+            :arch_decisions, 
+            :arch_decision_discussions, 
+            :arch_decision_factors,
+            :projects
 
   def setup
     @valid_factor = factors(:valid)
@@ -62,5 +66,126 @@ class FactorTest < Test::Unit::TestCase
     assert_nil ArchDecisionFactor.find_by_id(adfid)
     assert_not_nil ArchDecision.find_by_id(adid)
   end
+
+  def test_scope_global
+    factor = @valid_factor.clone
+    factor.scope = Factor::SCOPE_GLOBAL
+    factor.project = nil
+    assert factor.valid?
+  end
   
+  def test_scope_global_multiple_projects
+    factor = @valid_factor.clone
+    factor.scope = Factor::SCOPE_GLOBAL
+    factor.project = nil
+    ad = arch_decisions(:valid)
+    factor.arch_decisions << ad
+    ad2 = ad.clone
+    ad2.project = projects(:projects_002)
+    factor.arch_decisions << ad2
+    assert factor.valid?
+  end
+  
+  def test_scope_global_invalid
+    factor = @valid_factor.clone
+    factor.scope = Factor::SCOPE_GLOBAL
+    factor.project = projects(:projects_001)
+    assert !factor.valid?
+  end
+  
+  def test_scope_project
+    factor = @valid_factor.clone
+    factor.scope = Factor::SCOPE_PROJECT
+    factor.project = projects(:projects_001)
+    assert factor.valid?
+  end
+  
+  def test_scope_project_nil
+    factor = @valid_factor.clone
+    factor.scope = Factor::SCOPE_PROJECT
+    factor.project = nil
+    assert !factor.valid?
+  end
+  
+  def test_scope_project_ad_project_mismatch
+    factor = @valid_factor.clone
+    factor.scope = Factor::SCOPE_PROJECT
+    factor.project = projects(:projects_001)
+    ad = arch_decisions(:valid)
+    factor.arch_decisions << ad
+    ad2 = ad.clone
+    ad2.project = projects(:projects_002)
+    factor.arch_decisions << ad2
+    assert !factor.valid?
+  end
+  
+  def test_scope_project_ad_project_matches
+    project = projects(:projects_001)
+    factor = @valid_factor.clone
+    factor.scope = Factor::SCOPE_PROJECT
+    factor.project = project
+    ad = arch_decisions(:valid)
+    ad.project = project
+    factor.arch_decisions << ad
+    ad2 = ad.clone
+    ad2.project = project
+    factor.arch_decisions << ad2
+    assert factor.valid?
+  end
+  
+  def test_scope_ad
+    factor = @valid_factor.clone
+    factor.scope = Factor::SCOPE_ARCH_DECISION
+    factor.project = projects(:projects_001)
+    assert factor.valid?
+  end
+  
+  def test_scope_ad_project_nil
+    factor = @valid_factor.clone
+    factor.scope = Factor::SCOPE_ARCH_DECISION
+    factor.project = nil
+    assert !factor.valid?
+  end
+  
+  def test_scope_ad_multiple_ads
+    factor = @valid_factor.clone
+    project = projects(:projects_001)
+    factor.scope = Factor::SCOPE_ARCH_DECISION
+    factor.project = project
+    ad = arch_decisions(:valid)
+    ad.project = project
+    factor.arch_decisions << ad
+    ad2 = arch_decisions(:valid_summary_max_length)
+    ad2.project = project
+    factor.arch_decisions << ad2
+    assert !factor.valid?
+  end
+  
+  def test_scope_ad_no_ads
+    factor = @valid_factor.clone
+    factor.scope = Factor::SCOPE_ARCH_DECISION
+    factor.project = projects(:projects_001)
+    factor.arch_decisions = []
+    assert factor.valid?
+  end
+
+  def test_scope_name
+    factor = @valid_factor
+    factor.scope = Factor::SCOPE_GLOBAL
+    factor.project = projects(:projects_001)
+    assert_equal "Global", factor.scope_name
+    factor.scope = Factor::SCOPE_PROJECT
+    assert_equal "Project", factor.scope_name
+    factor.scope = Factor::SCOPE_ARCH_DECISION
+    assert_equal "Arch Decision", factor.scope_name
+  end
+  
+  def test_scope_invalid
+    factor = @valid_factor.clone
+    factor.scope = "Invalid"
+    factor.project = nil
+    assert !factor.valid?
+  end
+  
+
 end

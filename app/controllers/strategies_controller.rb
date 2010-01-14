@@ -2,7 +2,7 @@ class StrategiesController < ApplicationController
 
   before_filter :load_full_model, :except => [:new]
   before_filter :load_parent_model, :only => [:new]
-  before_filter :authorize, :except => [:show]
+  before_filter :authorize
 
   helper :arch_decisions
   helper :attachments

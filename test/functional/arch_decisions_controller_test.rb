@@ -9,6 +9,8 @@ class ArchDecisionsControllerTest < ActionController::TestCase
   fixtures :projects,
            :users,
            :arch_decisions,
+           :arch_decision_statuses,
+           :factors,
            :members,
            :roles,
            :issues
@@ -35,6 +37,12 @@ class ArchDecisionsControllerTest < ActionController::TestCase
     assert_tag :tag => 'a', :content => 'New Arch Decision', :attributes => { :href => /arch_decisions\/new/ }
   end
 
+  def test_index_no_perms
+    setup_user_no_permissions(@request)
+    get :index, :project_id => @ad.project.id
+    assert_response 403
+  end
+  
   def test_index_no_project
     begin
       get :index
@@ -167,6 +175,7 @@ class ArchDecisionsControllerTest < ActionController::TestCase
     assert_equal @ad.discussions, discussions
     assert_not_nil discussion
     assert_equal "Re: " + @ad.summary, discussion.subject
+    assert_tag :tag => 'small', :content => '(drag to reorder)'
     assert_tag :tag => 'a', 
                 :content => 'Edit', 
                 :attributes => { :href => /#{@ad.project.identifier}\/arch_decisions\/edit\/#{@ad.id}/ }
@@ -174,6 +183,12 @@ class ArchDecisionsControllerTest < ActionController::TestCase
 
   def test_show_no_perms
     setup_user_no_permissions(@request)
+    get :show, :project_id => @ad.project.id, :id => @ad.id
+    assert_response 403
+  end
+  
+  def test_show_view_perms_only
+    setup_user_view_permissions_only(@request)
     get :show, :project_id => @ad.project.id, :id => @ad.id
     assert_response :success
     assert_template 'show'
@@ -191,6 +206,7 @@ class ArchDecisionsControllerTest < ActionController::TestCase
     assert_no_tag :tag => 'a', :content => '<u>A</u>dd Factor'
     assert_no_tag :tag => 'a', :content => 'New <u>S</u>trategy'
     assert_no_tag :tag => 'a', :content => 'New <u>C</u>omment'
+    assert_no_tag :tag => 'small', :content => '(drag to reorder)'
     #TODO: "Remove Factor" link should not be available
     #TODO: "Delete Factor" link should not be available
     #TODO: "Delete Strategy" link should not be available
@@ -233,6 +249,44 @@ class ArchDecisionsControllerTest < ActionController::TestCase
     end
   end
   
+  def test_new
+    get :new, :project_id => @ad.project.id
+    assert_response :success
+    assert_template 'new'
+    assert_select "form[action=/projects/#{@ad.project.identifier}/arch_decisions/new]" do
+      assert_select 'input#arch_decision_summary'
+      assert_select 'textarea#arch_decision_problem_description'
+      assert_select 'textarea#arch_decision_resolution'
+      assert_select 'select#arch_decision_status_id'
+      assert_select 'select#arch_decision_assigned_to_id'
+    end
+  end
+  
+  def test_new_post
+    ad_count = ArchDecision.count(:all)
+    post :new, :project_id => @ad.project.id, 
+                :arch_decision => {
+                  :summary => "test_new_post summary",
+                  :problem_description => "test_new_post problem_description",
+                  :resolution => "test_new_post resolution",
+                  :status_id => arch_decision_statuses(:valid).id,
+                  :assigned_to_id => users(:users_002).id
+                }
+    assert_equal ad_count+1, ArchDecision.count(:all)
+    ad = assigns(:arch_decision)
+    assert_equal "test_new_post summary", ad.summary
+    assert_equal "test_new_post problem_description", ad.problem_description
+    assert_equal "test_new_post resolution", ad.resolution
+    assert_equal arch_decision_statuses(:valid), ad.status
+    assert_equal users(:users_002), ad.assigned_to
+  end
+  
+  def test_new_no_perms
+    setup_user_no_permissions(@request)
+    get :new, :project_id => @ad.project.id
+    assert_response 403
+  end
+  
   def test_edit
     get :edit, :project_id => @ad.project.id, :id => @ad.id
     assert_response :success
@@ -244,7 +298,7 @@ class ArchDecisionsControllerTest < ActionController::TestCase
       assert_select 'select#arch_decision_status_id'
       assert_select 'select#arch_decision_assigned_to_id'
     end
-    # TODO: assert that submit creates a new AD
+    # TODO: assert that submit udpdates AD
   end
   
   def test_edit_no_perms
@@ -253,6 +307,67 @@ class ArchDecisionsControllerTest < ActionController::TestCase
     assert_response 403
   end
   
+  def test_new_factor
+    summary = 'test_new_factor summary'
+    initial_num_factors = @ad.factors.size
+    get :show, :project_id => @ad.project.id, :id => @ad.id
+    assert_response :success
+    assert_template 'show'
+    assert_no_tag :tag => 'a', :content => /.*#{summary}.*/
+    post :new_factor, :project_id => @ad.project.id, 
+                      :id => @ad.id, 
+                      :factor => {
+                        :status_id => arch_decision_statuses(:valid).id, 
+                        :summary => summary
+                      }
+    assert_equal initial_num_factors+1, @ad.factors.size
+    (1..(@ad.factors.size)).each{ |n| 
+      assert_equal n, @ad.arch_decision_factors[n-1].priority
+    }
+    assert_equal summary, @ad.factors[@ad.factors.size-1].summary
+    get :show, :project_id => @ad.project.id, :id => @ad.id
+    assert_tag :tag => 'a', :content => /.*#{summary}.*/
+  end
+
+  def test_new_factor_no_perms
+    setup_user_no_permissions(@request)
+    post :new_factor, :project_id => @ad.project.id, 
+                      :id => @ad.id, 
+                      :factor => {
+                        :status_id => 1, 
+                        :summary => "Test factor summary"
+                      }
+    assert_response 403
+  end
+
+  def test_add_factor
+    factor = factors(:valid_ad_no_ad)
+    initial_num_factors = @ad.factors.size
+    get :show, :project_id => @ad.project.id, :id => @ad.id
+    assert_response :success
+    assert_template 'show'
+    assert_no_tag :tag => 'a', :content => /.*#{factor.summary}.*/
+    post :add_factor, :project_id => @ad.project.id, 
+                      :id => @ad.id, 
+                      :factor_id => factor.id
+    assert_equal initial_num_factors+1, @ad.factors.size
+    (1..(@ad.factors.size)).each{ |n| 
+      assert_equal n, @ad.arch_decision_factors[n-1].priority
+    }
+    assert_equal factor.summary, @ad.factors[@ad.factors.size-1].summary
+    get :show, :project_id => @ad.project.id, :id => @ad.id
+    assert_tag :tag => 'a', :content => /.*#{factor.summary}.*/
+  end
+
+  def test_add_factor_no_perms
+    setup_user_no_permissions(@request)
+    factor = factors(:valid_ad_no_ad)
+    post :add_factor, :project_id => @ad.project.id, 
+                      :id => @ad.id, 
+                      :factor_id => factor.id
+    assert_response 403
+  end
+
   def test_reorder_factors
     # TODO  
   end

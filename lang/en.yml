@@ -12,12 +12,16 @@ field_is_rejected: Rejected?
 field_reason_rejected: Reason rejected
 field_short_name: Short name
 field_content: Content
+field_scope: Scope
 
 label_id: "#"
 label_factor: Factor
 label_factor_plural: Factors
 label_factor_new: New <u>F</u>actor
 label_factor_add: <u>A</u>dd Factor
+label_factor_scope_global: Global
+label_factor_scope_project: Project 
+label_factor_scope_arch_decision: Arch Decision
 label_factors_prioritized: Factors (in order of importance)
 label_factors_reorder: drag to reorder
 label_created_time: Created %s ago
@@ -37,6 +41,11 @@ button_remove: Remove
 notice_create_discussion_failed: Unable to create discussion comment.
 
 error_discussion_parents_nil: The discussion entry is not associated with a decision, factor or strategy 
+error_factor_scope_invalid: The scope defined for this Factor is not valid
+error_factor_project_nil: The Factor must be directly associated with a project if its scope is set to 'Project' or 'Arch Decision'
+error_factor_project_not_nil: A Factor cannot be directly associated with a project if its scope is set to 'Global'
+error_factor_project_mismatch: One or more Arch Decisions associated with this Factor are associated with a different project
+error_factor_multiple_ads: A Factor of scope 'Arch Decision' cannot be associated with more than one Arch Decision at a time
 
 text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;%s and all its content ?
 text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;%s and all its content ?

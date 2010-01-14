@@ -10,9 +10,9 @@ Redmine::Plugin.register :redmine_arch_decisions do
   project_module :arch_decisions do
     permission :view_arch_decisions, {
                     :arch_decisions => [:index, :show],
-                    :strategies => [:show]
-                }, :public => true
-    permission :view_factors, {:factors => [:index, :show]}, :public => true
+                    :strategies => [:show],
+                    :factors => [:index, :show]
+                }
     permission :edit_arch_decisions, {
                     :arch_decisions => [:new, :edit, :add_factor, :remove_factor, :reorder_factors],
                     :strategies => [:new, :edit, :destroy]
@@ -26,7 +26,7 @@ Redmine::Plugin.register :redmine_arch_decisions do
                     :arch_decisions => [:destroy_factor],
                     :factors => [:destroy]
                 }
-    permission :comment, {:arch_decision_discussions => [:new, :edit, :destroy, :quote, :preview]}
+    permission :comment_arch_decisions, {:arch_decision_discussions => [:new, :edit, :destroy, :quote, :preview]}
   end
 
   menu :project_menu, :arch_decisions, { :controller => 'arch_decisions', :action => 'index' }, :caption => :label_arch_decision_plural, :param => :project_id
