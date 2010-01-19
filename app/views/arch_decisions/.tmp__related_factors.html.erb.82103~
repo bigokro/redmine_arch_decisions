@@ -4,7 +4,6 @@
 
 
 <%= error_messages_for 'factor' %>
-<%= javascript_tag "var isDrop = false;" %>
 
 <table class="list">
   <thead><tr>
@@ -31,10 +30,7 @@
   <tr class="<%= row_class %>">
 	<td><%= factor.id %></td>
     <td align="center" <%= "class='rejected'" if factor.refuted? %> style="width:10%; white-space:nowrap;"><%= factor.status.name %></td>
-	<td><div id="<%= factor_div_id %>" <%= "class='rejected'" if factor.refuted? %> style="cursor: -moz-grab;">
-		<%= link_to(h(factor.summary) + " " + text_for_discussion_count(factor), {}, :href => "#", 
-				:onmouseup => "if (!isDrop) window.location.href='" + url_for(:controller => 'factors', :project_id => @project, :action => 'show', :id => factor) + "';") %>
-	</div></td>
+	<td><div id="<%= factor_div_id %>" <%= "class='rejected'" if factor.refuted? %> style="cursor: -moz-grab;"><%= link_to(h(factor.summary) + " " + text_for_discussion_count(factor), :controller => 'factors', :project_id => @project, :action => 'show', :id => factor) %></div></td>
     <td align="center" style="width:10%; white-space:nowrap;">
       <small><%= link_to_remote_if_authorized l(:button_remove), 
 								{ :url => { :project_id => @project, :action => 'remove_factor', :id => @arch_decision, :factor_id => factor},
@@ -47,9 +43,7 @@
     </td>
   </tr>
 <% if authorize_for(:arch_decisions, :reorder_factors) %>
-  <%= draggable_element(factor_div_id, :revert => true, 
-	  :onStart => "function(draggable_element, droppable_element, event) { isDrop = true }",
-	  :onEnd => "function(draggable_element, droppable_element, event) { isDrop = false }") %>
+  <%= draggable_element(factor_div_id, :revert => true) %>
   <%= drop_receiving_element(factor_target_id,		# The id of the receiving element
 	  :with   => "'above=' + (element.id.split('_').last()) + '&below=#{factor.id};'",     		# The query string parameters
 	  :url    => {:action=> 'reorder_factors', :project_id => @project, :id => @arch_decision}, # The action to call
