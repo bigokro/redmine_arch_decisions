@@ -49,9 +49,15 @@ class ArchDecisionsController < ApplicationController
     @arch_decision = ArchDecision.new(params[:arch_decision])
     @arch_decision.project = @project
     @arch_decision_statuses = ArchDecisionStatus.find(:all)
+    @arch_decision.watcher_user_ids = [User.current.id]
     if request.post?
       @arch_decision.created_by = User.current
       @arch_decision.updated_by = User.current
+      update_watch_list
+#      @arch_decision.set_watcher @arch_decision.created_by, true #TODO: make this optional by putting it in the form
+#      if (@arch_decision.assigned_to)
+#        @arch_decision.set_watcher(@arch_decision.assigned_to, true)
+#      end
       if @arch_decision.save
         Mailer.deliver_arch_decision_add(@arch_decision)
         flash[:notice] = l(:notice_successful_create)
@@ -62,7 +68,13 @@ class ArchDecisionsController < ApplicationController
 
   def edit
     if request.post?
+      update_watch_list
       if @arch_decision.update_attributes(params[:arch_decision])
+#        if (@arch_decision.watchers.select{|w| w.user == @arch_decision.assigned_to}.empty?)
+#          #Add new assignee to watch list
+#          @arch_decision.set_watcher(@arch_decision.assigned_to, true)
+#          @arch_decision.save!
+#        end
         Mailer.deliver_arch_decision_edit(@arch_decision)
         flash[:notice] = l(:notice_successful_update)
         redirect_to :action => 'show', :project_id => @project, :id => @arch_decision
@@ -167,5 +179,12 @@ class ArchDecisionsController < ApplicationController
       end
     end
   end
-  
+
+  def update_watch_list
+    wids = params[:arch_decision]['watcher_user_ids']
+    wids = wids.nil? ? [] : wids
+    wids = wids << params[:arch_decision]['assigned_to_id'].to_i unless params[:arch_decision]['assigned_to_id'].to_i == 0
+    wids.uniq!
+    @arch_decision.watcher_user_ids = wids
+  end
 end

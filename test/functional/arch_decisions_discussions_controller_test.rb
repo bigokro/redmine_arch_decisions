@@ -27,6 +27,7 @@ class ArchDecisionDiscussionsControllerTest < ActionController::TestCase
 
   def test_new_ad_discussion
     expected_counts = get_counts
+    assert !@ad.watchers.collect{|w| w.user}.include?(User.current), "User shouldn't be on AD watch list yet"
     post :new, 
           :project_id => 1, 
           :arch_decision_id => @ad.id, 
@@ -36,11 +37,14 @@ class ArchDecisionDiscussionsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:arch_decision)
     add_counts expected_counts, :arch_decisions, 1
     assert_counts expected_counts
+    @ad.reload
+    assert @ad.watchers.collect{|w| w.user}.include?(User.current), "After comment, user should be on watch list"
   end
   
   def test_new_factor_discussion
     expected_counts = get_counts
     factor = factors(:valid)
+    assert !@ad.watchers.collect{|w| w.user}.include?(User.current), "User shouldn't be on AD watch list yet"
     post :new, 
           :project_id => 1, 
           :factor_id => factor.id, 
@@ -50,11 +54,48 @@ class ArchDecisionDiscussionsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:factor)
     add_counts expected_counts, :factors, 1
     assert_counts expected_counts
+    @ad.reload
+    assert !@ad.watchers.collect{|w| w.user}.include?(User.current), "After comment, user still shouldn't be on watch list"
+  end
+  
+  def test_new_ad_factor_discussion
+    expected_counts = get_counts
+    factor = factors(:valid_2)
+    assert !@ad.watchers.collect{|w| w.user}.include?(User.current), "User shouldn't be on AD watch list yet"
+    post :new, 
+          :project_id => 1, 
+          :factor_id => factor.id, 
+          :discussion => {:subject => "New discussion", :content => "New content"}
+    assert_redirected_to :controller => "factors", :action => "show"
+    #assert_equal 'Post was successfully created.', flash[:notice]    assert_not_nil assigns(:project)
+    assert_not_nil assigns(:factor)
+    add_counts expected_counts, :factors, 1
+    assert_counts expected_counts
+    @ad.reload
+    assert @ad.watchers.collect{|w| w.user}.include?(User.current), "After comment, user should be on watch list"
+  end
+  
+  def test_new_ad_factor_discussion_no_ad
+    expected_counts = get_counts
+    factor = factors(:valid_ad_no_ad)
+    assert !@ad.watchers.collect{|w| w.user}.include?(User.current), "User shouldn't be on AD watch list yet"
+    post :new, 
+          :project_id => 1, 
+          :factor_id => factor.id, 
+          :discussion => {:subject => "New discussion", :content => "New content"}
+    assert_redirected_to :controller => "factors", :action => "show"
+    #assert_equal 'Post was successfully created.', flash[:notice]    assert_not_nil assigns(:project)
+    assert_not_nil assigns(:factor)
+    add_counts expected_counts, :factors, 1
+    assert_counts expected_counts
+    @ad.reload
+    assert !@ad.watchers.collect{|w| w.user}.include?(User.current), "After comment, user still shouldn't be on watch list"
   end
   
   def test_new_strategy_discussion
     expected_counts = get_counts
     strategy = strategies(:valid)
+    assert !@ad.watchers.collect{|w| w.user}.include?(User.current), "User shouldn't be on AD watch list yet"
     post :new, 
           :project_id => 1, 
           :arch_decision_id => @ad.id, 
@@ -65,6 +106,8 @@ class ArchDecisionDiscussionsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:strategy)
     add_counts expected_counts, :strategies, 1
     assert_counts expected_counts
+    @ad.reload
+    assert @ad.watchers.collect{|w| w.user}.include?(User.current), "After comment, user should be on watch list"
   end
 
   def test_new_ad_discussion_no_perms

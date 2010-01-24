@@ -48,17 +48,20 @@ class Test::Unit::TestCase
   
   def setup_user_with_permissions(request)
     request.session[:user_id] = 2
+    User.current = users(:users_002)
     manager_role = roles(:roles_001)
     add_all_perms_to_role(manager_role)
   end
   
   def setup_user_view_permissions_only(request)
     request.session[:user_id] = 3
+    User.current = users(:users_003)
     role = roles(:roles_002)
     role.add_permission!(:view_arch_decisions)
   end
   
   def setup_user_no_permissions(request)
     request.session[:user_id] = 4
+    User.current = users(:users_004)
   end
 end

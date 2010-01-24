@@ -14,6 +14,12 @@
 
 <%= wikitoolbar_for 'arch_decision_problem_description' %>
 <%= wikitoolbar_for 'arch_decision_resolution' %>
-</div>
 
+<p><label><%= l(:label_issue_watchers) %></label>
+<% @project.users.sort.each do |user| -%>
+<label class="floating"><%= check_box_tag 'arch_decision[watcher_user_ids][]', user.id, @arch_decision.watcher_user_ids.include?(user.id) %> <%=h user %></label>
+<% end -%>
+</p>
+
+</div>
 <!--[eoform:arch_decision]-->

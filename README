@@ -11,6 +11,8 @@ RELEASE NOTES
 * Feature #582 - Enable security controls on the Arch Decisions features - Basic permissions are now required in order to perform actions other than view the entries
 * Feature #592 - Users should have view permissions in order to see ADs and related data - Permissions are now required to view AD data
 * Feature #581 - Factors should have a "scope" attribute - Factors can now be restricted to a single project, or single AD. Existing Factors will be updated according to current assignments.
+* Feature #594 - Users automatically added to watch list on creation, assignment or comments
+* Bug #557 - Fixed problem with unwanted link activation when dragging a Factor for reprioritization
 
 CURRENT FEATURES
 

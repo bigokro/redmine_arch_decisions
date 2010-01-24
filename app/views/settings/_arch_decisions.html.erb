@@ -1,0 +1,19 @@
+<% form_tag({:action => 'plugin'}) do %>
+
+<fieldset class="box" id="notified_events"><legend><%=l(:text_select_mail_notifications)%></legend>
+  <!-- label -->
+  <%= check_box_tag "settings[notify_on_new_ad]", Setting["plugin_redmine_arch_decisions"]["notify_on_new_ad"], Setting["plugin_redmine_arch_decisions"]["notify_on_new_ad"] %>
+  Creation of a new Arch Decision <!-- TODO: use a label -->
+  <!-- /label --><br />
+<% ArchDecisionStatus.all.each do |status| %>
+  <!-- label -->
+  <% param_name = "notify_on_#{status.name.downcase.gsub(' ', '_')}" %>
+  <%= check_box_tag "settings[#{param_name}]", Setting["plugin_redmine_arch_decisions"][param_name], Setting["plugin_redmine_arch_decisions"][param_name] %>
+  <%= status.name %>
+  <!-- /label --><br />
+<% end %>
+<%= hidden_field_tag 'settings[notified_events][]', '' %>
+<p><%= check_all_links('notified_events') %></p>
+</fieldset>
+
+<% end %>
