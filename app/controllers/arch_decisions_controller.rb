@@ -8,6 +8,7 @@ class ArchDecisionsController < ApplicationController
   helper :sort
   include SortHelper  
   helper :arch_decisions
+  include ArchDecisionsHelper
   helper :attachments
   helper :watchers
   include WatchersHelper
@@ -183,8 +184,10 @@ class ArchDecisionsController < ApplicationController
   def update_watch_list
     wids = params[:arch_decision]['watcher_user_ids']
     wids = wids.nil? ? [] : wids
-    wids = wids << params[:arch_decision]['assigned_to_id'].to_i unless params[:arch_decision]['assigned_to_id'].to_i == 0
-    wids.uniq!
+    if automatically_add_watchers
+      wids = wids << params[:arch_decision]['assigned_to_id'].to_i unless params[:arch_decision]['assigned_to_id'].to_i == 0
+      wids.uniq!
+    end
     @arch_decision.watcher_user_ids = wids
   end
 end

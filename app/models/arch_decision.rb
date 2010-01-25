@@ -80,7 +80,7 @@ class ArchDecision < ActiveRecord::Base
     arch_decision_discussions
   end
 
-  # Returns the mail adresses of users that should be notified for the issue
+  # Returns the mail adresses of users that should be notified for the AD
   def recipients
     recipients = project.recipients
     # Author and assignee are always notified unless they have been locked

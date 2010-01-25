@@ -305,6 +305,25 @@ class ArchDecisionsControllerTest < ActionController::TestCase
     assert ad.watchers.collect{ |w| w.user }.include?(ad.assigned_to)
   end
   
+  def test_new_post_dont_add_watchers
+    Setting["plugin_redmine_arch_decisions"]["automatically_add_watchers"] = false
+    ad_count = ArchDecision.count(:all)
+    post :new, :project_id => @ad.project.id, 
+                :arch_decision => {
+                  :summary => "test_new_post summary",
+                  :problem_description => "test_new_post problem_description",
+                  :resolution => "test_new_post resolution",
+                  :status_id => arch_decision_statuses(:valid).id,
+                  :assigned_to_id => User.current.id
+                }
+    assert_equal ad_count+1, ArchDecision.count(:all)
+    ad = assigns(:arch_decision)
+    assert_equal ad.created_by, ad.assigned_to
+    # There should be no watchers despite assigned to value
+    assert_equal 0, ad.watchers.size
+    Setting["plugin_redmine_arch_decisions"]["automatically_add_watchers"] = true
+  end
+  
   def test_new_no_perms
     setup_user_no_permissions(@request)
     get :new, :project_id => @ad.project.id
@@ -322,7 +341,6 @@ class ArchDecisionsControllerTest < ActionController::TestCase
       assert_select 'select#arch_decision_status_id'
       assert_select 'select#arch_decision_assigned_to_id'
     end
-    # TODO: assert that submit udpdates AD
   end
   
   def test_edit_post
@@ -373,7 +391,31 @@ class ArchDecisionsControllerTest < ActionController::TestCase
     assert watching_users.include?(ad.created_by)
     assert watching_users.include?(ad.assigned_to)
   end
-  
+
+  def test_edit_post_dont_add_watchers
+    Setting["plugin_redmine_arch_decisions"]["automatically_add_watchers"] = false
+    assignee = users(:users_002)
+    post :edit, :project_id => @ad.project.id,
+                :id => @ad.id,
+                :arch_decision => {
+                  :summary => "test_edit_post summary",
+                  :problem_description => "test_edit_post problem_description",
+                  :resolution => "test_edit_post resolution",
+                  :status_id => arch_decision_statuses(:valid_name_max_length).id,
+                  :assigned_to_id => assignee.id,
+                  :watcher_user_ids => [@ad.created_by.id]
+                }
+    ad = assigns(:arch_decision)
+    assert_equal assignee, ad.assigned_to
+    # Watch list should be unchanged
+    assert_equal 1, ad.watchers.size
+    watching_users = ad.watchers.collect{ |w| w.user }
+    assert watching_users.include?(ad.created_by)
+    assert !watching_users.include?(ad.assigned_to)
+    Setting["plugin_redmine_arch_decisions"]["automatically_add_watchers"] = true
+  end
+
+
   def test_edit_no_perms
     setup_user_no_permissions(@request)
     get :edit, :project_id => @ad.project.id, :id => @ad.id

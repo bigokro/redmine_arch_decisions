@@ -6,6 +6,7 @@ class ArchDecisionDiscussionsController < ApplicationController
   before_filter :authorize
 
   helper :arch_decisions
+  include ArchDecisionsHelper   
   helper :attachments
   include AttachmentsHelper   
 
@@ -22,10 +23,12 @@ class ArchDecisionDiscussionsController < ApplicationController
       @discussion.created_by = User.current
       if @discussion.save
         attach_files(@discussion, params[:attachments])
-        wad = ad_for_watch_list @discussion
-        unless wad.nil?
-          wad.set_watcher(User.current, true)
-          wad.save
+        if automatically_add_watchers
+          wad = ad_for_watch_list @discussion
+          unless wad.nil?
+            wad.set_watcher(User.current, true)
+            wad.save
+          end
         end
         Mailer.deliver_arch_decision_discussion_add(@discussion)
         flash[:notice] = l(:notice_successful_create)

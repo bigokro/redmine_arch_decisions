@@ -5,9 +5,6 @@
   <%= check_box_tag "settings[notify_on_new_ad]", Setting["plugin_redmine_arch_decisions"]["notify_on_new_ad"], Setting["plugin_redmine_arch_decisions"]["notify_on_new_ad"] %>
   Creation of a new Arch Decision <!-- TODO: use a label -->
   <!-- /label --><br />
-</fieldset>
-
-<fieldset class="box" id="notified_events"><legend>Status changes which should trigger a broadcast notification</legend>
 <% ArchDecisionStatus.all.each do |status| %>
   <!-- label -->
   <% param_name = "notify_on_#{status.name.downcase.gsub(' ', '_')}" %>
@@ -17,13 +14,6 @@
 <% end %>
 <%= hidden_field_tag 'settings[notified_events][]', '' %>
 <p><%= check_all_links('notified_events') %></p>
-</fieldset>
-
-<fieldset class="box" id="notified_events"><legend>Other configurations</legend>
-  <!-- label -->
-  <%= check_box_tag "settings[automatically_add_watchers]", Setting["plugin_redmine_arch_decisions"]["automatically_add_watchers"], Setting["plugin_redmine_arch_decisions"]["automatically_add_watchers"] %>
-  Automatically add creators, assignees and commenters to watch list <!-- TODO: use a label -->
-  <!-- /label --><br />
 </fieldset>
 
 <% end %>

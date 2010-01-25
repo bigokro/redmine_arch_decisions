@@ -34,6 +34,7 @@ Redmine::Plugin.register :redmine_arch_decisions do
 
   # This plugin contains settings
   settings :default => {
+    'automatically_add_watchers' => true,
     'notify_on_new_ad' => true,
     'notify_on_not_started' => false,
     'notify_on_under_discussion' => false,

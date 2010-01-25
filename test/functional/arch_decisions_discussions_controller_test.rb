@@ -40,7 +40,25 @@ class ArchDecisionDiscussionsControllerTest < ActionController::TestCase
     @ad.reload
     assert @ad.watchers.collect{|w| w.user}.include?(User.current), "After comment, user should be on watch list"
   end
-  
+ 
+  def test_new_ad_discussion_dont_add_watchers
+    Setting["plugin_redmine_arch_decisions"]["automatically_add_watchers"] = false
+    expected_counts = get_counts
+    assert !@ad.watchers.collect{|w| w.user}.include?(User.current), "User shouldn't be on AD watch list yet"
+    post :new, 
+          :project_id => 1, 
+          :arch_decision_id => @ad.id, 
+          :discussion => {:subject => "New discussion", :content => "New content"}
+    assert_redirected_to :controller => "arch_decisions", :action => "show"
+    #assert_equal 'Post was successfully created.', flash[:notice]    assert_not_nil assigns(:project)
+    assert_not_nil assigns(:arch_decision)
+    add_counts expected_counts, :arch_decisions, 1
+    assert_counts expected_counts
+    @ad.reload
+    assert !@ad.watchers.collect{|w| w.user}.include?(User.current), "After comment, user still shouldn't be on watch list"
+    Setting["plugin_redmine_arch_decisions"]["automatically_add_watchers"] = true
+  end
+ 
   def test_new_factor_discussion
     expected_counts = get_counts
     factor = factors(:valid)
