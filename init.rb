@@ -32,17 +32,4 @@ Redmine::Plugin.register :redmine_arch_decisions do
   menu :project_menu, :arch_decisions, { :controller => 'arch_decisions', :action => 'index' }, :caption => :label_arch_decision_plural, :param => :project_id
   menu :project_menu, :factors, { :controller => 'factors', :action => 'index' }, :caption => :label_factor_plural, :param => :project_id
 
-  # This plugin contains settings
-  settings :default => {
-    'automatically_add_watchers' => true,
-    'notify_on_new_ad' => true,
-    'notify_on_not_started' => false,
-    'notify_on_under_discussion' => false,
-    'notify_on_decision_made' => true,
-    'notify_on_work_scheduled' => false,
-    'notify_on_implemented' => false,
-    'notify_on_canceled' => false,
-    'notify_on_deprecated' => false
-  }, :partial => 'settings/arch_decisions'
-
 end

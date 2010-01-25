@@ -28,8 +28,4 @@ module ArchDecisionsHelper
     return "<span class='discussion-count'>(" + l(label, item.arch_decision_discussions.size.to_s) + ")</span>"
   end
   
-  def automatically_add_watchers
-    Setting["plugin_redmine_arch_decisions"]["automatically_add_watchers"]
-  end
-
 end

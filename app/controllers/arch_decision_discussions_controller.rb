@@ -23,13 +23,6 @@ class ArchDecisionDiscussionsController < ApplicationController
       @discussion.created_by = User.current
       if @discussion.save
         attach_files(@discussion, params[:attachments])
-        if automatically_add_watchers
-          wad = ad_for_watch_list @discussion
-          unless wad.nil?
-            wad.set_watcher(User.current, true)
-            wad.save
-          end
-        end
         Mailer.deliver_arch_decision_discussion_add(@discussion)
         flash[:notice] = l(:notice_successful_create)
       else
@@ -125,17 +118,4 @@ class ArchDecisionDiscussionsController < ApplicationController
     params[type + "_id"] ? params[type + "_id"] : (params[:discussion] ? params[:discussion][type + "_id"] : nil)
   end
   
-  def ad_for_watch_list(discussion)
-    case discussion.parent_type
-      when "Arch Decision" then discussion.arch_decision
-      when "Strategy" then discussion.parent.arch_decision
-      when "Factor" then
-        if discussion.factor.scope == Factor::SCOPE_ARCH_DECISION
-          discussion.factor.arch_decisions[0]
-        else
-          nil
-        end
-      else nil
-    end
-  end
 end
