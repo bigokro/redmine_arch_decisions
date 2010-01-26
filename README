@@ -4,14 +4,16 @@ The purpose of the Arch Decision plugin for Redmine is to allow teams to collabo
 to encourage explicit statements of assumptions and prioritizations, and to provide tracking after the decision has been made so that
 teams can have a collective memory as to how decisions were made in the past.
 
-VERSION: 0.0.7 dev build
+VERSION: 0.0.7
 
 RELEASE NOTES
 
 * Feature #582 - Enable security controls on the Arch Decisions features - Basic permissions are now required in order to perform actions other than view the entries
 * Feature #592 - Users should have view permissions in order to see ADs and related data - Permissions are now required to view AD data
 * Feature #581 - Factors should have a "scope" attribute - Factors can now be restricted to a single project, or single AD. Existing Factors will be updated according to current assignments.
+* Feature #595 - Add checkboxes for assigning watchers when creating/editing ADs
 * Bug #557 - Fixed problem with unwanted link activation when dragging a Factor for reprioritization
+* Bug #556 - Fixed colspan for the drag-and-drop rows for Factors and Strategies
 
 CURRENT FEATURES
 
@@ -31,6 +33,7 @@ ROADMAP
 * Allow associations between ADs and Issues
 * Allow tagging of ADs and Factors for easy and flexible categorization and search
 * Enable full-fledged search across all model types
+* Allow changes to ADs to show up in the Activity list
 
 KNOWN ISSUES
 
@@ -51,12 +54,4 @@ Note: there is now an official issue tracker for this plug-in. Please refer to h
   
   UPDATE: Unfortunately, this hasn't solved the problem in all cases. It seems that not only have the exact class representation changed, but whole
   methods have gone missing from the newly loaded versions! The only workaround left for me has been to run my local server in production mode.
-  
-  ################################
-  # Issue #2
-  # [timothy.high@gmail.com] 
-  # Currently, when reordering priorities via drag and drop,
-  # If you drag the link itself (rather than the row), it activates the link,
-  # and opens up the "show" Arch Decision page, rather than performing a reordering
-  ################################
   
