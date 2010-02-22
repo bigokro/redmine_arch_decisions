@@ -1,11 +1,13 @@
 require 'redmine'
 require 'mailer_extended'
+require 'arch_decisions_issue_patch'
+require 'show_issue_arch_decisions_hook'
 
 Redmine::Plugin.register :redmine_arch_decisions do
   name 'Architecture Decisions plugin'
   author 'Timothy High'
   description 'A plugin for tracking architecture and design decisions for software projects'
-  version '0.0.7'
+  version '0.0.8'
 
   project_module :arch_decisions do
     permission :view_arch_decisions, {
@@ -15,6 +17,7 @@ Redmine::Plugin.register :redmine_arch_decisions do
                 }
     permission :edit_arch_decisions, {
                     :arch_decisions => [:new, :edit, :add_factor, :remove_factor, :reorder_factors],
+                    :arch_decision_issues => [:add_issue, :remove_issue],
                     :strategies => [:new, :edit, :destroy]
                 }
     permission :delete_arch_decisions, {:arch_decisions => [:destroy]}

@@ -13,6 +13,7 @@ field_reason_rejected: Reason rejected
 field_short_name: Short name
 field_content: Content
 field_scope: Scope
+field_issue_type: Relation to AD
 
 label_id: "#"
 label_factor: Factor
@@ -35,6 +36,16 @@ label_strategy_new: New <u>S</u>trategy
 label_discussion: Discussion
 label_discussion_comment: Discussion Comment
 label_discussion_new: New <u>C</u>omment
+label_issue_add: Add <u>I</u>ssue
+label_issue_or_url: Redmine Issue or External URL
+label_ad_issue_type_task: Task
+label_ad_issue_type_poc: Proof of Concept
+label_ad_issue_type_impl: Implementation
+label_ad_issue_type_gov: Governed
+label_ad_issue_type_task_phrase: Task for
+label_ad_issue_type_poc_phrase: Proof of concept for
+label_ad_issue_type_impl_phrase: Implementation of
+label_ad_issue_type_gov_phrase: Governed by
 
 button_remove: Remove
 
@@ -46,6 +57,7 @@ error_factor_project_nil: The Factor must be directly associated with a project 
 error_factor_project_not_nil: A Factor cannot be directly associated with a project if its scope is set to 'Global'
 error_factor_project_mismatch: One or more Arch Decisions associated with this Factor are associated with a different project
 error_factor_multiple_ads: A Factor of scope 'Arch Decision' cannot be associated with more than one Arch Decision at a time
+error_ad_issue_url_and_issue_nil: You must provide either an Issue ID or an external URL to link to this Arch Decision
 
 text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;%s and all its content ?
 text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;%s and all its content ?
@@ -58,3 +70,7 @@ text_discussion_count_singular: %s comment
 text_discussion_count_plural: %s comments
 text_arch_decision_discussion_added: %s %s has a new discussion comment posted by %s.
 text_arch_decision_discussion_updated: %s %s has had a discussion comment updated by %s.
+text_arch_decision_issue_remove_confirmation: Remove Issue &#35;%s from this Arch Decision ?
+text_arch_decision_url_remove_confirmation: Remove the external link from this Arch Decision ? 
+text_issue_arch_decision_remove_confirmation: Remove Arch Decision &#35;%s from this Issue ?
+text_or_external_url: or external URL:

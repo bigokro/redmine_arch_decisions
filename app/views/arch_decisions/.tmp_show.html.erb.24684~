@@ -55,7 +55,7 @@
 
 <p><br/></p>
 
-<%= render :partial => 'arch_decision_issues/related_issues', :locals => { :arch_decision => @arch_decision } %>
+<%= render :partial => 'related_issues', :locals => { :arch_decision => @arch_decision } %>
 
 <p><br/></p>
 

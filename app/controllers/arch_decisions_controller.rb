@@ -1,7 +1,7 @@
 class ArchDecisionsController < ApplicationController
 
-  before_filter :load_project
   before_filter :load_arch_decision, :except => [:index, :new]
+  before_filter :load_project
   before_filter :set_updated_by, :except => [:index, :new, :destroy, :show]
   before_filter :authorize
 
@@ -148,7 +148,8 @@ class ArchDecisionsController < ApplicationController
   end
   
   def load_project
-    @project = Project.find(params[:project_id])
+    @project = @arch_decision.project if @arch_decision
+    @project = Project.find(params[:project_id]) unless @project
   rescue ActiveRecord::RecordNotFound
     render_404
   end

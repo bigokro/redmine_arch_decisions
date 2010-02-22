@@ -51,6 +51,10 @@ function activateShortcuts() {
 	shortcut.add("s",function() {
 		showForm('new_strategy');
 	});
+	// Add Issue
+	shortcut.add("i",function() {
+		showForm('add_issue');
+	});
 	// New Discussion Comment
 	shortcut.add("c",function() {
 		showForm('new_discussion');
@@ -60,6 +64,7 @@ function deactivateShortcuts() {
 	shortcut.remove("f");
 	shortcut.remove("a");
 	shortcut.remove("s");
+	shortcut.remove("i");
 	shortcut.remove("c");
 }
 

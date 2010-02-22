@@ -13,7 +13,8 @@ class ArchDecisionsControllerTest < ActionController::TestCase
            :factors,
            :members,
            :roles,
-           :issues
+           :issues,
+           :issue_statuses
            
   def setup
     @ad = arch_decisions(:valid)

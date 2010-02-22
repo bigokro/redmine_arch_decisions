@@ -11,6 +11,7 @@ class ArchDecision < ActiveRecord::Base
   has_many :factors, :through => :arch_decision_factors, :order => "priority"
   has_many :strategies, :dependent => :destroy, :order => "is_rejected, position"
   has_many :arch_decision_discussions, :dependent => :destroy, :order => "created_on"
+  has_many :arch_decision_issues, :dependent => :destroy, :order => "issue_type DESC"
   belongs_to :project
   belongs_to :status, :class_name => "ArchDecisionStatus", :foreign_key => 'status_id'
   belongs_to :created_by, :class_name =>"User", :foreign_key => 'created_by_id'
@@ -69,6 +70,15 @@ class ArchDecision < ActiveRecord::Base
       }
     end
     recalc_priorities
+  end
+
+  def remove_issue(issue_id)
+    adis = self.arch_decision_issues.select{|adi| adi.issue_id == issue_id}
+    if adis[0]
+      adis[0].destroy
+    else
+      raise "No issue were found matching id #{issue_id}"
+    end
   end
 
   # Users the AD can be assigned to

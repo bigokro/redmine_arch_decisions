@@ -1,0 +1,26 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+valid_001:
+  arch_decision: valid
+  issue_id: 1
+  issue_type: Governed
+
+valid_002:
+  arch_decision: valid
+  issue_id: 2
+  issue_type: Task
+
+valid_external_url:
+  arch_decision: valid
+  external_url: http://www.redmine.org
+  issue_type: Implementation
+  
+valid_external_url_max_length:
+  arch_decision: valid
+  external_url: http://this.is.a.very.long.url:8080/that/is/waaaaaay/too_long/to-even-be-realistic/butmaybed/andextra-long-session-cookie/will.help?external-url=not%20quite%20ready&session-id=9e0f9jer8jdfghsdfgl0resr4lgkhrerierghewrpgiherpgiwrhespriope9r8hhfdffdklfjghsdk
+  issue_type: Task
+
+valid_summary_max_length_001:
+  arch_decision: valid_summary_max_length
+  issue_id: 1
+  issue_type: Proof of Concept
+
