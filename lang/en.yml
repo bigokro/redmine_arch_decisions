@@ -58,6 +58,7 @@ error_factor_project_not_nil: A Factor cannot be directly associated with a proj
 error_factor_project_mismatch: One or more Arch Decisions associated with this Factor are associated with a different project
 error_factor_multiple_ads: A Factor of scope 'Arch Decision' cannot be associated with more than one Arch Decision at a time
 error_ad_issue_url_and_issue_nil: You must provide either an Issue ID or an external URL to link to this Arch Decision
+error_ad_issue_type_invalid: The type of issue relationship selected is invalid
 
 text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;%s and all its content ?
 text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;%s and all its content ?

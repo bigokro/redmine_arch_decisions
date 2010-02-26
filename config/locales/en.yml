@@ -1,0 +1,78 @@
+en:
+    field_id: ID
+    field_summary: Summary
+    field_details: Details
+    field_evidence: Evidence
+    field_problem_description: Problem Description
+    field_resolution: Resolution
+    field_created_by: Created by
+    field_updated_by: Updated by
+    field_created_on: Created on
+    field_updated_on: Updated on
+    field_is_rejected: Rejected?
+    field_reason_rejected: Reason rejected
+    field_short_name: Short name
+    field_content: Content
+    field_scope: Scope
+    field_issue_type: Relation to AD
+    
+    label_id: "#"
+    label_factor: Factor
+    label_factor_plural: Factors
+    label_factor_new: New <u>F</u>actor
+    label_factor_add: <u>A</u>dd Factor
+    label_factor_scope_global: Global
+    label_factor_scope_project: Project 
+    label_factor_scope_arch_decision: Arch Decision
+    label_factors_prioritized: Factors (in order of importance)
+    label_factors_reorder: drag to reorder
+    label_created_time: Created %s ago
+    label_arch_decision: Arch Decision
+    label_arch_decision_plural: Arch Decisions
+    label_arch_decision_new: New Arch Decision
+    label_arch_decisions_related: Related Arch Decisions
+    label_strategy: Strategy
+    label_strategy_plural: Strategies
+    label_strategy_new: New <u>S</u>trategy
+    label_discussion: Discussion
+    label_discussion_comment: Discussion Comment
+    label_discussion_new: New <u>C</u>omment
+    label_issue_add: Add <u>I</u>ssue
+    label_issue_or_url: Redmine Issue or External URL
+    label_ad_issue_type_task: Task
+    label_ad_issue_type_poc: Proof of Concept
+    label_ad_issue_type_impl: Implementation
+    label_ad_issue_type_gov: Governed
+    label_ad_issue_type_task_phrase: Task for
+    label_ad_issue_type_poc_phrase: Proof of concept for
+    label_ad_issue_type_impl_phrase: Implementation of
+    label_ad_issue_type_gov_phrase: Governed by
+    
+    button_remove: Remove
+    
+    notice_create_discussion_failed: Unable to create discussion comment.
+    
+    error_discussion_parents_nil: The discussion entry is not associated with a decision, factor or strategy 
+    error_factor_scope_invalid: The scope defined for this Factor is not valid
+    error_factor_project_nil: The Factor must be directly associated with a project if its scope is set to 'Project' or 'Arch Decision'
+    error_factor_project_not_nil: A Factor cannot be directly associated with a project if its scope is set to 'Global'
+    error_factor_project_mismatch: One or more Arch Decisions associated with this Factor are associated with a different project
+    error_factor_multiple_ads: A Factor of scope 'Arch Decision' cannot be associated with more than one Arch Decision at a time
+    error_ad_issue_url_and_issue_nil: You must provide either an Issue ID or an external URL to link to this Arch Decision
+    error_ad_issue_type_invalid: The type of issue relationship selected is invalid
+    
+    text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;%s and all its content ?
+    text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;%s and all its content ?
+    text_arch_decision_factor_remove_confirmation: Remove Factor &#35;%s from this Arch Decision ?
+    text_arch_decision_added: Arch Decision %s has been created by %s.
+    text_arch_decision_updated: Arch Decision %s has been updated by %s.
+    text_strategy_destroy_confirmation: Are you sure you want to delete Strategy &#35;%s and all its content ?
+    text_discussion_count_none: No comments
+    text_discussion_count_singular: %s comment
+    text_discussion_count_plural: %s comments
+    text_arch_decision_discussion_added: %s %s has a new discussion comment posted by %s.
+    text_arch_decision_discussion_updated: %s %s has had a discussion comment updated by %s.
+    text_arch_decision_issue_remove_confirmation: Remove Issue &#35;%s from this Arch Decision ?
+    text_arch_decision_url_remove_confirmation: Remove the external link from this Arch Decision ? 
+    text_issue_arch_decision_remove_confirmation: Remove Arch Decision &#35;%s from this Issue ?
+    text_or_external_url: or external URL:
