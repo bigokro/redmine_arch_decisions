@@ -1,3 +1,3 @@
-<%= l(:text_arch_decision_added, "##{@arch_decision.id}", @arch_decision.created_by) %>
+<%= l(:text_arch_decision_added, :identifier => "##{@arch_decision.id}", :author => @arch_decision.created_by) %>
 <hr />
 <%= render :partial => "arch_decision_text_html", :locals => { :arch_decision => @arch_decision, :arch_decision_url => @arch_decision_url } %>

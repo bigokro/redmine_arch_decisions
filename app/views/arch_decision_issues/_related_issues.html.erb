@@ -37,7 +37,7 @@
 				if issue
 					link_to_remote_if_authorized l(:button_remove), 
 								{ :url => { :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project, :arch_decision_id => @arch_decision, :issue_id => issue},
-									:confirm => l(:text_arch_decision_issue_remove_confirmation, issue.id) },
+									:confirm => l(:text_arch_decision_issue_remove_confirmation, :id => issue.id) },
 								:class => 'icon icon-del'
 				else
 					link_to_remote_if_authorized l(:button_remove), 

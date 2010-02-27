@@ -1,6 +1,8 @@
 require 'mailer'
 
 class Mailer
+  
+  self.instance_variable_get("@inheritable_attributes")[:view_paths] << RAILS_ROOT + "/vendor/plugins/redmine_arch_decisions/app/views"
 
   def arch_decision_add(ad)
     redmine_headers 'Project' => ad.project.identifier,
@@ -12,6 +14,7 @@ class Mailer
     subject "[#{ad.project.name} - Arch Decision ##{ad.id}] (#{ad.status.name}) #{ad.summary}"
     body :arch_decision => ad,
          :arch_decision_url => url_for(:controller => 'arch_decisions', :action => 'show', :id => ad, :project_id => ad.project)
+    render_multipart('arch_decision_add', body)
   end
 
   def arch_decision_edit(ad)
@@ -29,6 +32,7 @@ class Mailer
     subject s
     body :arch_decision => ad,
          :arch_decision_url => url_for(:controller => 'arch_decisions', :action => 'show', :id => ad, :project_id => ad.project)
+    render_multipart('arch_decision_edit', body)
   end
 
   def arch_decision_discussion_add(add)
@@ -41,6 +45,7 @@ class Mailer
     body :discussion => add,
          :discussion_url => discussion_url(add),
          :parent_description => discussion_parent_description(add)
+    render_multipart('arch_decision_discussion_add', body)
   end
 
   def arch_decision_discussion_edit(add)
@@ -55,10 +60,11 @@ class Mailer
     body :discussion => add,
          :discussion_url => discussion_url(add),
          :parent_description => discussion_parent_description(add)
+    render_multipart('arch_decision_discussion_edit', body)
   end
 
   private
-  
+
   def discussion_project_id(add)
     add.project.nil? ? "Redmine" : add.project.identifier
   end

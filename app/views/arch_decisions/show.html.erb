@@ -7,8 +7,8 @@
 <div class="<%= css_arch_decision_classes(@arch_decision) %> details">
 	<h3><%=h @arch_decision.summary%></h3>
 	<p class="author">
-		<%= l(:label_added_time_by, user_name(@arch_decision.created_by), distance_of_time_in_words(Time.now, @arch_decision.created_on)) + '.' %>
-		<%= l(:label_updated_time_by, user_name(@arch_decision.updated_by), distance_of_time_in_words(Time.now, @arch_decision.updated_on)) + '.' if @arch_decision.created_on != @arch_decision.updated_on %>
+		<%= l(:label_rad_added_time_by, :author => user_name(@arch_decision.created_by), :age => distance_of_time_in_words(Time.now, @arch_decision.created_on)) + '.' %>
+		<%= l(:label_rad_updated_time_by, :author => user_name(@arch_decision.updated_by), :age => distance_of_time_in_words(Time.now, @arch_decision.updated_on)) + '.' if @arch_decision.created_on != @arch_decision.updated_on %>
 	</p>
 
 <table width="100%">

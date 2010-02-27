@@ -26,7 +26,7 @@ en:
     label_factor_scope_arch_decision: Arch Decision
     label_factors_prioritized: Factors (in order of importance)
     label_factors_reorder: drag to reorder
-    label_created_time: Created %s ago
+    label_created_time: Created {{time}} ago
     label_arch_decision: Arch Decision
     label_arch_decision_plural: Arch Decisions
     label_arch_decision_new: New Arch Decision
@@ -47,6 +47,9 @@ en:
     label_ad_issue_type_poc_phrase: Proof of concept for
     label_ad_issue_type_impl_phrase: Implementation of
     label_ad_issue_type_gov_phrase: Governed by
+    # Created to avoid duplicate definition conflicts (see Issue #598)
+    label_rad_added_time_by: "Added by {{author}} {{age}} ago"
+    label_rad_updated_time_by: "Updated by {{author}} {{age}} ago"
     
     button_remove: Remove
     
@@ -61,18 +64,18 @@ en:
     error_ad_issue_url_and_issue_nil: You must provide either an Issue ID or an external URL to link to this Arch Decision
     error_ad_issue_type_invalid: The type of issue relationship selected is invalid
     
-    text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;%s and all its content ?
-    text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;%s and all its content ?
-    text_arch_decision_factor_remove_confirmation: Remove Factor &#35;%s from this Arch Decision ?
-    text_arch_decision_added: Arch Decision %s has been created by %s.
-    text_arch_decision_updated: Arch Decision %s has been updated by %s.
-    text_strategy_destroy_confirmation: Are you sure you want to delete Strategy &#35;%s and all its content ?
+    text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;{{id}} and all its content ?
+    text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;{{id}} and all its content ?
+    text_arch_decision_factor_remove_confirmation: Remove Factor &#35;{{id}} from this Arch Decision ?
+    text_arch_decision_added: Arch Decision {{identifier}} has been created by {{author}}.
+    text_arch_decision_updated: Arch Decision {{identifier}} has been updated by {{author}}.
+    text_strategy_destroy_confirmation: Are you sure you want to delete Strategy &#35;{{id}} and all its content ?
     text_discussion_count_none: No comments
-    text_discussion_count_singular: %s comment
-    text_discussion_count_plural: %s comments
-    text_arch_decision_discussion_added: %s %s has a new discussion comment posted by %s.
-    text_arch_decision_discussion_updated: %s %s has had a discussion comment updated by %s.
-    text_arch_decision_issue_remove_confirmation: Remove Issue &#35;%s from this Arch Decision ?
+    text_discussion_count_singular: "{{count}} comment"
+    text_discussion_count_plural: "{{count}} comments"
+    text_arch_decision_discussion_added: "{{parent_type}} {{identifier}} has a new discussion comment posted by {{author}}."
+    text_arch_decision_discussion_updated: "{{parent_type}} {{identifier}} has had a discussion comment updated by {{author}}."
+    text_arch_decision_issue_remove_confirmation: Remove Issue &#35;{{id}} from this Arch Decision ?
     text_arch_decision_url_remove_confirmation: Remove the external link from this Arch Decision ? 
-    text_issue_arch_decision_remove_confirmation: Remove Arch Decision &#35;%s from this Issue ?
+    text_issue_arch_decision_remove_confirmation: Remove Arch Decision &#35;{{id}} from this Issue ?
     text_or_external_url: or external URL:

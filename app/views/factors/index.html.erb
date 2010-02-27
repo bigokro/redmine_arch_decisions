@@ -49,7 +49,7 @@
 	  <td align="center" style="width:10%">
 	    <small><%= link_to_if_authorized(l(:button_delete), 
 							{ :project_id => @project, :action => 'destroy', :id => factor }, 
-							:confirm => l(:text_factor_destroy_confirmation, factor.id), 
+							:confirm => l(:text_factor_destroy_confirmation, :id => factor.id), 
 							:class => 'icon icon-del') %></small>
 	  </td>
 	<% end %>

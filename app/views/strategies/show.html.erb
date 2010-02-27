@@ -10,8 +10,8 @@
 	</p>
 
 	<p class="author">
-		<%= l(:label_added_time_by, user_name(@strategy.created_by), distance_of_time_in_words(Time.now, @strategy.created_on)) + '.' %>
-		<%= l(:label_updated_time_by, user_name(@strategy.updated_by), distance_of_time_in_words(Time.now, @strategy.updated_on)) + '.' if @strategy.created_on != @strategy.updated_on %>
+		<%= l(:label_rad_added_time_by, :author => user_name(@strategy.created_by), :age => distance_of_time_in_words(Time.now, @strategy.created_on)) + '.' %>
+		<%= l(:label_rad_updated_time_by, :author => user_name(@strategy.updated_by), :age => distance_of_time_in_words(Time.now, @strategy.updated_on)) + '.' if @strategy.created_on != @strategy.updated_on %>
 	</p>
 
 <table width="100%">

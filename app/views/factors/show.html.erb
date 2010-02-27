@@ -6,8 +6,8 @@
 <div class="issue details">
 	<h3 <%= "class='rejected'" if @factor.refuted? %>><%=h @factor.summary%></h3>
 	<p class="author">
-		<%= l(:label_added_time_by, user_name(@factor.created_by), distance_of_time_in_words(Time.now, @factor.created_on)) + '.' %>
-		<%= l(:label_updated_time_by, user_name(@factor.updated_by), distance_of_time_in_words(Time.now, @factor.updated_on)) + '.' if @factor.created_on != @factor.updated_on %>
+		<%= l(:label_rad_added_time_by, :author => user_name(@factor.created_by), :age => distance_of_time_in_words(Time.now, @factor.created_on)) + '.' %>
+		<%= l(:label_rad_updated_time_by, :author => user_name(@factor.updated_by), :age => distance_of_time_in_words(Time.now, @factor.updated_on)) + '.' if @factor.created_on != @factor.updated_on %>
 	</p>
 
 <table width="100%">

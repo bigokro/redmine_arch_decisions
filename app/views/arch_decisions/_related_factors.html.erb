@@ -38,11 +38,11 @@
     <td align="center" style="width:10%; white-space:nowrap;">
       <small><%= link_to_remote_if_authorized l(:button_remove), 
 								{ :url => { :project_id => @project, :action => 'remove_factor', :id => @arch_decision, :factor_id => factor},
-									:confirm => l(:text_arch_decision_factor_remove_confirmation, factor.id) },
+									:confirm => l(:text_arch_decision_factor_remove_confirmation, :id => factor.id) },
 								:class => 'icon icon-del'  %></small>
       <small><%= link_to_remote_if_authorized l(:button_delete), 
 								{ :url => { :project_id => @project, :action => 'destroy_factor', :id => @arch_decision, :factor_id => factor},
-									:confirm => l(:text_factor_destroy_confirmation, factor.id) },  
+									:confirm => l(:text_factor_destroy_confirmation, :id => factor.id) },  
 								:class => 'icon icon-del' %></small>
     </td>
   </tr>

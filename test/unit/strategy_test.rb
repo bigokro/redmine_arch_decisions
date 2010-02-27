@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class StrategyTest < Test::Unit::TestCase
+class StrategyTest < ActiveSupport::TestCase
   fixtures :strategies, :arch_decisions, :arch_decision_discussions
 
   def setup

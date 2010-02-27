@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class FactorTest < Test::Unit::TestCase
+class FactorTest < ActiveSupport::TestCase
   fixtures :factors, 
             :arch_decisions, 
             :arch_decision_discussions, 

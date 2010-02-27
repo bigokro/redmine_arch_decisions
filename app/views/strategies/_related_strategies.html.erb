@@ -27,7 +27,7 @@
     <td align="center" style="width:10%; white-space:nowrap;">
       <small><%= link_to_remote_if_authorized l(:button_delete), 
 								{ :url => { :controller => 'strategies', :action => 'destroy', :id => strategy },
-									:confirm => l(:text_strategy_destroy_confirmation, strategy.id) },  
+									:confirm => l(:text_strategy_destroy_confirmation, :id => strategy.id) },  
 								:class => 'icon icon-del' %></small>
     </td>
   </tr>

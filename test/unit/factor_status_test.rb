@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class FactorStatusTest < Test::Unit::TestCase
+class FactorStatusTest < ActiveSupport::TestCase
   fixtures :factor_statuses
 
   def setup
