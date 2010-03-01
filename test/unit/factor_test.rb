@@ -27,7 +27,8 @@ class FactorTest < ActiveSupport::TestCase
     invalid_factor.summary += "a"
     assert !invalid_factor.save
     fields = [:summary]
-    assert_fields_max_length_enforced(invalid_factor, fields)
+    lengths = [Factor::SUMMARY_MAX_SIZE]
+    assert_fields_max_length_enforced(invalid_factor, fields, lengths)
   end
   
   def test_required_fields

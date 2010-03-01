@@ -28,7 +28,8 @@ class StrategyTest < ActiveSupport::TestCase
     invalid.short_name += "a"
     assert !invalid.save
     fields = [:short_name]
-    assert_fields_max_length_enforced(invalid, fields)
+    lengths = [Strategy::SHORT_NAME_MAX_SIZE]
+    assert_fields_max_length_enforced(invalid, fields, lengths)
   end
   
   def test_required_fields

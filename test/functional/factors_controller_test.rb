@@ -8,6 +8,7 @@ class FactorsControllerTest < ActionController::TestCase
            :users,
            :members,
            :roles,
+           :member_roles,
            :issues
            
   def setup

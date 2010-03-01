@@ -60,22 +60,22 @@ class ArchDecisionsControllerTest < ActionController::TestCase
     ad2 = arch_decisions(:valid_summary_max_length)
     assert_equal @ad, arch_decisions[@ad.id > ad2.id ? 0 : 1]
     assert_equal ad2, arch_decisions[@ad.id > ad2.id ? 1 : 0]
-    assert_tag :tag => 'a', :content => '#', :attributes => { :href => /sort_order=asc/ }
-    assert_tag :tag => 'a', :content => 'Status', :attributes => { :href => /sort_order=asc/ }
-    assert_tag :tag => 'a', :content => 'Arch Decision', :attributes => { :href => /sort_order=asc/ }
-    assert_tag :tag => 'a', :content => 'Assigned to', :attributes => { :href => /sort_order=asc/ }
-    assert_tag :tag => 'a', :content => 'Updated on', :attributes => { :href => /sort_order=desc/ }
+    assert_tag :tag => 'a', :content => '#', :attributes => { :href => /sort=id$/ }
+    assert_tag :tag => 'a', :content => 'Status', :attributes => { :href => /sort=status_id%2Cid%3Adesc$/ }
+    assert_tag :tag => 'a', :content => 'Arch Decision', :attributes => { :href => /sort=summary%2Cid%3Adesc$/ }
+    assert_tag :tag => 'a', :content => 'Assigned to', :attributes => { :href => /sort=assigned_to_id%2Cid%3Adesc$/ }
+    assert_tag :tag => 'a', :content => 'Updated on', :attributes => { :href => /sort=updated_on%3Adesc%2Cid%3Adesc$/ }
     assert_tag :tag => 'a', :content => 'Delete', :attributes => { :href => /arch_decisions\/destroy/ }
   end
 
   def test_index_sort_id_asc
-    get :index, :project_id => 1, :sort_key => 'id', :sort_order => 'asc'
+    get :index, :project_id => 1, :sort => 'id'
     assert_response :success
     arch_decisions = assigns(:arch_decisions)
     ad2 = arch_decisions(:valid_summary_max_length)
     assert_equal @ad, arch_decisions[@ad.id > ad2.id ? 1 : 0]
     assert_equal ad2, arch_decisions[@ad.id > ad2.id ? 0 : 1]
-    assert_tag :tag => 'a', :content => '#', :attributes => { :href => /sort_order=desc/ }
+    assert_tag :tag => 'a', :content => '#', :attributes => { :href => /sort=id%3Adesc$/ }
   end
 
   def test_index_paging_default

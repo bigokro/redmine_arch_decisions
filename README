@@ -4,11 +4,12 @@ The purpose of the Arch Decision plugin for Redmine is to allow teams to collabo
 to encourage explicit statements of assumptions and prioritizations, and to provide tracking after the decision has been made so that
 teams can have a collective memory as to how decisions were made in the past.
 
-VERSION: 0.0.9 snapshot
+VERSION: 0.0.9 
 
 RELEASE NOTES
 
 * Bug #598 - Labels missing for Redmine 0.9.2
+* Feature #596 - Add support for Redmine version 0.9: The plugin is now compatible with Redmine "trunk" (0.9.2). A separate branch has been created for the 0.8.4-compatible version.
 
 CURRENT FEATURES
 
@@ -47,6 +48,6 @@ Note: there is now an official issue tracker for this plug-in. Please refer to h
   that worked was to patch association_proxy.rb. For more info, see:
   http://groups.google.com/group/rubyonrails-talk/browse_thread/thread/d2adc451ff0236c2/b95a3bc9cb97f988?#b95a3bc9cb97f988
   
-  UPDATE: Unfortunately, this hasn't solved the problem in all cases. It seems that not only have the exact class representation changed, but whole
+  UPDATE: Unfortunately, this hasn't solved the problem. It seems that not only have the exact class representation changed, but whole
   methods have gone missing from the newly loaded versions! The only workaround left for me has been to run my local server in production mode.
   

@@ -19,7 +19,8 @@ class ArchDecisionDiscussionTest < ActiveSupport::TestCase
     invalid_add.subject += "a"
     assert !invalid_add.save
     fields = [:subject]
-    assert_fields_max_length_enforced(invalid_add, fields)
+    lengths = [ArchDecisionDiscussion::SUBJECT_MAX_SIZE]
+    assert_fields_max_length_enforced(invalid_add, fields, lengths)
   end
   
   def test_required_fields
@@ -33,7 +34,8 @@ class ArchDecisionDiscussionTest < ActiveSupport::TestCase
     invalid_add = arch_decision_discussions(:arch_decision_discussion_1).clone
     invalid_add.arch_decision = nil
     assert !invalid_add.save
-    assert invalid_add.errors.full_messages.include?(l(:error_discussion_parents_nil))
+    assert invalid_add.errors.on_base.include?(:error_discussion_parents_nil.to_s),
+            "Error messages don't include '" + :error_discussion_parents_nil.to_s + "'. Messages: " + invalid_add.errors.on_base.to_s 
   end
 
   def test_destroy

@@ -6,7 +6,8 @@ class ArchDecisionDiscussion < ActiveRecord::Base
   belongs_to :strategy
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_id'
 
-  acts_as_attachable
+  acts_as_attachable :view_permission => :view_arch_decisions, 
+                      :delete_permission => :edit_arch_decisions 
 
   # TODO: Factors and Strategies don't belong to a project
   acts_as_searchable :columns => ['subject', 'content'],

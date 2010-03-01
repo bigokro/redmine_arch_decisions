@@ -35,7 +35,8 @@ class ArchDecisionStatusTest < ActiveSupport::TestCase
     invalid_status = ArchDecisionStatus.new(:name => valid_status.name + "a", :position => valid_status.position)
     assert !invalid_status.valid?
     fields = [:name]
-    assert_fields_max_length_enforced(invalid_status, fields)
+    lengths = [ArchDecisionStatus::NAME_MAX_SIZE]
+    assert_fields_max_length_enforced(invalid_status, fields, lengths)
   end
   
   def test_name_invalid_format

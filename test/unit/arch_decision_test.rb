@@ -28,7 +28,8 @@ class ArchDecisionTest < ActiveSupport::TestCase
     invalid_ad.summary += "a"
     assert !invalid_ad.save
     fields = [:summary]
-    assert_fields_max_length_enforced(invalid_ad, fields)
+    lengths = [ArchDecision::SUMMARY_MAX_SIZE]
+    assert_fields_max_length_enforced(invalid_ad, fields, lengths)
   end
   
   def test_required_fields
