@@ -1,6 +1,5 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'arch_decision_discussions_controller'
-require 'mailer_extended'
 
 # Re-raise errors caught by the controller.
 class ArchDecisionDiscussionsController; def rescue_action(e) raise e end; end

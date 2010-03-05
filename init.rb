@@ -1,5 +1,4 @@
 require 'redmine'
-require 'mailer_extended'
 require 'arch_decisions_issue_patch'
 require 'show_issue_arch_decisions_hook'
 
