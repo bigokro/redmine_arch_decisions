@@ -1,0 +1,80 @@
+ru:
+    field_id: Номер
+    field_summary: Описание
+    field_details: Детали
+    field_evidence: Доказательства
+    field_problem_description: Описание проблемы
+    field_resolution: Резолюция
+    field_created_by: Создана
+    field_updated_by: Обновлена
+    field_created_on: Создана в
+    field_updated_on: Обновлена в
+    field_is_rejected: Отклонена?
+    field_reason_rejected: Причина отклонена
+    field_short_name: Короткое название
+    field_content: Содержание
+    field_scope: Область действия
+    field_issue_type: Свазана с АР
+    
+    label_id: "№"
+    label_factor: Фактор
+    label_factor_plural: Факторы
+    label_factor_new: Новый <u>Ф</u>актор
+    label_factor_add: <u>Д</u>обавить фактор
+    label_factor_scope_global: Глобальная
+    label_factor_scope_project: Проект 
+    label_factor_scope_arch_decision: Архитектурное решение
+    label_factors_prioritized: Факторы (отсортированы по важности)
+    label_factors_reorder: Переместите для пересортировки
+    label_created_time: Создано {{time}} назад
+    label_arch_decision: Архитектурное решение
+    label_arch_decision_plural: Архитектурные решения
+    label_arch_decision_new: Новое архитектурное решение
+    label_arch_decisions_related: Свазанные архитектурные решения
+    label_strategy: Стратегия
+    label_strategy_plural: Стратегии
+    label_strategy_new: Новая <u>С</u>тратегия
+    label_discussion: Обсуждение
+    label_discussion_comment: Комментарий к обсуждению
+    label_discussion_new: Новый <u>К</u>омментарий
+    label_issue_add: Добавить <u>З</u>адачу
+    label_issue_or_url: Задача или внешняя ссылка
+    label_ad_issue_type_task: Задача
+    label_ad_issue_type_poc: Проверка концепции
+    label_ad_issue_type_impl: Осуществление
+    label_ad_issue_type_gov: Регулируется
+    label_ad_issue_type_task_phrase: Задача для
+    label_ad_issue_type_poc_phrase: Проверка концепции для
+    label_ad_issue_type_impl_phrase: Осуществление
+    label_ad_issue_type_gov_phrase: Регулируется
+    # Created to avoid duplicate definition conflicts (see Issue #598)
+    label_rad_added_time_by: "Добавлена {{author}} {{age}} назад"
+    label_rad_updated_time_by: "Обновлена {{author}} {{age}} назад"
+    
+    button_remove: Удалить
+    
+    notice_create_discussion_failed: Невозможно создать комментарий к обсуждению
+    
+    error_discussion_parents_nil: Обсуждение не связано ни с решением, ни с фактором, ни со стратегией
+    error_factor_scope_invalid: Область применения указаная для данного фактора неверна
+    error_factor_project_nil: Фактор должен быть непосредственно ассоциирован с проектом, если область его применения указана как 'Проект' или 'Архитектурное решение'	
+    error_factor_project_not_nil: Фактор не может быть непосредственно ассоциирован с проектом, если в качестве области применения указана 'Глобальная'
+    error_factor_project_mismatch: Одно или более архитектурных решений уже ассоциировано с этим фактором и другим проектом
+    error_factor_multiple_ads: Фактор с областью 'Архитектурное решение' не может быть ассоциирован с более чем одним архитектурным решением в один момент
+    error_ad_issue_url_and_issue_nil: Вы должны указать номер задачи или внешнюю ссылку (URL) для связи с этим архитектурным решением
+    error_ad_issue_type_invalid: Тип выбранной взаимосвязи задачи неверен
+    text_factor_destroy_confirmation: Вы уверены что хотите удалить фактор &#35;{{id}} и его содержимое ?
+    text_arch_decision_destroy_confirmation: Вы уверены что хотите удлаить архитектурное решение &#35;{{id}} и его содержимое?
+    text_arch_decision_factor_remove_confirmation: Удалить фактор &#35;{{id}} из этого архитектурного решения ?
+    text_arch_decision_added: Архитектурное решение {{identifier}} создано {{author}}.
+    text_arch_decision_updated: Архитектурное решение {{identifier}} обновлено {{author}}.
+    text_strategy_destroy_confirmation: Вы уверены что хотите удалить Стратегию &#35;{{id}} и всё её содержимое ?
+    text_discussion_count_none: Нет комментариев
+    text_discussion_count_singular: "{{count}} комментариев"
+    text_discussion_count_plural: "{{count}} комментариев"
+    text_arch_decision_discussion_added: "{{parent_type}} {{identifier}} появился новый комментарий, добавленный {{author}}."
+    text_arch_decision_discussion_updated: "{{parent_type}} {{identifier}} комментарий к обсуждению обновлен {{author}}."
+    text_arch_decision_issue_remove_confirmation: Удалить задачу &#35;{{id}} из этого архитектурного решения ?
+    text_arch_decision_url_remove_confirmation: Удалить внешнюю ссылку из этого архитектурного решения ? 
+    text_issue_arch_decision_remove_confirmation: Удалить архитектурное решение &#35;{{id}} из этой задачи ?
+    text_or_external_url: или внешнюю ссылку:
