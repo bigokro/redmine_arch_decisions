@@ -51,6 +51,18 @@ ru:
     label_rad_added_time_by: "Добавлена {{author}} {{age}} назад"
     label_rad_updated_time_by: "Обновлена {{author}} {{age}} назад"
     
+    arch_decision_status_not_started: Not Started
+    arch_decision_status_under_discussion: Under Discussion
+    arch_decision_status_decision_made: Decision Made
+    arch_decision_status_work_scheduled: Work Scheduled
+    arch_decision_status_implemented: Implemented
+    arch_decision_status_canceled: Canceled
+    arch_decision_status_deprecated: Deprecated
+    factor_status_proposed: Proposed
+    factor_status_under_discussion: Under Discussion
+    factor_status_refuted: Validated
+    factor_status_validated: Refuted
+    
     button_remove: Удалить
     
     notice_create_discussion_failed: Невозможно создать комментарий к обсуждению

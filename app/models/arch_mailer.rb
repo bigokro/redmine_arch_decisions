@@ -7,7 +7,7 @@ class ArchMailer < Mailer
     redmine_headers 'Arch-Decision-Assignee' => ad.assigned_to.login if ad.assigned_to
     recipients ad.recipients
     cc(ad.watcher_recipients - @recipients)
-    subject "[#{ad.project.name} - Arch Decision ##{ad.id}] (#{ad.status.name}) #{ad.summary}"
+    subject "[#{ad.project.name} - Arch Decision ##{ad.id}] (#{l(ad.status.name_key)}) #{ad.summary}"
     body :arch_decision => ad,
          :arch_decision_url => url_for(:controller => 'arch_decisions', :action => 'show', :id => ad, :project_id => ad.project)
     render_multipart('arch_decision_add', body)
@@ -23,7 +23,7 @@ class ArchMailer < Mailer
     # Watchers in cc
     cc(ad.watcher_recipients - @recipients)
     s = "[#{ad.project.name} - Arch Decision ##{ad.id}] "
-    s << "(#{ad.status.name}) "
+    s << "(#{l(ad.status.name_key)}) "
     s << ad.summary
     subject s
     body :arch_decision => ad,

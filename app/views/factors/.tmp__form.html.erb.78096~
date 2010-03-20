@@ -10,7 +10,7 @@
 
 <p><%= f.select :scope, (Factor.scopes.collect {|s| [Factor.scope_name(s), s]}), { :required => true }, { :tabindex => autotab } %></p>
 
-<p><%= f.select :status_id, (@factor_statuses.collect {|s| [l(s.name_key), s.id]}), { :required => true }, { :tabindex => autotab } %></p>
+<p><%= f.select :status_id, (@factor_statuses.collect {|s| [s.name, s.id]}), { :required => true }, { :tabindex => autotab } %></p>
 
 <%= wikitoolbar_for 'factor_details' %>
 <%= wikitoolbar_for 'factor_evidence' %>

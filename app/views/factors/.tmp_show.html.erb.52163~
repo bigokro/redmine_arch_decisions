@@ -16,7 +16,7 @@
     <td style="width:15%" class="start-date"></td><td style="width:35%"></td>
 </tr>
 <tr>
-    <td style="width:15%" class="status"><b><%=l(:field_status)%>:</b></td><td style="width:35%" class="<%= @factor.refuted? ? "rejected-highlight" : "status" %>"><%= l(@factor.status.name_key) %></td>
+    <td style="width:15%" class="status"><b><%=l(:field_status)%>:</b></td><td style="width:35%" class="<%= @factor.refuted? ? "rejected-highlight" : "status" %>"><%= @factor.status.name %></td>
     <td style="width:15%" class="start-date"></td><td style="width:35%"></td>
 </tr>
 </table>

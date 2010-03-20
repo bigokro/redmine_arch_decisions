@@ -20,6 +20,11 @@ class ArchDecisionStatus < ActiveRecord::Base
     return !self.is_irrelevant
   end
   
+  # Converts the name into a locale key
+  def name_key
+    ("arch_decision_status_" + name.downcase.sub(' ', '_')).to_s
+  end
+ 
   # Specify a default order
 #  def self.find(*args)
 #    options = args.last.is_a?(Hash) ? args.pop : {}

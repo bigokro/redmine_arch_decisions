@@ -3,7 +3,7 @@
 
 <ul>
 <li><%=l(:field_created_by)%>: <%= arch_decision.created_by %></li>
-<li><%=l(:field_status)%>: <%= arch_decision.status.name %></li>
+<li><%=l(:field_status)%>: <%= l(arch_decision.status.name_key) %></li>
 <li><%=l(:field_assigned_to)%>: <%= arch_decision.assigned_to %></li>
 </ul>
 

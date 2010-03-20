@@ -2,7 +2,7 @@
 <%= arch_decision_url %>
 
 <%=l(:field_created_by)%>: <%= arch_decision.created_by %>
-<%=l(:field_status)%>: <%= l(arch_decision.status.name_key) %>
+<%=l(:field_status)%>: <%= arch_decision.status.name %>
 <%=l(:field_assigned_to)%>: <%= arch_decision.assigned_to %>
 
 <%= arch_decision.problem_description %>

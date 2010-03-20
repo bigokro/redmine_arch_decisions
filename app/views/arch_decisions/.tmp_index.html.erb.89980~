@@ -28,7 +28,7 @@
 <% for ad in @arch_decisions %>
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= ad.id %></td>
-	<td align="center" style="white-space:nowrap;"><%= l(ad.status.name_key) %></td>
+	<td align="center" style="white-space:nowrap;"><%= ad.status.name %></td>
 	<td><%= link_to(h(ad.summary), :project_id => @project, :action => 'show', :id => ad) %></td>
 	<!-- td><%= textilizable ad.problem_description, :arch_decision => ad %></td -->
 	<td align="center" style="white-space:nowrap;"><%= ad.assigned_to ? user_name(ad.assigned_to) : "-" %></td>

@@ -30,7 +30,7 @@
   <tr class="<%= row_class %>"><td colspan="4"><div id="<%= factor_target_id %>" class="drag-drop-target"></div></td></tr>
   <tr class="<%= row_class %>">
 	<td><%= factor.id %></td>
-    <td align="center" <%= "class='rejected'" if factor.refuted? %> style="width:10%; white-space:nowrap;"><%= l(factor.status.name_key) %></td>
+    <td align="center" <%= "class='rejected'" if factor.refuted? %> style="width:10%; white-space:nowrap;"><%= factor.status.name %></td>
 	<td><div id="<%= factor_div_id %>" <%= "class='rejected'" if factor.refuted? %> style="cursor: -moz-grab;">
 		<%= link_to(h(factor.summary) + " " + text_for_discussion_count(factor), {}, :href => "#", 
 				:onmouseup => "if (!isDrop) window.location.href='" + url_for(:controller => 'factors', :project_id => @project, :action => 'show', :id => factor) + "';") %>

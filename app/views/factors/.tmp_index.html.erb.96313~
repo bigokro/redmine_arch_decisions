@@ -36,7 +36,7 @@
 <% for factor in @factors %>
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= factor.id %></td>
-	<td align="center" style="white-space:nowrap;"><%= l(factor.status.name_key) %></td>
+	<td align="center" style="white-space:nowrap;"><%= factor.status.name %></td>
 	<% if !@popup %>
 		<td><%= link_to(h(factor.summary), :project_id => @project, :action => 'show', :id => factor) %></td>
 	<% else %>

@@ -27,5 +27,6 @@ module ArchDecisionsHelper
     end
     return "<span class='discussion-count'>(" + l(label, :count => item.arch_decision_discussions.size.to_s) + ")</span>"
   end
-  
+
+
 end
