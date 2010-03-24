@@ -1,92 +1,96 @@
 ru:
-    field_id: Номер
+    project_module_arch_decisions: Системное решение
+
+    field_id: №
     field_summary: Описание
     field_details: Детали
-    field_evidence: Доказательства
+    field_evidence: Основание
     field_problem_description: Описание проблемы
-    field_resolution: Резолюция
-    field_created_by: Создана
-    field_updated_by: Обновлена
-    field_created_on: Создана в
-    field_updated_on: Обновлена в
-    field_is_rejected: Отклонена?
-    field_reason_rejected: Причина отклонена
-    field_short_name: Короткое название
-    field_content: Содержание
+    field_resolution: Заключение
+    field_created_by: Создал
+    field_updated_by: Обновил
+    field_created_on: Создано
+    field_updated_on: Обновлено
+    field_is_rejected: Отклонено?
+    field_reason_rejected: Причина отказа
+    field_short_name: Краткое имя
+    field_content: Содержимое
     field_scope: Область действия
-    field_issue_type: Свазана с АР
+    field_issue_type: Связь с системным решением
     
-    label_id: "№"
+    label_id: "#"
     label_factor: Фактор
     label_factor_plural: Факторы
-    label_factor_new: Новый <u>Ф</u>актор
+    label_factor_new: Новый <u>ф</u>актор
     label_factor_add: <u>Д</u>обавить фактор
     label_factor_scope_global: Глобальная
-    label_factor_scope_project: Проект 
-    label_factor_scope_arch_decision: Архитектурное решение
-    label_factors_prioritized: Факторы (отсортированы по важности)
-    label_factors_reorder: Переместите для пересортировки
+    label_factor_scope_project: Проект
+    label_factor_scope_arch_decision: Системное решение
+    label_factors_prioritized: Факторы в порядке важности
+    label_factors_reorder: порядок можно менять перетаскиванием
     label_created_time: Создано {{time}} назад
-    label_arch_decision: Архитектурное решение
-    label_arch_decision_plural: Архитектурные решения
-    label_arch_decision_new: Новое архитектурное решение
-    label_arch_decisions_related: Свазанные архитектурные решения
-    label_strategy: Стратегия
-    label_strategy_plural: Стратегии
-    label_strategy_new: Новая <u>С</u>тратегия
+    label_arch_decision: Системное решение
+    label_arch_decision_plural: Системные решения
+    label_arch_decision_new: Новое системное решение
+    label_arch_decisions_related: Связанные системные решения
+    label_strategy: Способ реализации
+    label_strategy_plural: Способы реализации
+    label_strategy_new: Новый <u>с</u>пособ
     label_discussion: Обсуждение
     label_discussion_comment: Комментарий к обсуждению
-    label_discussion_new: Новый <u>К</u>омментарий
-    label_issue_add: Добавить <u>З</u>адачу
-    label_issue_or_url: Задача или внешняя ссылка
-    label_ad_issue_type_task: Задача
+    label_discussion_new: Новый <u>к</u>омментарий
+    label_issue_add: Добавить <u>з</u>адачу
+    label_issue_or_url: Задача, связанная с Redmine, или внешния ссылка
+    label_ad_issue_type_task: Задание
     label_ad_issue_type_poc: Проверка концепции
     label_ad_issue_type_impl: Осуществление
-    label_ad_issue_type_gov: Регулируется
-    label_ad_issue_type_task_phrase: Задача для
+    label_ad_issue_type_gov: Обусловлено
+    label_ad_issue_type_task_phrase: Задание для
     label_ad_issue_type_poc_phrase: Проверка концепции для
     label_ad_issue_type_impl_phrase: Осуществление
-    label_ad_issue_type_gov_phrase: Регулируется
+    label_ad_issue_type_gov_phrase: Обусловлено
     # Created to avoid duplicate definition conflicts (see Issue #598)
     label_rad_added_time_by: "Добавлена {{author}} {{age}} назад"
     label_rad_updated_time_by: "Обновлена {{author}} {{age}} назад"
     
-    arch_decision_status_not_started: Not Started
-    arch_decision_status_under_discussion: Under Discussion
-    arch_decision_status_decision_made: Decision Made
-    arch_decision_status_work_scheduled: Work Scheduled
-    arch_decision_status_implemented: Implemented
-    arch_decision_status_canceled: Canceled
-    arch_decision_status_deprecated: Deprecated
-    factor_status_proposed: Proposed
-    factor_status_under_discussion: Under Discussion
-    factor_status_refuted: Validated
-    factor_status_validated: Refuted
+    arch_decision_status_not_started: Не начато
+    arch_decision_status_under_discussion: Обсуждается
+    arch_decision_status_decision_made: Решение принято
+    arch_decision_status_work_scheduled: Задача запланирована
+    arch_decision_status_implemented: Реализовано
+    arch_decision_status_canceled: Отменено
+    arch_decision_status_deprecated: Устарело
+    factor_status_proposed: Предложено
+    factor_status_under_discussion: Обсуждается
+    factor_status_refuted: Утверждено
+    factor_status_validated: Отвергнуто
     
     button_remove: Удалить
     
-    notice_create_discussion_failed: Невозможно создать комментарий к обсуждению
+    notice_create_discussion_failed: Не удалось создать комментарий к обсуждению.
     
-    error_discussion_parents_nil: Обсуждение не связано ни с решением, ни с фактором, ни со стратегией
-    error_factor_scope_invalid: Область применения указаная для данного фактора неверна
-    error_factor_project_nil: Фактор должен быть непосредственно ассоциирован с проектом, если область его применения указана как 'Проект' или 'Архитектурное решение'	
-    error_factor_project_not_nil: Фактор не может быть непосредственно ассоциирован с проектом, если в качестве области применения указана 'Глобальная'
-    error_factor_project_mismatch: Одно или более архитектурных решений уже ассоциировано с этим фактором и другим проектом
-    error_factor_multiple_ads: Фактор с областью 'Архитектурное решение' не может быть ассоциирован с более чем одним архитектурным решением в один момент
-    error_ad_issue_url_and_issue_nil: Вы должны указать номер задачи или внешнюю ссылку (URL) для связи с этим архитектурным решением
-    error_ad_issue_type_invalid: Тип выбранной взаимосвязи задачи неверен
-    text_factor_destroy_confirmation: Вы уверены что хотите удалить фактор &#35;{{id}} и его содержимое ?
-    text_arch_decision_destroy_confirmation: Вы уверены что хотите удлаить архитектурное решение &#35;{{id}} и его содержимое?
-    text_arch_decision_factor_remove_confirmation: Удалить фактор &#35;{{id}} из этого архитектурного решения ?
-    text_arch_decision_added: Архитектурное решение {{identifier}} создано {{author}}.
-    text_arch_decision_updated: Архитектурное решение {{identifier}} обновлено {{author}}.
-    text_strategy_destroy_confirmation: Вы уверены что хотите удалить Стратегию &#35;{{id}} и всё её содержимое ?
+    error_discussion_parents_nil: Обсуждение не связано с решением, фактором или способом реализации
+    error_factor_scope_invalid: Указана неверная область действия для этого фактора
+    error_factor_project_nil: Фактор должен быть непосредственно ассоциирован с проектом, если область его действия указана, как 'Проект' или 'Системное решение'
+    error_factor_project_not_nil: Фактор не может быть непосредственно ассоциирован с проектом, если область его действия установлена, как 'Глобальная'
+    error_factor_project_mismatch: Одно или более системных решений, ассоциированные с этим фактором, уже связаны с другим проектом
+    error_factor_multiple_ads: Фактор, действующий в области 'Системное решение', не может быть ассоциирован более, чем с одним решением
+    error_ad_issue_url_and_issue_nil: Вы должны ввести номер задачи или URL внешней ссылки, чтобы создать связь с этим системным решением
+    error_ad_issue_type_invalid: Неверный тип связи задачи
+
+    text_factor_destroy_confirmation: Вы уверены, что хотите удалить фактор &#35;{{id}} и все его содержимое?
+    text_arch_decision_destroy_confirmation: Вы уверены, что хотите удалить системное решение &#35;{{id}} и все его содержимое?
+    text_arch_decision_factor_remove_confirmation: Удалить фактор &#35;{{id}} из этого системного решения?
+    text_arch_decision_added: Системное решение {{identifier}} создано {{author}}.
+    text_arch_decision_updated: Системное решение {{identifier}} обновлено {{author}}.
+    text_strategy_destroy_confirmation: Вы уверены, что хотите удалить способ реализации &#35;{{id}} и все его содержимое?
     text_discussion_count_none: Нет комментариев
-    text_discussion_count_singular: "{{count}} комментариев"
-    text_discussion_count_plural: "{{count}} комментариев"
+    text_discussion_count_singular: "{{count}} комментарий"
+    text_discussion_count_plural: "{{count}} комментарии"
     text_arch_decision_discussion_added: "{{parent_type}} {{identifier}} появился новый комментарий, добавленный {{author}}."
+    text_arch_decision_discussion_updated: "{{parent_type}} {{identifier}} содержал новый комментарий, обновленный {{author}}."
     text_arch_decision_discussion_updated: "{{parent_type}} {{identifier}} комментарий к обсуждению обновлен {{author}}."
-    text_arch_decision_issue_remove_confirmation: Удалить задачу &#35;{{id}} из этого архитектурного решения ?
-    text_arch_decision_url_remove_confirmation: Удалить внешнюю ссылку из этого архитектурного решения ? 
-    text_issue_arch_decision_remove_confirmation: Удалить архитектурное решение &#35;{{id}} из этой задачи ?
+    text_arch_decision_issue_remove_confirmation: Удалить задачу &#35;{{id}} из этого системного решения?
+    text_arch_decision_url_remove_confirmation: Удалить внешнюю ссылку из этого системного решения? 
+    text_issue_arch_decision_remove_confirmation: Удалить системное решение &#35;{{id}} из этой задачи?
     text_or_external_url: или внешнюю ссылку:

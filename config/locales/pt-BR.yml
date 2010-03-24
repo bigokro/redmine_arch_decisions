@@ -1,0 +1,95 @@
+pt:
+    project_module_arch_decisions: Decisões Técnicas
+
+    field_id: ID
+    field_summary: Resumo
+    field_details: Detalhes
+    field_evidence: Evidência
+    field_problem_description: Descrição do Problema
+    field_resolution: Resolução
+    field_created_by: Criador por
+    field_updated_by: Atualizado por
+    field_created_on: Criado em
+    field_updated_on: Atualizado em
+    field_is_rejected: Rejeitado?
+    field_reason_rejected: Causa da rejeição
+    field_short_name: Nome curto
+    field_content: Conteúdo
+    field_scope: Escopo
+    field_issue_type: Relação com a Decisão Técnica
+    
+    label_id: "#"
+    label_factor: Fator
+    label_factor_plural: Fatores
+    label_factor_new: Novo <u>F</u>ator
+    label_factor_add: <u>A</u>dicionar Fator
+    label_factor_scope_global: Global
+    label_factor_scope_project: Projeto 
+    label_factor_scope_arch_decision: Decisão Técnica
+    label_factors_prioritized: Fatores (em ordem de impacto)
+    label_factors_reorder: arrastar para reordenar
+    label_created_time: Criado {{time}} atrás
+    label_arch_decision: Decisão Técnica
+    label_arch_decision_plural: Decisões Técnicas
+    label_arch_decision_new: Nova Decisão Técnica
+    label_arch_decisions_related: Decisões Técnicas Relacionadas
+    label_strategy: Estratégia
+    label_strategy_plural: Estratégias
+    label_strategy_new: Nova E<u>s</u>tratégia
+    label_discussion: Discussão
+    label_discussion_comment: Comentário
+    label_discussion_new: Nova <u>C</u>omentário
+    label_issue_add: Ad<u>i</u>cionar Tarefa
+    label_issue_or_url: Issue no Redmine ou URL externo
+    label_ad_issue_type_task: Tarefa
+    label_ad_issue_type_poc: Prova de Conceito
+    label_ad_issue_type_impl: Implementação
+    label_ad_issue_type_gov: Governado
+    label_ad_issue_type_task_phrase: Tarefa para a 
+    label_ad_issue_type_poc_phrase: Prova de conceito para a
+    label_ad_issue_type_impl_phrase: Implementação da
+    label_ad_issue_type_gov_phrase: Governado pela
+    # Created to avoid duplicate definition conflicts (see Issue #598)
+    label_rad_added_time_by: "Adicionado por {{author}} {{age}} atrás"
+    label_rad_updated_time_by: "Atualizado por {{author}} {{age}} atrás"
+    
+    arch_decision_status_not_started: Não iniciada
+    arch_decision_status_under_discussion: Sendo discutida
+    arch_decision_status_decision_made: Decisão tomada
+    arch_decision_status_work_scheduled: Trabalho agendado
+    arch_decision_status_implemented: Implementada
+    arch_decision_status_canceled: Cancelada
+    arch_decision_status_deprecated: Deprecada
+    factor_status_proposed: Proposto
+    factor_status_under_discussion: Sendo discutido
+    factor_status_refuted: Validado
+    factor_status_validated: Rejeitado
+    
+    button_remove: Remover
+    
+    notice_create_discussion_failed: Unable to create discussion comment.
+    
+    error_discussion_parents_nil: The discussion entry is not associated with a decision, factor or strategy 
+    error_factor_scope_invalid: The scope defined for this Factor is not valid
+    error_factor_project_nil: The Factor must be directly associated with a project if its scope is set to 'Project' or 'Arch Decision'
+    error_factor_project_not_nil: A Factor cannot be directly associated with a project if its scope is set to 'Global'
+    error_factor_project_mismatch: One or more Arch Decisions associated with this Factor are associated with a different project
+    error_factor_multiple_ads: A Factor of scope 'Arch Decision' cannot be associated with more than one Arch Decision at a time
+    error_ad_issue_url_and_issue_nil: You must provide either an Issue ID or an external URL to link to this Arch Decision
+    error_ad_issue_type_invalid: The type of issue relationship selected is invalid
+    
+    text_factor_destroy_confirmation: Are you sure you want to delete Factor &#35;{{id}} and all its content ?
+    text_arch_decision_destroy_confirmation: Are you sure you want to delete Arch Decision &#35;{{id}} and all its content ?
+    text_arch_decision_factor_remove_confirmation: Remove Factor &#35;{{id}} from this Arch Decision ?
+    text_arch_decision_added: Arch Decision {{identifier}} has been created by {{author}}.
+    text_arch_decision_updated: Arch Decision {{identifier}} has been updated by {{author}}.
+    text_strategy_destroy_confirmation: Are you sure you want to delete Strategy &#35;{{id}} and all its content ?
+    text_discussion_count_none: No comments
+    text_discussion_count_singular: "{{count}} comment"
+    text_discussion_count_plural: "{{count}} comments"
+    text_arch_decision_discussion_added: "{{parent_type}} {{identifier}} has a new discussion comment posted by {{author}}."
+    text_arch_decision_discussion_updated: "{{parent_type}} {{identifier}} has had a discussion comment updated by {{author}}."
+    text_arch_decision_issue_remove_confirmation: Remove Issue &#35;{{id}} from this Arch Decision ?
+    text_arch_decision_url_remove_confirmation: Remove the external link from this Arch Decision ? 
+    text_issue_arch_decision_remove_confirmation: Remove Arch Decision &#35;{{id}} from this Issue ?
+    text_or_external_url: or external URL:

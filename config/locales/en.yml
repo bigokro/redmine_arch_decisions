@@ -1,4 +1,6 @@
 en:
+    project_module_arch_decisions: Arch Decisions
+    
     field_id: ID
     field_summary: Summary
     field_details: Details
