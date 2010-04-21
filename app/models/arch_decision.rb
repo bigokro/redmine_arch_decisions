@@ -20,7 +20,18 @@ class ArchDecision < ActiveRecord::Base
   
   acts_as_watchable
   acts_as_searchable :columns => ['summary', 'problem_description', 'resolution'], :arch_decision_key => 'id', :permission => nil
+
+  acts_as_event :title => Proc.new {|o| "#{l(:label_arch_decision)} ##{o.id} (#{o.status.name}): #{o.summary}"},
+                :url => Proc.new {|o| {:controller => 'arch_decisions', :action => 'show', :id => o.id}},
+                :type => Proc.new {|o| 'arch decision' + (o.resolved? ? ' resolved' : '')},
+                :author => Proc.new {|o| o.updated_by},
+                :description => Proc.new {|o| o.problem_description},
+                :datetime => Proc.new {|o| o.updated_on}
   
+  acts_as_activity_provider :find_options => {:include => [:project, :created_by, :updated_by]},
+                            :author_key => :updated_by_id,
+                            :timestamp => "arch_decisions.updated_on"
+
   validates_presence_of :summary, :project, :status, :created_by, :updated_by
   validates_length_of :summary, :maximum => SUMMARY_MAX_SIZE
   
@@ -98,7 +109,7 @@ class ArchDecision < ActiveRecord::Base
     recipients << assigned_to.mail if assigned_to && assigned_to.active?
     recipients.compact.uniq
   end
-
+  
   def resolved?
     status.resolved?
   end

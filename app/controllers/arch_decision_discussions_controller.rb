@@ -22,7 +22,7 @@ class ArchDecisionDiscussionsController < ApplicationController
     if request.post?
       @discussion.created_by = User.current
       if @discussion.save
-        attach_files(@discussion, params[:attachments])
+        save_attachments
         ArchMailer.deliver_arch_decision_discussion_add(@discussion)
         flash[:notice] = l(:notice_successful_create)
       else
@@ -36,7 +36,7 @@ class ArchDecisionDiscussionsController < ApplicationController
   def edit
     render_403 and return false unless @discussion.editable_by?(User.current)
     if request.post? && @discussion.update_attributes(params[:discussion])
-      attach_files(@discussion, params[:attachments])
+      save_attachments
       ArchMailer.deliver_arch_decision_discussion_edit(@discussion)
       flash[:notice] = l(:notice_successful_update)
       redirect_to_show
@@ -116,6 +116,11 @@ class ArchDecisionDiscussionsController < ApplicationController
 
   def get_id_from_params(type)
     params[type + "_id"] ? params[type + "_id"] : (params[:discussion] ? params[:discussion][type + "_id"] : nil)
+  end
+  
+  def save_attachments
+    # test for backwards-compatibility
+    defined?(attach_files) ? attach_files(@discussion, params[:attachments]) : Attachment.attach_files(@discussion, params[:attachments])
   end
   
 end

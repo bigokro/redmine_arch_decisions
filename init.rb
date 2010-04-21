@@ -1,6 +1,11 @@
+require 'dispatcher'
 require 'redmine'
 require 'arch_decisions_issue_patch'
 require 'show_issue_arch_decisions_hook'
+
+Dispatcher.to_prepare do
+  Issue.send(:include, IssuePatch)
+end
 
 Redmine::Plugin.register :redmine_arch_decisions do
   name 'Architecture Decisions plugin'
@@ -34,4 +39,6 @@ Redmine::Plugin.register :redmine_arch_decisions do
   menu :project_menu, :arch_decisions, { :controller => 'arch_decisions', :action => 'index' }, :caption => :label_arch_decision_plural, :param => :project_id
   menu :project_menu, :factors, { :controller => 'factors', :action => 'index' }, :caption => :label_factor_plural, :param => :project_id
 
+  activity_provider :arch_decisions
+  # TODO: make comments optional
 end
