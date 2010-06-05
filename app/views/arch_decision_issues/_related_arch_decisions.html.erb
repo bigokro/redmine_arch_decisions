@@ -1,3 +1,5 @@
+<% unless @project.enabled_modules.select{ |m| m.name == "arch_decisions" }.empty? %>
+
 <div id="related_arch_decisions">
 <hr />
 
@@ -56,3 +58,4 @@
 <% end %>
 <% end %>
 </div>
+<% end %>
