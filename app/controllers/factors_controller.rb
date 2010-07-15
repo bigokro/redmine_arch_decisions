@@ -33,7 +33,7 @@ class FactorsController < ApplicationController
               unassigned_ad_factor_ids]
     else
       # Index should only list globally-scoped Factors and those associated with this project
-      c << ["scope = '#{Factor::SCOPE_GLOBAL}' OR project_id = ?", @project.id]
+      c << ["scope = '#{Factor::SCOPE_GLOBAL}' OR project_id = ?", @project.id] #"
     end
 
     unless params[:summary].blank?
@@ -112,7 +112,7 @@ class FactorsController < ApplicationController
   private
 
   def load_project
-    @project = Project.find_by_id(params[:project_id]) || Project.find_by_identifier(params[:project_id]) 
+    @project = Project.find_by_id(params[:project_id].to_i) || Project.find_by_identifier(params[:project_id]) 
   end
 
   def adjust_for_scope(factor)
