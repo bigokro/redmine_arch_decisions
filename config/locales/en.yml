@@ -62,8 +62,8 @@ en:
     arch_decision_status_deprecated: Deprecated
     factor_status_proposed: Proposed
     factor_status_under_discussion: Under Discussion
-    factor_status_refuted: Validated
-    factor_status_validated: Refuted
+    factor_status_validated: Validated
+    factor_status_refuted: Refuted
     
     button_remove: Remove
     
