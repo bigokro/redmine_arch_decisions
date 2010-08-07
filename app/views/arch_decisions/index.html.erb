@@ -19,7 +19,7 @@
 	<%= sort_header_tag('id', :caption => '#', :default_order => 'desc') %>
 	<%= sort_header_tag('status_id', :caption => l(:field_status)) %>
 	<%= sort_header_tag('summary', :caption => l(:label_arch_decision)) %>
-	<!-- th><%=l(:field_details)%></th -->
+	<th><%=l(:field_resolution)%></th>
 	<%= sort_header_tag('assigned_to_id', :caption => l(:field_assigned_to)) %>
 	<%= sort_header_tag('updated_on', :caption => l(:field_updated_on), :default_order => 'desc') %>
     <th></th>
@@ -30,7 +30,13 @@
 	<td><%= ad.id %></td>
 	<td align="center" style="white-space:nowrap;"><%= l(ad.status.name_key) %></td>
 	<td><%= link_to(h(ad.summary), :project_id => @project, :action => 'show', :id => ad) %></td>
-	<!-- td><%= textilizable ad.problem_description, :arch_decision => ad %></td -->
+	<td>
+	  <% if ad.status.resolved? %>
+	    <% ad.strategies.each do |s| %>
+	      <%= s.short_name + "<br/>" unless s.is_rejected %>
+	    <% end %>
+	  <% end %>
+	</td>
 	<td align="center" style="white-space:nowrap;"><%= ad.assigned_to ? user_name(ad.assigned_to) : "-" %></td>
 	<td align="center" style="white-space:nowrap;"><%= format_time(ad.updated_on) %></td>
 	<td align="center" style="width:10%">
