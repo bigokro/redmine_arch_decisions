@@ -14,14 +14,19 @@ function initializeForm(frm) {
 	cancelForm(frm);
 }
 function showForm(frm) {
-	Element.hide(frm + '_link');
-	Element.show(frm + '_form_row');
-	$(frm).elements[0].focus();
-	// TODO: get rid of this hack. Dunno why I can't call scrollTo outside this method.
-	if (frm == "new_discussion") {
-		Element.scrollTo('new_discussion_form_row');
+    Element.hide(frm + '_link');
+    Element.show(frm + '_form_row');
+    for (i=0; i < $(frm).elements.length; i++) {
+	if ($(frm).elements[i].type != 'hidden') {
+	    $(frm).elements[i].focus();
+	    break;
 	}
-	deactivateShortcuts();
+    }
+    // TODO: get rid of this hack. Dunno why I can't call scrollTo outside this method.
+    if (frm == "new_discussion") {
+	Element.scrollTo('new_discussion_form_row');
+    }
+    deactivateShortcuts();
 }
 function hideForm(frm) {
 	Element.hide(frm + '_form_row');
