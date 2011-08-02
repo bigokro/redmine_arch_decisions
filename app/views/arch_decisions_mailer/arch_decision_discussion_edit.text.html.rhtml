@@ -1,0 +1,3 @@
+<%= l(:text_arch_decision_discussion_updated, :parent_type => @discussion.parent_type, :identifier => "##{@discussion.parent.id}", :author => @discussion.created_by) %>
+<hr />
+<%= render :partial => "discussion_text_html", :locals => { :discussion => @discussion, :discussion_url => @discussion_url, :parent_description => @parent_description } %>

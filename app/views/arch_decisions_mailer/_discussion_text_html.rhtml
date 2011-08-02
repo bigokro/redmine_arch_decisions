@@ -1,0 +1,13 @@
+<!-- TODO: the title should be internationalized, but for the recipient, not the sender -->
+<h1><%= link_to "#{discussion.parent_type} ##{discussion.parent.id}: #{parent_description}", discussion_url %></h1>
+
+<%=l(:label_discussion_comment)%>
+<ul>
+<li><%=l(:field_created_by)%>: <%= discussion.created_by %></li>
+<li><%=l(:field_created_on)%>: <%= discussion.created_on %></li>
+<li><%=l(:field_updated_on)%>: <%= discussion.updated_on %></li>
+</ul>
+
+<p>Subject: <%= discussion.subject %></p>
+
+<%= textilizable(discussion, :content, :only_path => false) %>

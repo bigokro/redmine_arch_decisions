@@ -1,0 +1,4 @@
+<%= l(:text_arch_decision_updated, :identifier => "##{@arch_decision.id}", :author => @arch_decision.updated_by) %>
+
+----------------------------------------
+<%= render :partial => "arch_decision_text_plain", :locals => { :arch_decision=> @arch_decision, :arch_decision_url => @arch_decision_url } %>

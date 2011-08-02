@@ -1,0 +1,12 @@
+<%= "Arch Decision ##{arch_decision.id}: #{arch_decision.summary}" %>
+<%= arch_decision_url %>
+
+<%=l(:field_created_by)%>: <%= arch_decision.created_by %>
+<%=l(:field_status)%>: <%= l(arch_decision.status.name_key) %>
+<%=l(:field_assigned_to)%>: <%= arch_decision.assigned_to %>
+
+<%= arch_decision.problem_description %>
+
+<% if arch_decision.resolved? %>
+	<%= arch_decision.resolution %>
+<% end %>
