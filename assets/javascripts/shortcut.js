@@ -216,8 +216,8 @@ shortcut = {
 		var ele = binding['target'];
 		var callback = binding['callback'];
 
-		if(ele.detachEvent) ele.detachEvent('on'+type, callback);
-		else if(ele.removeEventListener) ele.removeEventListener(type, callback, false);
+		if(ele.removeEventListener) ele.removeEventListener(type, callback, false);
+		else if(ele.detachEvent) ele.detachEvent('on'+type, callback);
 		else ele['on'+type] = false;
 	}
 }
