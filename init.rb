@@ -37,7 +37,6 @@ Redmine::Plugin.register :redmine_arch_decisions do
   end
 
   menu :project_menu, :arch_decisions, { :controller => 'arch_decisions', :action => 'index' }, :caption => :label_arch_decision_plural, :param => :project_id
-  menu :project_menu, :factors, { :controller => 'factors', :action => 'index' }, :caption => :label_factor_plural, :param => :project_id
 
   activity_provider :arch_decisions
   # TODO: make comments optional

@@ -3,6 +3,8 @@ class FactorsController < ApplicationController
   before_filter :load_project
   before_filter :authorize
 
+  menu_item :arch_decisions
+
   helper :sort
   include SortHelper  
   helper :arch_decisions
