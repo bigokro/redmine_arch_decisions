@@ -6,7 +6,7 @@ class ArchDecisionsController < ApplicationController
   before_filter :authorize
 
   helper :sort
-  include SortHelper
+  include SortHelper  
   helper :arch_decisions
   include ArchDecisionsHelper
   helper :attachments
@@ -17,18 +17,20 @@ class ArchDecisionsController < ApplicationController
     sort_init 'id', 'desc'
     sort_update %w(id summary status_id assigned_to_id updated_on)
 
-    c = ["project_id = ?", @project.id]
+    c = ARCondition.new()
+    c << ["project_id = ?", @project.id]
+
     unless params[:summary].blank?
       summary = "%#{params[:summary].strip.downcase}%"
-      c = ["project_id = ? AND (LOWER(summary) LIKE ? OR id = ?)", @project.id, summary, params[:summary].to_i]
+      c << ["LOWER(summary) LIKE ? OR id = ?", summary, params[:summary].to_i]
     end
-
-    @arch_decision_count = ArchDecision.count(:conditions => c)
+    
+    @arch_decision_count = ArchDecision.count(:conditions => c.conditions)
     @arch_decision_pages = Paginator.new self, @arch_decision_count,
                 per_page_option,
-                params['page']
+                params['page']                
     @arch_decisions = ArchDecision.find :all, :order => sort_clause,
-                        :conditions => c,
+                        :conditions => c.conditions,
             :limit  =>  @arch_decision_pages.items_per_page,
             :offset =>  @arch_decision_pages.current.offset
 

@@ -20,7 +20,7 @@
   <tr>
     <td>
     	<%= adissue.issue_type_phrase %>
-		<%= link_to(l(:label_arch_decision) + " ##{ad.id}", :controller => 'arch_decisions', :action => 'show', :id => ad.id) %>
+		<%= link_to(l(:label_arch_decision) + " ##{ad.id}", :controller => 'arch_decisions', :action => 'show', :id => ad) %>
 	</td>
 	<td><%= h(ad.summary) %>	</td>
     <td align="center" style="width:10%; white-space:nowrap;"><%= l(ad.status.name_key) %></td>
@@ -29,9 +29,9 @@
       <small><%= link_to_remote_if_authorized "", 
 						{ :url => {:controller => 'arch_decision_issues', 
 									:action => 'remove_issue', 
-									:project_id => @project.id, 
-									:arch_decision_id => ad.id, 
-									:issue_id => @issue.id, 
+									:project_id => @project, 
+									:arch_decision_id => ad, 
+									:issue_id => @issue, 
 									:return_to => "issue"
 								},
 							:confirm => l(:text_issue_arch_decision_remove_confirmation, :id => ad.id)},
@@ -44,7 +44,7 @@
 
 <% if authorize_for(:arch_decision_issues, :add_issue) %>
 <% remote_form_for(:arch_decision_issue, @arch_decision_issue, 
-			:url => { :controller => "arch_decision_issues", :action => "add_issue", :project_id => @project.id, :return_to => "issue"}, 
+			:url => { :controller => "arch_decision_issues", :action => "add_issue", :project_id => @project, :return_to => "issue"}, 
 			:html => { :id => "add-arch-decision-form", :style => (@arch_decision_issue ? '' : 'display: none;') }) do |adi| %>
 	<%= adi.hidden_field :issue_id, :value => @issue.id %>
 	<%= adi.select :issue_type, (ArchDecisionIssue.issue_types.collect {|t| [ArchDecisionIssue.issue_type_phrase(t), t]}) %>

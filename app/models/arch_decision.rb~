@@ -27,14 +27,15 @@ class ArchDecision < ActiveRecord::Base
                 :author => Proc.new {|o| o.updated_by},
                 :description => Proc.new {|o| o.problem_description},
                 :datetime => Proc.new {|o| o.updated_on}
-
+  
   acts_as_activity_provider :find_options => {:include => [:project, :created_by, :updated_by]},
                             :author_key => :updated_by_id,
                             :timestamp => "arch_decisions.updated_on"
 
   validates_presence_of :summary, :project, :status, :created_by, :updated_by
   validates_length_of :summary, :maximum => SUMMARY_MAX_SIZE
-
+  
+  
   def remove_factor(factor_id)
     adfs = self.arch_decision_factors.select{|adf| adf.factor_id == factor_id}
     if adfs[0]

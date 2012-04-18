@@ -1,5 +1,5 @@
 <div class="contextual">
-<%= link_to_if_authorized(l(:button_edit), {:action => 'edit', :project_id => @project, :id => @strategy.id}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+<%= link_to_if_authorized(l(:button_edit), {:action => 'edit', :project_id => @project, :id => @strategy}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
 </div>
 <h2><%=l(:label_strategy)%> #<%= @strategy.id %></h2> 
 	
@@ -44,7 +44,7 @@
   <tbody>
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= ad.id %></td>
-	<td><%= link_to(h(ad.summary), :controller => 'arch_decisions', :project_id => @project.id, :action => 'show', :id => ad.id) %></td>
+	<td><%= link_to(h(ad.summary), :controller => 'arch_decisions', :project_id => @project, :action => 'show', :id => ad) %></td>
 	<td align="center" style="width:10%"></td>
   </tr>
   </tbody>

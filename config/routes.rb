@@ -5,4 +5,13 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'projects/:project_id/factors/:action', :controller => 'factors'
   map.connect 'projects/:project_id/factors/:action/:id', :controller => 'factors'
   map.connect 'projects/:project_id/discussions/:action/:id', :controller => 'arch_decision_discussions'
+  map.connect 'strategies/:action/:id', :controller => 'strategies'
+  map.connect 'arch_decision_issues/:action/:project_id', :controller => 'arch_decision_issues'
+  map.connect 'arch_decision_issues/:action/:project_id/:arch_decision_id', :controller => 'arch_decision_issues'
+  map.connect 'arch_decision_issues/:action/:project_id/:arch_decision_id/:issue_id', :controller => 'arch_decision_issues'
+  map.connect 'factors/:action/:project_id/:id', :controller => 'factors'
+  map.connect 'factors/:action/:id', :controller => 'factors'
+  map.connect 'arch_decisions/:action/:id', :controller => 'arch_decisions'
+  map.connect 'arch_decision_discussions/:action', :controller => 'arch_decision_discussions'
+  map.connect 'arch_decision_discussions/:action/:id', :controller => 'arch_decision_discussions'
 end

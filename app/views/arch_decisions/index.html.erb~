@@ -1,6 +1,6 @@
 <div class="contextual">
-<%= link_to_if_authorized l(:label_factor_plural), {:controller => 'factors', :action => 'index', :project_id => @project.id }, :class => 'icon icon-summary' %>
-<%= link_to_if_authorized l(:label_arch_decision_new), {:controller => 'arch_decisions', :project_id => @project.id, :action => 'new'}, :class => 'icon icon-add' %>
+<%= link_to_if_authorized l(:label_factor_plural), {:controller => 'factors', :action => 'index', :project_id => @project }, :class => 'icon icon-summary' %>
+<%= link_to_if_authorized l(:label_arch_decision_new), {:controller => 'arch_decisions', :project_id => @project, :action => 'new'}, :class => 'icon icon-add' %>
 </div>
 
 <h2><%=l(:label_arch_decision_plural)%></h2>
@@ -30,7 +30,7 @@
   <tr class="<%= cycle("odd", "even") %>">
 	<td><%= ad.id %></td>
 	<td align="center" style="white-space:nowrap;"><%= l(ad.status.name_key) %></td>
-	<td><%= link_to(h(ad.summary), :project_id => @project.id, :action => 'show', :id => ad.id) %></td>
+	<td><%= link_to(h(ad.summary), :project_id => @project, :action => 'show', :id => ad) %></td>
 	<td>
 	  <% if ad.status.resolved? %>
 	    <% ad.strategies.each do |s| %>
@@ -42,7 +42,7 @@
 	<td align="center" style="white-space:nowrap;"><%= format_time(ad.updated_on) %></td>
 	<td align="center" style="width:10%">
 	    <small><%= link_to_if_authorized(l(:button_delete), 
-							{ :action => 'destroy', :project_id => @project.id, :id => ad.id }, 
+							{ :action => 'destroy', :project_id => @project, :id => ad }, 
 							:confirm => l(:text_arch_decision_destroy_confirmation, :id => ad.id), 
 							:class => 'icon icon-del') %></small>
  	 </td>

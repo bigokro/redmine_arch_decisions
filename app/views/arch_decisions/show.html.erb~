@@ -1,5 +1,5 @@
 <div class="contextual">
-<%= link_to_if_authorized(l(:button_edit), {:project_id => @project.id, :action => 'edit', :id => @arch_decision.id}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+<%= link_to_if_authorized(l(:button_edit), {:project_id => @project, :action => 'edit', :id => @arch_decision}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
 <%= watcher_tag(@arch_decision, User.current) %>
 </div>
 <h2><%=l(:label_arch_decision)%> #<%= @arch_decision.id %></h2> 

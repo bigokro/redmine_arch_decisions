@@ -32,7 +32,7 @@ class Factor < ActiveRecord::Base
   belongs_to :created_by, :class_name =>"User", :foreign_key => 'created_by_id'
   belongs_to :updated_by, :class_name =>"User", :foreign_key => 'updated_by_id'
   belongs_to :project
-
+  
   acts_as_searchable :columns => ['id', 'summary', 'details', 'evidence'], :factor_key => 'id', :permission => nil
 
   validates_presence_of :summary, :status, :scope
@@ -41,7 +41,7 @@ class Factor < ActiveRecord::Base
   def discussions
     arch_decision_discussions
   end
-
+  
   def refuted?
     status.name == "Refuted"
   end
@@ -51,17 +51,17 @@ class Factor < ActiveRecord::Base
     arch_decisions.each{ |ad| recipient_list << ad.recipients }
     recipient_list.compact.uniq
   end
-
+    
   def watcher_recipients
     recipient_list = []
     arch_decisions.each{ |ad| recipient_list << ad.watcher_recipients }
     recipient_list.compact.uniq
   end
-
+  
   def scope_name
     Factor.scope_name(scope)
   end
-
+  
   def self.scope_name(scope)
     case scope
       when SCOPE_GLOBAL then l(:label_factor_scope_global)
@@ -69,7 +69,7 @@ class Factor < ActiveRecord::Base
       when SCOPE_ARCH_DECISION then l(:label_factor_scope_arch_decision)
     end
   end
-
+  
   def self.scopes
     [SCOPE_GLOBAL, SCOPE_PROJECT, SCOPE_ARCH_DECISION]
   end

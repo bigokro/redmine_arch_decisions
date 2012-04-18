@@ -25,7 +25,7 @@ class FactorsController < ApplicationController
       @arch_decision = ArchDecision.find(params[:arch_decision_id])
       factor_ids = @arch_decision.factors.collect{|factor| factor.id}
       if factor_ids.size > 0 then
-        query << "(NOT id IN (?))"
+        query << "(NOT id IN (?)"
         values << factor_ids
       end
 
@@ -45,13 +45,13 @@ class FactorsController < ApplicationController
     end
 
     unless params[:summary].blank?
+      summary = "%#{params[:summary].strip.downcase}%"
       query << "(LOWER(summary) LIKE ? OR id = ?)"
-      summary = "%" + params[:summary].strip.downcase + "%"
       values << summary
       values << params[:summary].to_i
     end
 
-    conditions = [query.join(" AND ")] + values
+    conditions = [query] + values
 
     @factor_count = Factor.count(:conditions => conditions)
     @factor_pages = Paginator.new self, @factor_count,

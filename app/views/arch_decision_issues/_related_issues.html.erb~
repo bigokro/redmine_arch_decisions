@@ -14,7 +14,7 @@
     <th>
 <% if authorize_for(:arch_decision_issues, :add_issue) %>
 <!--
-    	<%= link_to l(:label_issue_add), {:project_id => @project.id, :action => 'add_issue', :id => @arch_decision.id}, :popup => ['choose_issue', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_issue_link' %>
+    	<%= link_to l(:label_issue_add), {:project_id => @project, :action => 'add_issue', :id => @arch_decision}, :popup => ['choose_issue', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_issue_link' %>
 -->
 <% end %>		
 	</th>
@@ -36,12 +36,12 @@
       <small><%= 
 				if issue
 					link_to_remote_if_authorized l(:button_remove), 
-								{ :url => { :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project.id, :arch_decision_id => @arch_decision.id, :issue_id => issue.id},
+								{ :url => { :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project, :arch_decision_id => @arch_decision, :issue_id => issue},
 									:confirm => l(:text_arch_decision_issue_remove_confirmation, :id => issue.id) },
 								:class => 'icon icon-del'
 				else
 					link_to_remote_if_authorized l(:button_remove), 
-								{ :url => { :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project.id, :arch_decision_id => @arch_decision.id, :arch_decision_issue_id => adissue.id},
+								{ :url => { :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project, :arch_decision_id => @arch_decision, :arch_decision_issue_id => adissue},
 									:confirm => l(:text_arch_decision_url_remove_confirmation) },
 								:class => 'icon icon-del'
 				end
@@ -54,7 +54,7 @@
   <% row_class = cycle("odd", "even") %>
   <tr class="<%= row_class %>" id="add_issue_form_row">
 	<td colspan="5"><br/>
-<% remote_form_for(:arch_decision_issue, @arch_decision_issue, :url => { :controller => 'arch_decision_issues', :action => "add_issue", :project_id => @project.id }, :html => { :id => "add_issue" }) do |adi| %>
+<% remote_form_for(:arch_decision_issue, @arch_decision_issue, :url => { :controller => 'arch_decision_issues', :action => "add_issue", :project_id => @project }, :html => { :id => "add_issue" }) do |adi| %>
 	<%= adi.select :issue_type, (ArchDecisionIssue.issue_types.collect {|t| [t, t]}) %>
 	<%= l(:label_issue) %> #<%= adi.text_field :issue_id, :size => 10 %>
 	<%= l(:text_or_external_url) %> <%= adi.text_field :external_url, :size => 100 %>
