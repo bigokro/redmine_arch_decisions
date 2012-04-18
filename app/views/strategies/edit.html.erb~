@@ -1,9 +1,0 @@
-<% labelled_tabular_form_for :strategy, @strategy, :url => { :action => "edit", :id => @strategy } do |f| %>
-<%= render :partial => 'form', :locals => { :f => f } %>
-<%= submit_tag l(:button_save), :tabindex => autotab %>
-<% end %>
-
-<% content_for :header_tags do %>
-    <%= stylesheet_link_tag 'arch_decisions', :plugin => 'redmine_arch_decisions' %>
-<% end %>
-
