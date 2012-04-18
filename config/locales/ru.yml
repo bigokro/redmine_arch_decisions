@@ -28,7 +28,7 @@ ru:
     label_factor_scope_arch_decision: Системное решение
     label_factors_prioritized: Факторы в порядке важности
     label_factors_reorder: порядок можно менять перетаскиванием
-    label_created_time: Создано {{time}} назад
+    label_created_time: Создано %{time} назад
     label_arch_decision: Системное решение
     label_arch_decision_plural: Системные решения
     label_arch_decision_new: Новое системное решение
@@ -50,8 +50,8 @@ ru:
     label_ad_issue_type_impl_phrase: Осуществление
     label_ad_issue_type_gov_phrase: Обусловлено
     # Created to avoid duplicate definition conflicts (see Issue #598)
-    label_rad_added_time_by: "Добавлена {{author}} {{age}} назад"
-    label_rad_updated_time_by: "Обновлена {{author}} {{age}} назад"
+    label_rad_added_time_by: "Добавлена %{author} %{age} назад"
+    label_rad_updated_time_by: "Обновлена %{author} %{age} назад"
     
     arch_decision_status_not_started: Не начато
     arch_decision_status_under_discussion: Обсуждается
@@ -71,26 +71,26 @@ ru:
     
     error_discussion_parents_nil: Обсуждение не связано с решением, фактором или способом реализации
     error_factor_scope_invalid: Указана неверная область действия для этого фактора
-    error_factor_project_nil: Фактор должен быть непосредственно ассоциирован с проектом, если область его действия указана, как 'Проект' или 'Системное решение'
-    error_factor_project_not_nil: Фактор не может быть непосредственно ассоциирован с проектом, если область его действия установлена, как 'Глобальная'
-    error_factor_project_mismatch: Одно или более системных решений, ассоциированные с этим фактором, уже связаны с другим проектом
-    error_factor_multiple_ads: Фактор, действующий в области 'Системное решение', не может быть ассоциирован более, чем с одним решением
-    error_ad_issue_url_and_issue_nil: Вы должны ввести номер задачи или URL внешней ссылки, чтобы создать связь с этим системным решением
-    error_ad_issue_type_invalid: Неверный тип связи задачи
+    error_factor_project_nil: Фактор должен быть непосредственно ассоциирован с проектом, если область его действия указана, как 'Проект' или 'Системное решение'
+    error_factor_project_not_nil: Фактор не может быть непосредственно ассоциирован с проектом, если область его действия установлена, как 'Глобальная'
+    error_factor_project_mismatch: Одно или более системных решений, ассоциированные с этим фактором, уже связаны с другим проектом
+    error_factor_multiple_ads: Фактор, действующий в области 'Системное решение', не может быть ассоциирован более, чем с одним решением
+    error_ad_issue_url_and_issue_nil: Вы должны ввести номер задачи или URL внешней ссылки, чтобы создать связь с этим системным решением
+    error_ad_issue_type_invalid: Неверный тип связи задачи
 
-    text_factor_destroy_confirmation: Вы уверены, что хотите удалить фактор &#35;{{id}} и все его содержимое?
-    text_arch_decision_destroy_confirmation: Вы уверены, что хотите удалить системное решение &#35;{{id}} и все его содержимое?
-    text_arch_decision_factor_remove_confirmation: Удалить фактор &#35;{{id}} из этого системного решения?
-    text_arch_decision_added: Системное решение {{identifier}} создано {{author}}.
-    text_arch_decision_updated: Системное решение {{identifier}} обновлено {{author}}.
-    text_strategy_destroy_confirmation: Вы уверены, что хотите удалить способ реализации &#35;{{id}} и все его содержимое?
-    text_discussion_count_none: Нет комментариев
-    text_discussion_count_singular: "{{count}} комментарий"
-    text_discussion_count_plural: "{{count}} комментарии"
-    text_arch_decision_discussion_added: "{{parent_type}} {{identifier}} появился новый комментарий, добавленный {{author}}."
-    text_arch_decision_discussion_updated: "{{parent_type}} {{identifier}} содержал новый комментарий, обновленный {{author}}."
-    text_arch_decision_discussion_updated: "{{parent_type}} {{identifier}} комментарий к обсуждению обновлен {{author}}."
-    text_arch_decision_issue_remove_confirmation: Удалить задачу &#35;{{id}} из этого системного решения?
-    text_arch_decision_url_remove_confirmation: Удалить внешнюю ссылку из этого системного решения? 
-    text_issue_arch_decision_remove_confirmation: Удалить системное решение &#35;{{id}} из этой задачи?
+    text_factor_destroy_confirmation: Вы уверены, что хотите удалить фактор &#35;%{id} и все его содержимое?
+    text_arch_decision_destroy_confirmation: Вы уверены, что хотите удалить системное решение &#35;%{id} и все его содержимое?
+    text_arch_decision_factor_remove_confirmation: Удалить фактор &#35;%{id} из этого системного решения?
+    text_arch_decision_added: Системное решение %{identifier} создано %{author}.
+    text_arch_decision_updated: Системное решение %{identifier} обновлено %{author}.
+    text_strategy_destroy_confirmation: Вы уверены, что хотите удалить способ реализации &#35;%{id} и все его содержимое?
+    text_discussion_count_none: Нет комментариев
+    text_discussion_count_singular: "%{count} комментарий"
+    text_discussion_count_plural: "%{count} комментарии"
+    text_arch_decision_discussion_added: "%{parent_type} %{identifier} появился новый комментарий, добавленный %{author}."
+    text_arch_decision_discussion_updated: "%{parent_type} %{identifier} содержал новый комментарий, обновленный %{author}."
+    text_arch_decision_discussion_updated: "%{parent_type} %{identifier} комментарий к обсуждению обновлен %{author}."
+    text_arch_decision_issue_remove_confirmation: Удалить задачу &#35;%{id} из этого системного решения?
+    text_arch_decision_url_remove_confirmation: Удалить внешнюю ссылку из этого системного решения? 
+    text_issue_arch_decision_remove_confirmation: Удалить системное решение &#35;%{id} из этой задачи?
     text_or_external_url: или внешнюю ссылку:
