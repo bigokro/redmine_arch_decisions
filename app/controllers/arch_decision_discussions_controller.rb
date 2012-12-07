@@ -15,7 +15,7 @@ class ArchDecisionDiscussionsController < ApplicationController
 
 
   def new
-    @discussion = ArchDecisionDiscussion.new(params[:discussion])
+    @discussion = ArchDecisionDiscussion.new(params[:arch_decision_discussion])
     @discussion.factor = @factor
     @discussion.strategy = @strategy
     @discussion.arch_decision = @arch_decision if !(@factor || @strategy)
