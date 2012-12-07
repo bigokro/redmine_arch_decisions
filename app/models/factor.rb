@@ -77,18 +77,18 @@ class Factor < ActiveRecord::Base
   protected
 
   def validate
-    errors.add_to_base :error_factor_scope_invalid unless Factor.scopes.include?(scope)
+    errors[:base] << :error_factor_scope_invalid unless Factor.scopes.include?(scope)
     
     if project.nil?
-      errors.add_to_base :error_factor_project_nil if scope != SCOPE_GLOBAL
+      errors[:base] << :error_factor_project_nil if scope != SCOPE_GLOBAL
     elsif scope != SCOPE_GLOBAL
-      errors.add_to_base :error_factor_project_mismatch unless arch_decisions.select{|ad| ad.project != project}.empty?
+      errors[:base] << :error_factor_project_mismatch unless arch_decisions.select{|ad| ad.project != project}.empty?
     else
-      errors.add_to_base :error_factor_project_not_nil 
+      errors[:base] << :error_factor_project_not_nil 
     end
     
     if scope == SCOPE_ARCH_DECISION && arch_decisions.size > 1
-      errors.add_to_base :error_factor_multiple_ads 
+      errors[:base] << :error_factor_multiple_ads 
     end
   end
 end

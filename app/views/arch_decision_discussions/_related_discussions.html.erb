@@ -19,7 +19,7 @@
 
 <% if authorize_for(:arch_decision_discussions, :new) %>
 <div id="new_discussion_form_row" style="display:none;">
-<% labelled_tabular_form_for :discussion, @discussion, :url => {:controller => 'arch_decision_discussions', :action => 'new'}, :html => {:multipart => true, :id => 'new_discussion'} do |f| %>
+<%= labelled_tabular_form_for @discussion, :url => {:controller => 'arch_decision_discussions', :action => 'new'}, :html => {:multipart => true, :id => 'new_discussion'} do |f| %>
 	<%= render :partial => 'arch_decision_discussions/form', :locals => {:f => f, :discussion => @discussion} %>
 	<p><%= submit_tag l(:button_create) %>
 	<%= submit_tag l(:button_cancel), :onclick => "cancelForm('new_discussion'); return false;" %>
@@ -34,7 +34,7 @@
 </div>
 <div id="new_discussion_link">
 	<br/>
-	<%= link_to_function l(:label_discussion_new), "showForm('new_discussion')", :class => 'icon icon-add' %>
+	<%= link_to_function t(:label_discussion_new_html), "showForm('new_discussion')", :class => 'icon icon-add' %>
 </div>
 <div id="preview" class="wiki"></div>
 

@@ -1,4 +1,4 @@
-<% labelled_tabular_form_for :strategy, @strategy, :url => { :action => "edit", :id => @strategy.id } do |f| %>
+<%= labelled_tabular_form_for @strategy, :url => { :action => "edit", :id => @strategy.id } do |f| %>
 <%= render :partial => 'form', :locals => { :f => f } %>
 <%= submit_tag l(:button_save), :tabindex => autotab %>
 <% end %>

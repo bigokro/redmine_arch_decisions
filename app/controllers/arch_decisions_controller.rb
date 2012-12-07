@@ -53,7 +53,7 @@ class ArchDecisionsController < ApplicationController
       @arch_decision.updated_by = User.current
       update_watch_list
       if @arch_decision.save
-        ArchDecisionsMailer.deliver_arch_decision_add(@arch_decision)
+        ArchDecisionsMailer.arch_decision_add(@arch_decision).deliver
         flash[:notice] = l(:notice_successful_create)
         redirect_to( :action => 'show', :project_id => @project, :id => @arch_decision )
       end
@@ -61,10 +61,10 @@ class ArchDecisionsController < ApplicationController
   end
 
   def edit
-    if request.post?
+    if request.put?
       update_watch_list
       if @arch_decision.update_attributes(params[:arch_decision])
-        ArchDecisionsMailer.deliver_arch_decision_edit(@arch_decision)
+        ArchDecisionsMailer.arch_decision_edit(@arch_decision).deliver
         flash[:notice] = l(:notice_successful_update)
         redirect_to :action => 'show', :project_id => @project, :id => @arch_decision
       else
@@ -134,7 +134,7 @@ class ArchDecisionsController < ApplicationController
 
   def register_and_notify_update
     set_updated_by
-    ArchDecisionsMailer.deliver_arch_decision_edit(@arch_decision)
+    ArchDecisionsMailer.arch_decision_edit(@arch_decision).deliver
   end
 
   private 

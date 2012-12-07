@@ -17,7 +17,7 @@
 	</th>
     <th>
 <% if authorize_for(:arch_decisions, :add_factor) %>
-    	<%= link_to l(:label_factor_add), {:controller => 'factors', :project_id => @project.id, :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision.id}, :popup => ['choose_factor', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_factor_link' %>
+    	<%= link_to t(:label_factor_add_html), {:controller => 'factors', :project_id => @project.id, :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision.id}, :popup => ['choose_factor', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_factor_link' %>
 <% end %>		
 	</th>
   </tr></thead>
@@ -32,7 +32,7 @@
 	<td><%= factor.id %></td>
     <td align="center" <%= "class='rejected'" if factor.refuted? %> style="width:10%; white-space:nowrap;"><%= l(factor.status.name_key) %></td>
 	<td><div id="<%= factor_div_id %>" <%= "class='rejected'" if factor.refuted? %> style="cursor: -moz-grab;">
-		<%= link_to(h(factor.summary) + " " + text_for_discussion_count(factor), {}, :href => "#", 
+		<%= link_to(h(factor.summary) + " " + text_for_discussion_count(factor).html_safe, {}, :href => "#", 
 				:onmouseup => "if (!isDrop) window.location.href='" + url_for(:controller => 'factors', :project_id => @project.id, :action => 'show', :id => factor.id) + "';") %>
 	</div></td>
     <td align="center" style="width:10%; white-space:nowrap;">
@@ -73,7 +73,7 @@
 	<td></td>
 	<!-- td align="center" style="width:10%; white-space:nowrap;"></td-->
 	<td colspan="3">
-<% remote_form_for(:factor, @factor, :url => { :project_id => @project.id, :action => "new_factor", :id => @arch_decision.id }, :html => { :id => "new_factor" }) do |f| %>
+<%= form_for(@factor || Factor.new, :remote => true, :url => { :project_id => @project.id, :action => "new_factor", :id => @arch_decision.id }, :html => { :id => "new_factor" }) do |f| %>
 	<%= f.select :status_id, (@factor_statuses.collect {|s| [s.name, s.id]}) %>
 	  <%= f.text_field :summary, :size => 100, :required => true %>
 	  <small>
@@ -89,7 +89,7 @@
 
 <% if authorize_for(:factors, :new) %>
 <div id="new_factor_link">
-	<%= link_to_function l(:label_factor_new), "showForm('new_factor')", :class => 'icon icon-add' %>
+	<%= link_to_function t(:label_factor_new_html), "showForm('new_factor')", :class => 'icon icon-add' %>
 </div>
 
 <%= javascript_tag "initializeForm('new_factor');" %>

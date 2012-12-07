@@ -43,7 +43,8 @@
 <% end %>
 
 <% if authorize_for(:arch_decision_issues, :add_issue) %>
-<% remote_form_for(:arch_decision_issue, @arch_decision_issue, 
+<%= form_for(@arch_decision_issue || ArchDecisionIssue.new(:issue => Issue.new, :arch_decision => ArchDecision.new), 
+                        :remote => true,
 			:url => { :controller => "arch_decision_issues", :action => "add_issue", :project_id => @project.id, :return_to => "issue"}, 
 			:html => { :id => "add-arch-decision-form", :style => (@arch_decision_issue ? '' : 'display: none;') }) do |adi| %>
 	<%= adi.hidden_field :issue_id, :value => @issue.id %>

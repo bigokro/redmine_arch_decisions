@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module ArchDecisionsHelper
 
   def autotab
@@ -25,7 +27,7 @@ module ArchDecisionsHelper
               when 1 then :text_discussion_count_singular
               else :text_discussion_count_plural
     end
-    return "<span class='discussion-count'>(" + l(label, :count => item.arch_decision_discussions.size.to_s) + ")</span>"
+    return "<span class='discussion-count'>(" + t(label, :count => item.arch_decision_discussions.size.to_s) + ")</span>"
   end
 
 

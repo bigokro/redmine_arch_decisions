@@ -5,7 +5,7 @@
 
 <h2><%=l(:label_arch_decision_plural)%></h2>
 
-<% form_tag({}, :method => :get) do %>
+<%= form_tag({}, :method => :get) do %>
 <fieldset><legend><%= l(:label_filter_plural) %></legend>
 <label><%= l(:label_arch_decision) %>:</label>
 <%= hidden_field_tag('project_id', value = @project.id) %>

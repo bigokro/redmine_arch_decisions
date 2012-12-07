@@ -52,7 +52,7 @@ class ArchDecisionIssue < ActiveRecord::Base
   protected
 
   def validate
-    errors.add_to_base :error_ad_issue_type_invalid unless ArchDecisionIssue.issue_types.include?(issue_type)
-    errors.add_to_base :error_ad_issue_url_and_issue_nil unless issue || external_url
+    errors[:base] << :error_ad_issue_type_invalid unless ArchDecisionIssue.issue_types.include?(issue_type)
+    errors[:base] << :error_ad_issue_url_and_issue_nil unless issue || external_url
   end
 end

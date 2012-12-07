@@ -21,8 +21,8 @@ ru:
     label_id: "#"
     label_factor: Фактор
     label_factor_plural: Факторы
-    label_factor_new: Новый <u>ф</u>актор
-    label_factor_add: <u>Д</u>обавить фактор
+    label_factor_new_html: Новый <u>ф</u>актор
+    label_factor_add_html: <u>Д</u>обавить фактор
     label_factor_scope_global: Глобальная
     label_factor_scope_project: Проект
     label_factor_scope_arch_decision: Системное решение
@@ -35,11 +35,11 @@ ru:
     label_arch_decisions_related: Связанные системные решения
     label_strategy: Способ реализации
     label_strategy_plural: Способы реализации
-    label_strategy_new: Новый <u>с</u>пособ
+    label_strategy_new_html: Новый <u>с</u>пособ
     label_discussion: Обсуждение
     label_discussion_comment: Комментарий к обсуждению
-    label_discussion_new: Новый <u>к</u>омментарий
-    label_issue_add: Добавить <u>з</u>адачу
+    label_discussion_new_html: Новый <u>к</u>омментарий
+    label_issue_add_html: Добавить <u>з</u>адачу
     label_issue_or_url: Задача, связанная с Redmine, или внешния ссылка
     label_ad_issue_type_task: Задание
     label_ad_issue_type_poc: Проверка концепции
@@ -93,4 +93,4 @@ ru:
     text_arch_decision_issue_remove_confirmation: Удалить задачу &#35;%{id} из этого системного решения?
     text_arch_decision_url_remove_confirmation: Удалить внешнюю ссылку из этого системного решения? 
     text_issue_arch_decision_remove_confirmation: Удалить системное решение &#35;%{id} из этой задачи?
-    text_or_external_url: или внешнюю ссылку:
+    text_or_external_url: "или внешнюю ссылку:"
