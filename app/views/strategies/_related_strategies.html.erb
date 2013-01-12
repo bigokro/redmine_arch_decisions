@@ -25,10 +25,11 @@
 	<td <%= "class='rejected'" if strategy.rejected? %>><div id="<%= strategy_div_id %>" style="cursor: -moz-grab;"><%= link_to(h(strategy.short_name) + " " + text_for_discussion_count(strategy).html_safe, :controller => 'strategies', :action => 'show', :id => strategy.id) %></div></td>
     <td <%= "class='rejected'" if strategy.rejected? %>><%= h strategy.summary %></td>
     <td align="center" style="width:10%; white-space:nowrap;">
-      <small><%= link_to_remote_if_authorized l(:button_delete), 
-								{ :url => { :controller => 'strategies', :action => 'destroy', :id => strategy.id },
-									:confirm => l(:text_strategy_destroy_confirmation, :id => strategy.id) },  
-								:class => 'icon icon-del' %></small>
+      <small><%= link_to_if_authorized l(:button_delete), 
+			{ :controller => 'strategies', :action => 'destroy', :id => strategy.id },
+			:confirm => l(:text_strategy_destroy_confirmation, :id => strategy.id), 
+	                :remote => true,
+			:class => 'icon icon-del' %></small>
     </td>
   </tr>
   <!-- %= draggable_element(strategy_div_id) % -->

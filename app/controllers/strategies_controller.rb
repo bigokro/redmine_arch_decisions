@@ -67,11 +67,7 @@ class StrategiesController < ApplicationController
   
   def refresh_strategies_table
     respond_to do |format|
-      format.js do
-        render :update do |page|
-            page.replace_html "related_strategies", :partial => "related_strategies"
-        end
-      end
+      format.js
     end
   end
 

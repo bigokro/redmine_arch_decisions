@@ -162,11 +162,7 @@ class ArchDecisionsController < ApplicationController
     @factor = nil
     @factor_statuses = FactorStatus.find(:all)
     respond_to do |format|
-      format.js do
-        render :update do |page|
-            page.replace_html "related_factors", :partial => "related_factors"
-        end
-      end
+      format.js
     end
   end
 

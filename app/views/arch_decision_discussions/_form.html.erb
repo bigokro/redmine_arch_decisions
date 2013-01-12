@@ -9,7 +9,7 @@
 <p><%= f.text_field :subject, :size => 120, :required => true, :tabindex => autotab %><br /><em><%= l(:text_caracters_maximum, ArchDecisionDiscussion::SUBJECT_MAX_SIZE) %></em></p>
 
 <p><%= f.text_area :content, :cols => 80, :rows => 15, :class => 'wiki-edit', :tabindex => autotab %></p>
-<%= wikitoolbar_for 'discussion_content' %>
+<%= wikitoolbar_for 'arch_decision_discussion_content' %>
 
 <p><%= l(:label_attachment_plural) %><br />
 <%= render :partial => 'attachments/form' %></p>

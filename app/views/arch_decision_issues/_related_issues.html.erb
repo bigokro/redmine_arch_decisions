@@ -30,19 +30,21 @@
     <td align="center" style="width:10%; white-space:nowrap;"><%= issue.status.name if issue %></td>
 	<td>
 		<%= link_to(h(issue.subject), :controller => 'issues', :action => 'show', :id => issue) if issue %>
-		<%= "<a href='#{adissue.external_url}'>#{adissue.external_url}</a>" if adissue.external_url %>
+		<%= "<a href='#{adissue.external_url}'>#{adissue.external_url}</a>".html_safe if adissue.external_url %>
 	</td>
     <td align="center" style="width:10%; white-space:nowrap;">
       <small><%= 
 				if issue
-					link_to_remote_if_authorized l(:button_remove), 
-								{ :url => { :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project.id, :arch_decision_id => @arch_decision.id, :issue_id => issue.id},
-									:confirm => l(:text_arch_decision_issue_remove_confirmation, :id => issue.id) },
-								:class => 'icon icon-del'
+					link_to_if_authorized l(:button_remove), 
+							{ :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project.id, :arch_decision_id => @arch_decision.id, :issue_id => issue.id},
+							:confirm => l(:text_arch_decision_issue_remove_confirmation, :id => issue.id),
+	                                                :remote => true,
+							:class => 'icon icon-del'
 				else
-					link_to_remote_if_authorized l(:button_remove), 
-								{ :url => { :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project.id, :arch_decision_id => @arch_decision.id, :arch_decision_issue_id => adissue.id},
-									:confirm => l(:text_arch_decision_url_remove_confirmation) },
+					link_to_if_authorized l(:button_remove), 
+								{ :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project.id, :arch_decision_id => @arch_decision.id, :arch_decision_issue_id => adissue.id},
+								:confirm => l(:text_arch_decision_url_remove_confirmation),
+	                                                        :remote => true,
 								:class => 'icon icon-del'
 				end
 	  %></small>

@@ -1,4 +1,4 @@
-<%= labelled_tabular_form_for @arch_decision || ArchDecision.new, :url => { :project_id => @project, :action => "edit", :id => @arch_decision } do |f| %>
+<%= labelled_form_for @arch_decision || ArchDecision.new, :url => { :project_id => @project, :action => "edit", :id => @arch_decision } do |f| %>
 <%= render :partial => 'form', :locals => { :f => f } %>
 <%= submit_tag l(:button_save), :tabindex => autotab %>
 <% end %>
