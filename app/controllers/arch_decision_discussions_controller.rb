@@ -57,12 +57,12 @@ class ArchDecisionDiscussionsController < ApplicationController
     content = "#{ll(Setting.default_language, :text_user_wrote, user)}\\n> "
     content << text.to_s.strip.gsub(%r{<pre>((.|\s)*?)</pre>}m, '[...]').gsub('"', '\"').gsub(/(\r?\n|\r\n?)/, "\\n> ") + "\\n\\n"
     render(:update) { |page|
-      page.<< "$('discussion_subject').value = \"#{@discussion.subject}\";"
-      page.<< "$('discussion_content').value = \"#{content}\";"
+      page << "$('#discussion_subject').val(\"#{@discussion.subject}\";)"
+      page << "$('#discussion_content').val(\"#{content}\";)"
       page << "showForm('new_discussion');"
-      page << "Form.Element.focus('discussion_content');"
-      page << "Element.scrollTo('new_discussion_form_row');"
-      page << "$('discussion_content').scrollTop = $('discussion_content').scrollHeight - $('discussion_content').clientHeight;"
+      page << "$('#discussion_content').focus();"
+      page << "$('#new_discussion_form_row').scrollTo();"
+      page << "$('#discussion_content').scrollTop = $('#discussion_content').scrollHeight - $('#discussion_content').clientHeight;"
     }
   end
   
