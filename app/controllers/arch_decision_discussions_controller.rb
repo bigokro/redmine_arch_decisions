@@ -19,7 +19,7 @@ class ArchDecisionDiscussionsController < ApplicationController
     @discussion.factor = @factor
     @discussion.strategy = @strategy
     @discussion.arch_decision = @arch_decision if !(@factor || @strategy)
-    if request.post?
+    if request.post? || request.put?
       @discussion.created_by = User.current
       if @discussion.save
         save_attachments
@@ -35,7 +35,7 @@ class ArchDecisionDiscussionsController < ApplicationController
 
   def edit
     render_403 and return false unless @discussion.editable_by?(User.current)
-    if request.post? && @discussion.update_attributes(params[:discussion])
+    if (request.post? || request.put?) && @discussion.update_attributes(params[:arch_decision_discussion])
       save_attachments
       ArchDecisionsMailer.deliver_arch_decision_discussion_edit(@discussion)
       flash[:notice] = l(:notice_successful_update)
@@ -65,15 +65,15 @@ class ArchDecisionDiscussionsController < ApplicationController
       page << "$('#discussion_content').scrollTop = $('#discussion_content').scrollHeight - $('#discussion_content').clientHeight;"
     }
   end
-  
+
   def preview
     discussion = ArchDecisionDiscussion.find(params[:id]) if params[:id]
     @attachments = @discussion.attachments if discussion
-    @text = params[:discussion][:content]
+    @text = params[:arch_decision_discussion][:content]
     render :partial => 'common/preview'
   end
 
-  private 
+  private
 
   def load_discussion
     @discussion = ArchDecisionDiscussion.find(params[:id])
@@ -112,7 +112,7 @@ class ArchDecisionDiscussionsController < ApplicationController
   end
 
   def get_id_from_params(type)
-    params[type + "_id"] ? params[type + "_id"] : (params[:discussion] ? params[:discussion][type + "_id"] : nil)
+    params[type + "_id"] ? params[type + "_id"] : (params[:arch_decision_discussion] ? params[:arch_decision_discussion][type + "_id"] : nil)
   end
 
   def save_attachments

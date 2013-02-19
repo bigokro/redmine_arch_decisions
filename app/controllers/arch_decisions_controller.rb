@@ -94,8 +94,8 @@ class ArchDecisionsController < ApplicationController
     @factor.scope = Factor::SCOPE_ARCH_DECISION
     priority = @arch_decision.factors.count + 1
     if @factor.save
-      adf = ArchDecisionFactor.new({ :arch_decision_id => params[:id], 
-                                      :factor_id => @factor.id, 
+      adf = ArchDecisionFactor.new({ :arch_decision_id => params[:id],
+                                      :factor_id => @factor.id,
                                       :priority => priority })
       adf.save
       register_and_notify_update
@@ -111,7 +111,7 @@ class ArchDecisionsController < ApplicationController
 
   def add_factor
     priority = @arch_decision.factors.count + 1
-    adf = ArchDecisionFactor.new(:arch_decision_id => @arch_decision.id, 
+    adf = ArchDecisionFactor.new(:arch_decision_id => @arch_decision.id,
                                   :factor_id => params[:factor_id],
                                   :priority => priority)
     adf.save
@@ -137,27 +137,27 @@ class ArchDecisionsController < ApplicationController
     ArchDecisionsMailer.arch_decision_edit(@arch_decision).deliver
   end
 
-  private 
+  private
 
   def load_arch_decision
     @arch_decision = ArchDecision.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render_404
   end
-  
+
   def load_project
     @project = @arch_decision.project if @arch_decision
     @project = Project.find(params[:project_id]) unless @project
   rescue ActiveRecord::RecordNotFound
     render_404
   end
-  
+
   def set_updated_by
     @arch_decision.updated_by = User.current
     @arch_decision.updated_on = Time.now
     @arch_decision.save
   end
-  
+
   def refresh_factors_table
     @factor = nil
     @factor_statuses = FactorStatus.find(:all)

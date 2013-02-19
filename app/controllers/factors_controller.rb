@@ -82,7 +82,7 @@ class FactorsController < ApplicationController
     @factor = Factor.new(params[:factor])
     @factor_scopes = Factor.scopes
     @factor_statuses = FactorStatus.find(:all)
-    if request.post?
+    if request.post? || request.put?
       adjust_for_scope @factor
       @factor.created_by = User.current
       @factor.updated_by = User.current
@@ -90,13 +90,13 @@ class FactorsController < ApplicationController
         flash[:notice] = l(:notice_successful_create)
         redirect_to( :action => 'show', :project_id => @project, :id => @factor )
         return
-      end   
+      end
     end
   end
 
 
   def edit
-    if request.post?
+    if request.post? || request.put?
       @factor = Factor.find(params[:id])
       adjust_for_scope @factor
       @factor.updated_by = User.current
@@ -124,7 +124,7 @@ class FactorsController < ApplicationController
   private
 
   def load_project
-    @project = Project.find_by_id(params[:project_id].to_i) || Project.find_by_identifier(params[:project_id]) 
+    @project = Project.find_by_id(params[:project_id].to_i) || Project.find_by_identifier(params[:project_id])
   end
 
   def adjust_for_scope(factor)
@@ -132,7 +132,7 @@ class FactorsController < ApplicationController
     if scope != Factor::SCOPE_GLOBAL
       factor.project = @project
     else
-      factor.project = nil 
+      factor.project = nil
     end
   end
 

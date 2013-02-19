@@ -25,7 +25,7 @@ function showForm(frm) {
     }
     // TODO: get rid of this hack. Dunno why I can't call scrollTo outside this method.
     if (frm == "new_discussion") {
-	$('new_discussion_form_row').scrollTo();
+	//scrollTo($('#new_discussion_form_row'));
     }
     deactivateShortcuts();
 }
@@ -84,3 +84,8 @@ function showDropped(target) {
     target.css("background-color", "#FF0000");
 }
 
+function scrollTo(target) {
+    $('html, body').animate({
+	    scrollTop: target.offset().top
+		}, 1000);
+}
