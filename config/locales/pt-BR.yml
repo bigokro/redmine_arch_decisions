@@ -21,8 +21,8 @@ pt:
     label_id: "#"
     label_factor: Fator
     label_factor_plural: Fatores
-    label_factor_new: Novo <u>F</u>ator
-    label_factor_add: <u>A</u>dicionar Fator
+    label_factor_new_html: Novo <u>F</u>ator
+    label_factor_add_html: <u>A</u>dicionar Fator
     label_factor_scope_global: Global
     label_factor_scope_project: Projeto 
     label_factor_scope_arch_decision: Decisão Técnica
@@ -35,11 +35,11 @@ pt:
     label_arch_decisions_related: Decisões Técnicas Relacionadas
     label_strategy: Estratégia
     label_strategy_plural: Estratégias
-    label_strategy_new: Nova E<u>s</u>tratégia
+    label_strategy_new_html: Nova E<u>s</u>tratégia
     label_discussion: Discussão
     label_discussion_comment: Comentário
-    label_discussion_new: Nova <u>C</u>omentário
-    label_issue_add: Ad<u>i</u>cionar Tarefa
+    label_discussion_new_html: Novo <u>C</u>omentário
+    label_issue_add_html: Ad<u>i</u>cionar Tarefa
     label_issue_or_url: Issue no Redmine ou URL externo
     label_ad_issue_type_task: Tarefa
     label_ad_issue_type_poc: Prova de Conceito
@@ -92,4 +92,4 @@ pt:
     text_arch_decision_issue_remove_confirmation: Remove Issue &#35;%{id} from this Arch Decision ?
     text_arch_decision_url_remove_confirmation: Remove the external link from this Arch Decision ? 
     text_issue_arch_decision_remove_confirmation: Remove Arch Decision &#35;%{id} from this Issue ?
-    text_or_external_url: or external URL:
+    text_or_external_url: "or external URL:"

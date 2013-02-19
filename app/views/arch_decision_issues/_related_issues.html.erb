@@ -14,7 +14,7 @@
     <th>
 <% if authorize_for(:arch_decision_issues, :add_issue) %>
 <!--
-    	<%= link_to l(:label_issue_add), {:project_id => @project.id, :action => 'add_issue', :id => @arch_decision.id}, :popup => ['choose_issue', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_issue_link' %>
+    	<%= link_to t(:label_issue_add_html), {:project_id => @project.id, :action => 'add_issue', :id => @arch_decision.id}, :popup => ['choose_issue', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_issue_link' %>
 -->
 <% end %>		
 	</th>
@@ -30,19 +30,21 @@
     <td align="center" style="width:10%; white-space:nowrap;"><%= issue.status.name if issue %></td>
 	<td>
 		<%= link_to(h(issue.subject), :controller => 'issues', :action => 'show', :id => issue) if issue %>
-		<%= "<a href='#{adissue.external_url}'>#{adissue.external_url}</a>" if adissue.external_url %>
+		<%= "<a href='#{adissue.external_url}'>#{adissue.external_url}</a>".html_safe if adissue.external_url %>
 	</td>
     <td align="center" style="width:10%; white-space:nowrap;">
       <small><%= 
 				if issue
-					link_to_remote_if_authorized l(:button_remove), 
-								{ :url => { :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project.id, :arch_decision_id => @arch_decision.id, :issue_id => issue.id},
-									:confirm => l(:text_arch_decision_issue_remove_confirmation, :id => issue.id) },
-								:class => 'icon icon-del'
+					link_to_if_authorized l(:button_remove), 
+							{ :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project.id, :arch_decision_id => @arch_decision.id, :issue_id => issue.id},
+							:confirm => l(:text_arch_decision_issue_remove_confirmation, :id => issue.id),
+	                                                :remote => true,
+							:class => 'icon icon-del'
 				else
-					link_to_remote_if_authorized l(:button_remove), 
-								{ :url => { :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project.id, :arch_decision_id => @arch_decision.id, :arch_decision_issue_id => adissue.id},
-									:confirm => l(:text_arch_decision_url_remove_confirmation) },
+					link_to_if_authorized l(:button_remove), 
+								{ :controller => 'arch_decision_issues', :action => 'remove_issue', :project_id => @project.id, :arch_decision_id => @arch_decision.id, :arch_decision_issue_id => adissue.id},
+								:confirm => l(:text_arch_decision_url_remove_confirmation),
+	                                                        :remote => true,
 								:class => 'icon icon-del'
 				end
 	  %></small>
@@ -54,7 +56,7 @@
   <% row_class = cycle("odd", "even") %>
   <tr class="<%= row_class %>" id="add_issue_form_row">
 	<td colspan="5"><br/>
-<% remote_form_for(:arch_decision_issue, @arch_decision_issue, :url => { :controller => 'arch_decision_issues', :action => "add_issue", :project_id => @project.id }, :html => { :id => "add_issue" }) do |adi| %>
+<%= form_for(@arch_decision_issue || ArchDecisionIssue.new, :remote => true, :url => { :controller => 'arch_decision_issues', :action => "add_issue", :project_id => @project.id }, :html => { :id => "add_issue" }) do |adi| %>
 	<%= adi.select :issue_type, (ArchDecisionIssue.issue_types.collect {|t| [t, t]}) %>
 	<%= l(:label_issue) %> #<%= adi.text_field :issue_id, :size => 10 %>
 	<%= l(:text_or_external_url) %> <%= adi.text_field :external_url, :size => 100 %>
@@ -72,7 +74,7 @@
 
 <% if authorize_for(:arch_decision_issues, :add_issue) %>
 <div id="add_issue_link">
-	<%= link_to_function l(:label_issue_add), "showForm('add_issue')", :class => 'icon icon-add' %>
+	<%= link_to_function t(:label_issue_add_html), "showForm('add_issue')", :class => 'icon icon-add' %>
 </div>
 
 <%= javascript_tag "initializeForm('add_issue');" %>

@@ -22,7 +22,7 @@ class StrategiesController < ApplicationController
 
 
   def edit
-    if request.post?
+    if request.post? || request.put?
       @strategy.updated_by = User.current
       @strategy.updated_on = Time.now
       if @strategy.update_attributes(params[:strategy])
@@ -52,26 +52,22 @@ class StrategiesController < ApplicationController
     refresh_strategies_table
   end
 
-  private 
+  private
 
   def load_full_model
     @strategy = Strategy.find(params[:id])
     @arch_decision = @strategy.arch_decision
     @project = @arch_decision.project
   end
-  
+
   def load_parent_model
     @arch_decision = ArchDecision.find(params[:arch_decision_id])
     @project = @arch_decision.project
   end
-  
+
   def refresh_strategies_table
     respond_to do |format|
-      format.js do
-        render :update do |page|
-            page.replace_html "related_strategies", :partial => "related_strategies"
-        end
-      end
+      format.js
     end
   end
 

@@ -1,6 +1,6 @@
-<h2><%=l(:label_factor_new)%></h2>
+<h2><%=t(:label_factor_new_html)%></h2>
 
-<% labelled_tabular_form_for :factor, @factor, :url => { :project_id => @project.id, :action => "new" } do |f| %>
+<%= labelled_form_for @factor, :url => { :project_id => @project.id, :action => "new" } do |f| %>
 <%= render :partial => 'form', :locals => { :f => f } %>
 
 <%= submit_tag l(:button_save), :tabindex => autotab %>

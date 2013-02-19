@@ -1,14 +1,14 @@
 <% if !@popup %>
 	<div class="contextual">
-	<%= link_to_if_authorized l(:label_factor_new), {:controller => 'factors', :project_id => @project.id, :action => 'new'}, :class => 'icon icon-add' %>
+	<%= link_to_if_authorized t(:label_factor_new_html), {:controller => 'factors', :project_id => @project.id, :action => 'new'}, :class => 'icon icon-add' %>
 	</div>
 
 	<h2><%=l(:label_factor_plural)%></h2>
 <% else %>
-	<h2><%=l(:label_factor_add)%></h2>
+	<h2><%=t(:label_factor_add_html)%></h2>
 <% end %>
 
-<% form_tag({}, :method => :get) do %>
+<%= form_tag({}, :method => :get) do %>
 <fieldset><legend><%= l(:label_filter_plural) %></legend>
 <label><%= l(:label_factor) %>:</label>
 <%= text_field_tag 'summary', params[:summary], :size => 30 %>

@@ -22,13 +22,14 @@
   <tr class="<%= row_class %>">
 	<td><%= strategy.id %></td>
 	<td align="center"><%= image_tag("false.png") if strategy.rejected? %></td>
-	<td <%= "class='rejected'" if strategy.rejected? %>><div id="<%= strategy_div_id %>" style="cursor: -moz-grab;"><%= link_to(h(strategy.short_name) + " " + text_for_discussion_count(strategy), :controller => 'strategies', :action => 'show', :id => strategy.id) %></div></td>
+	<td <%= "class='rejected'" if strategy.rejected? %>><div id="<%= strategy_div_id %>" style="cursor: -moz-grab;"><%= link_to(h(strategy.short_name) + " " + text_for_discussion_count(strategy).html_safe, :controller => 'strategies', :action => 'show', :id => strategy.id) %></div></td>
     <td <%= "class='rejected'" if strategy.rejected? %>><%= h strategy.summary %></td>
     <td align="center" style="width:10%; white-space:nowrap;">
-      <small><%= link_to_remote_if_authorized l(:button_delete), 
-								{ :url => { :controller => 'strategies', :action => 'destroy', :id => strategy.id },
-									:confirm => l(:text_strategy_destroy_confirmation, :id => strategy.id) },  
-								:class => 'icon icon-del' %></small>
+      <small><%= link_to_if_authorized l(:button_delete), 
+			{ :controller => 'strategies', :action => 'destroy', :id => strategy.id },
+			:confirm => l(:text_strategy_destroy_confirmation, :id => strategy.id), 
+	                :remote => true,
+			:class => 'icon icon-del' %></small>
     </td>
   </tr>
   <!-- %= draggable_element(strategy_div_id) % -->
@@ -54,7 +55,7 @@
 	<td></td>
 	<!-- td align="center" style="width:10%; white-space:nowrap;"></td-->
 	<td colspan="3">
-<% remote_form_for(:strategy, @strategy, :url => { :controller => 'strategies', :action => "new", :arch_decision_id => @arch_decision.id }, :html => { :id => "new_strategy" }) do |f| %>
+<%= form_for(@strategy || Strategy.new, :remote => true, :url => { :controller => 'strategies', :action => "new", :arch_decision_id => @arch_decision.id }, :html => { :id => "new_strategy" }) do |f| %>
 	  <%= f.text_field :short_name, :size => 40, :required => true %>
 	  <%= f.text_field :summary, :size => 100 %>
 	  <small>
@@ -70,7 +71,7 @@
 
 <% if authorize_for(:strategies, :new) %>
 <div id="new_strategy_link">
-	<%= link_to_function l(:label_strategy_new), "showForm('new_strategy')", :class => 'icon icon-add' %>
+	<%= link_to_function t(:label_strategy_new_html), "showForm('new_strategy')", :class => 'icon icon-add' %>
 </div>
 
 <%= javascript_tag "initializeForm('new_strategy');" %>

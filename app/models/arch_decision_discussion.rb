@@ -69,7 +69,7 @@ class ArchDecisionDiscussion < ActiveRecord::Base
 
   def validate
     if (arch_decision.nil? && factor.nil? && strategy.nil?)
-      errors.add_to_base :error_discussion_parents_nil
+      errors[:base] << :error_discussion_parents_nil
     end
   end
 

@@ -26,7 +26,7 @@
     <td align="center" style="width:10%; white-space:nowrap;"><%= l(ad.status.name_key) %></td>
     <td>
       <!-- Should be link_to_if_authorized, but for some reason it's not authorizing -->
-      <small><%= link_to_remote_if_authorized "", 
+      <small><%= link_to_if_authorized "", 
 						{ :url => {:controller => 'arch_decision_issues', 
 									:action => 'remove_issue', 
 									:project_id => @project.id, 
@@ -35,6 +35,7 @@
 									:return_to => "issue"
 								},
 							:confirm => l(:text_issue_arch_decision_remove_confirmation, :id => ad.id)},
+	                                                :remote => true,
 						:class => 'icon icon-del'  %></small>
     </td>
   </tr>
@@ -43,7 +44,8 @@
 <% end %>
 
 <% if authorize_for(:arch_decision_issues, :add_issue) %>
-<% remote_form_for(:arch_decision_issue, @arch_decision_issue, 
+<%= form_for(@arch_decision_issue || ArchDecisionIssue.new(:issue => Issue.new, :arch_decision => ArchDecision.new), 
+                        :remote => true,
 			:url => { :controller => "arch_decision_issues", :action => "add_issue", :project_id => @project.id, :return_to => "issue"}, 
 			:html => { :id => "add-arch-decision-form", :style => (@arch_decision_issue ? '' : 'display: none;') }) do |adi| %>
 	<%= adi.hidden_field :issue_id, :value => @issue.id %>

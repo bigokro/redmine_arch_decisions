@@ -21,8 +21,8 @@ en:
     label_id: "#"
     label_factor: Factor
     label_factor_plural: Factors
-    label_factor_new: New <u>F</u>actor
-    label_factor_add: <u>A</u>dd Factor
+    label_factor_new_html: New <u>F</u>actor
+    label_factor_add_html: <u>A</u>dd Factor
     label_factor_scope_global: Global
     label_factor_scope_project: Project 
     label_factor_scope_arch_decision: Arch Decision
@@ -35,11 +35,11 @@ en:
     label_arch_decisions_related: Related Arch Decisions
     label_strategy: Strategy
     label_strategy_plural: Strategies
-    label_strategy_new: New <u>S</u>trategy
+    label_strategy_new_html: New <u>S</u>trategy
     label_discussion: Discussion
     label_discussion_comment: Discussion Comment
-    label_discussion_new: New <u>C</u>omment
-    label_issue_add: Add <u>I</u>ssue
+    label_discussion_new_html: New <u>C</u>omment
+    label_issue_add_html: Add <u>I</u>ssue
     label_issue_or_url: Redmine Issue or External URL
     label_ad_issue_type_task: Task
     label_ad_issue_type_poc: Proof of Concept
@@ -92,4 +92,4 @@ en:
     text_arch_decision_issue_remove_confirmation: Remove Issue &#35;%{id} from this Arch Decision ?
     text_arch_decision_url_remove_confirmation: Remove the external link from this Arch Decision ? 
     text_issue_arch_decision_remove_confirmation: Remove Arch Decision &#35;%{id} from this Issue ?
-    text_or_external_url: or external URL:
+    text_or_external_url: "or external URL:"

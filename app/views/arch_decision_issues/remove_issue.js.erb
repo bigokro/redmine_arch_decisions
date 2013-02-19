@@ -1,0 +1,6 @@
+if ($('#related_issues')) {
+   $('#related_issues').html("<%= escape_javascript(render(:partial => 'related_issues')) %>");
+} else {
+   $('#related_arch_decisions').html("<%= escape_javascript(render(:partial => 'related_arch_decisions')) %>");
+}
+

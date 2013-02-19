@@ -1,0 +1,203 @@
+=> Booting WEBrick
+=> Rails 3.2.3 application starting in production on http://0.0.0.0:3000
+=> Call with -d to detach
+=> Ctrl-C to shutdown server
+Resolved collector.newrelic.com to 204.93.223.153
+/usr/local/rvm/gems/ruby-1.9.3-p194@redmine/gems/activesupport-3.2.3/lib/active_support/dependencies.rb:251:in `block in require': iconv will be deprecated in the future, use String#encode instead.
+/var/redmine/plugins/redmine_skills/init.rb:66: warning: already initialized constant DEFAULT_LAYOUT
+[2012-12-07 07:42:19] INFO  WEBrick 1.3.1
+[2012-12-07 07:42:19] INFO  ruby 1.9.3 (2012-04-20) [x86_64-linux]
+[2012-12-07 07:42:19] INFO  WEBrick::HTTPServer#start: pid=13930 port=3000
+Connected to NewRelic Service at collector-5.newrelic.com
+
+
+Started GET "/projects/7/arch_decisions/show/5" for 186.221.99.83 at 2012-12-07 07:42:24 -0600
+Processing by ArchDecisionsController#show as HTML
+  Parameters: {"project_id"=>"7", "id"=>"5"}
+  Rendered watchers/_watchers.html.erb (9.8ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/_related_factors.html.erb (183.0ms)
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (46.2ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_issues/_related_issues.html.erb (113.9ms)
+DEPRECATION WARNING: ApplicationHelper#labelled_tabular_form_for is deprecated and will be removed in Redmine 1.5. Use #labelled_form_for instead. (called from labelled_tabular_form_for at /var/redmine/app/helpers/application_helper.rb:936)
+  Rendered attachments/_form.html.erb (4.7ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_discussions/_form.html.erb (15.2ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_discussions/_related_discussions.html.erb (31.3ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/show.html.erb within layouts/base (12089.3ms)
+Completed 200 OK in 12973ms (Views: 12394.9ms | ActiveRecord: 40.9ms)
+
+
+Started POST "/projects/7/discussions/new/5" for 186.221.99.83 at 2012-12-07 07:43:08 -0600
+Processing by ArchDecisionDiscussionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "project_id"=>"7", "arch_decision_id"=>"5", "arch_decision_discussion"=>{"subject"=>"Re: Que informação deveremos colocar no Soft Descriptor da Cielo?", "content"=>"Ideal seria a profissão ou serviço cadastrado. Mas podemos discutir.\r\n\r\nAtt,\r\nMárcio Campos\r\nPagPop\r\n"}, "attachments"=>{"1"=>{"description"=>""}}, "commit"=>"Criar", "id"=>"5"}
+DEPRECATION WARNING: Mailer.deliver_arch_decision_discussion_add(*args) is deprecated. Use Mailer.arch_decision_discussion_add(*args).deliver instead. (called from method_missing at /var/redmine/app/models/mailer.rb:426)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/_discussion_text_plain.erb (1.6ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/arch_decision_discussion_add.text.erb within layouts/mailer (5.9ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/_discussion_text_html.erb (2.7ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/arch_decision_discussion_add.html.erb within layouts/mailer (6.6ms)
+Redirected to http://cloudteam.pagpop.com.br/projects/7/arch_decisions/show/5
+Completed 302 Found in 3790ms (ActiveRecord: 21.7ms)
+
+
+Started GET "/projects/7/arch_decisions/show/5" for 186.221.99.83 at 2012-12-07 07:43:12 -0600
+Processing by ArchDecisionsController#show as HTML
+  Parameters: {"project_id"=>"7", "id"=>"5"}
+  Rendered watchers/_watchers.html.erb (6.4ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/_related_factors.html.erb (35.8ms)
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (108.3ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_issues/_related_issues.html.erb (4.7ms)
+DEPRECATION WARNING: ApplicationHelper#labelled_tabular_form_for is deprecated and will be removed in Redmine 1.5. Use #labelled_form_for instead. (called from labelled_tabular_form_for at /var/redmine/app/helpers/application_helper.rb:936)
+  Rendered attachments/_form.html.erb (1.8ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_discussions/_form.html.erb (6.0ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_discussions/_related_discussions.html.erb (49.3ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/show.html.erb within layouts/base (222.2ms)
+Completed 200 OK in 285ms (Views: 242.2ms | ActiveRecord: 31.7ms)
+
+
+Started POST "/projects/7/discussions/new/5" for 186.221.99.83 at 2012-12-07 07:43:45 -0600
+Processing by ArchDecisionDiscussionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "project_id"=>"7", "arch_decision_id"=>"5", "arch_decision_discussion"=>{"subject"=>"Re: Que informação deveremos colocar no Soft Descriptor da Cielo?", "content"=>"Tim\r\n \r\nAlguns exemplos que vi no mercado o conceito é igual a conta de banco, aparecem os primeiros caracteres do nome cadastrado.\r\n \r\nNo cadastro, poderiamos criar um campo de 13 caracteres para o cliente inputar o nome fantasia que ele quer que apareça no recibo / extrato.\r\n\r\n- Rollo"}, "attachments"=>{"1"=>{"description"=>""}}, "commit"=>"Criar", "id"=>"5"}
+DEPRECATION WARNING: Mailer.deliver_arch_decision_discussion_add(*args) is deprecated. Use Mailer.arch_decision_discussion_add(*args).deliver instead. (called from method_missing at /var/redmine/app/models/mailer.rb:426)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/_discussion_text_plain.erb (0.7ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/arch_decision_discussion_add.text.erb within layouts/mailer (2.0ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/_discussion_text_html.erb (1.7ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/arch_decision_discussion_add.html.erb within layouts/mailer (2.4ms)
+Redirected to http://cloudteam.pagpop.com.br/projects/7/arch_decisions/show/5
+Completed 302 Found in 2611ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/projects/7/arch_decisions/show/5" for 186.221.99.83 at 2012-12-07 07:43:48 -0600
+Processing by ArchDecisionsController#show as HTML
+  Parameters: {"project_id"=>"7", "id"=>"5"}
+  Rendered watchers/_watchers.html.erb (6.7ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/_related_factors.html.erb (169.8ms)
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (14.6ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_issues/_related_issues.html.erb (4.7ms)
+DEPRECATION WARNING: ApplicationHelper#labelled_tabular_form_for is deprecated and will be removed in Redmine 1.5. Use #labelled_form_for instead. (called from labelled_tabular_form_for at /var/redmine/app/helpers/application_helper.rb:936)
+  Rendered attachments/_form.html.erb (1.9ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_discussions/_form.html.erb (6.1ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_discussions/_related_discussions.html.erb (29.0ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/show.html.erb within layouts/base (242.6ms)
+Completed 200 OK in 398ms (Views: 378.2ms | ActiveRecord: 10.2ms)
+
+
+Started POST "/projects/7/discussions/quote/2" for 186.221.99.83 at 2012-12-07 07:44:12 -0600
+Processing by ArchDecisionDiscussionsController#quote as JS
+  Parameters: {"authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "project_id"=>"7", "id"=>"2"}
+Completed 200 OK in 16ms (Views: 1.2ms | ActiveRecord: 1.8ms)
+
+
+Started POST "/projects/7/discussions/quote/2" for 186.221.99.83 at 2012-12-07 07:44:18 -0600
+Processing by ArchDecisionDiscussionsController#quote as JS
+  Parameters: {"authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "project_id"=>"7", "id"=>"2"}
+Completed 200 OK in 13ms (Views: 0.6ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/projects/7/discussions/new/5" for 186.221.99.83 at 2012-12-07 07:51:06 -0600
+Processing by ArchDecisionDiscussionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "project_id"=>"7", "arch_decision_id"=>"5", "arch_decision_discussion"=>{"subject"=>"Re: Que informação deveremos colocar no Soft Descriptor da Cielo?", "content"=>"> No cadastro, poderiamos criar um campo de 13 caracteres para o cliente inputar o nome fantasia que ele quer que apareça no recibo / extrato.\r\n\r\nO único problema com esta abordagem (que é o que a PagSeguro faz) é que revelaria o número de clientes ativos que temos para a Cielo. Fora isso, acho uma ótima solução.\r\n\r\nAo invés de chamar de \"nome fantasia\", poderíamos chamar de \"descrição do serviço ou venda\", que talvez seja mais difícil para a Cielo analisar. Para obfuscar mais ainda, teríamos que optar ou por um campo de valores fixos (para que múltiplos clientes tenham o mesmo valor - tipo  \"Produto Handara\"), ou pro outro lado, campo aberto para cada compra (para que um cliente tenha múltiplas descrições).\r\n\r\nNota que essa confusão toda se basea na necessidade de obfuscar para a Cielo.\r\n"}, "attachments"=>{"1"=>{"description"=>""}}, "commit"=>"Criar", "id"=>"5"}
+DEPRECATION WARNING: Mailer.deliver_arch_decision_discussion_add(*args) is deprecated. Use Mailer.arch_decision_discussion_add(*args).deliver instead. (called from method_missing at /var/redmine/app/models/mailer.rb:426)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/_discussion_text_plain.erb (0.8ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/arch_decision_discussion_add.text.erb within layouts/mailer (2.4ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/_discussion_text_html.erb (2.6ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/arch_decision_discussion_add.html.erb within layouts/mailer (3.4ms)
+Redirected to http://cloudteam.pagpop.com.br/projects/7/arch_decisions/show/5
+Completed 302 Found in 3124ms (ActiveRecord: 5.8ms)
+
+
+Started GET "/projects/7/arch_decisions/show/5" for 186.221.99.83 at 2012-12-07 07:51:09 -0600
+Processing by ArchDecisionsController#show as HTML
+  Parameters: {"project_id"=>"7", "id"=>"5"}
+  Rendered watchers/_watchers.html.erb (7.1ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/_related_factors.html.erb (35.8ms)
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (12.7ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_issues/_related_issues.html.erb (4.2ms)
+DEPRECATION WARNING: ApplicationHelper#labelled_tabular_form_for is deprecated and will be removed in Redmine 1.5. Use #labelled_form_for instead. (called from labelled_tabular_form_for at /var/redmine/app/helpers/application_helper.rb:936)
+  Rendered attachments/_form.html.erb (1.7ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_discussions/_form.html.erb (5.5ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_discussions/_related_discussions.html.erb (124.7ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/show.html.erb within layouts/base (305.7ms)
+Completed 200 OK in 363ms (Views: 344.9ms | ActiveRecord: 9.2ms)
+
+
+Started GET "/projects/anti-fraud/arch_decisions" for 186.221.99.83 at 2012-12-07 07:54:09 -0600
+Processing by ArchDecisionsController#index as HTML
+  Parameters: {"project_id"=>"anti-fraud"}
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/index.html.erb within layouts/base (20.6ms)
+Completed 200 OK in 178ms (Views: 162.8ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/projects/7/arch_decisions/new" for 186.221.99.83 at 2012-12-07 07:54:12 -0600
+Processing by ArchDecisionsController#new as HTML
+  Parameters: {"project_id"=>"7"}
+DEPRECATION WARNING: ApplicationHelper#labelled_tabular_form_for is deprecated and will be removed in Redmine 1.5. Use #labelled_form_for instead. (called from labelled_tabular_form_for at /var/redmine/app/helpers/application_helper.rb:936)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/_form.html.erb (37.5ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/new.html.erb within layouts/base (44.9ms)
+Completed 200 OK in 204ms (Views: 189.7ms | ActiveRecord: 5.5ms)
+
+
+Started POST "/projects/7/arch_decisions/new" for 186.221.99.83 at 2012-12-07 08:04:08 -0600
+Processing by ArchDecisionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "arch_decision"=>{"summary"=>"Limitar transações para clientes novos", "problem_description"=>"A maior área de risco é com cliente novo sem verificação. Deveremos limitar as transações destes clientes até ganharem nossa confiança. Esta discussão se divide em 2 focos:\r\n\r\n* Como defenir \"cliente novo\" para esta regra\r\n* Quais as limitações de devem ser impostos\r\n", "resolution"=>"", "status_id"=>"2", "assigned_to_id"=>"2", "watcher_user_ids"=>["19", "10", "18", "15"]}, "commit"=>"Salvar", "project_id"=>"7"}
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/_arch_decision_text_plain.erb (1.3ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/arch_decision_add.text.erb within layouts/mailer (4.3ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/_arch_decision_text_html.erb (2.4ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions_mailer/arch_decision_add.html.erb within layouts/mailer (5.1ms)
+Redirected to http://cloudteam.pagpop.com.br/projects/anti-fraud/arch_decisions/show/6
+Completed 302 Found in 2691ms (ActiveRecord: 8.7ms)
+
+
+Started GET "/projects/anti-fraud/arch_decisions/show/6" for 186.221.99.83 at 2012-12-07 08:04:10 -0600
+Processing by ArchDecisionsController#show as HTML
+  Parameters: {"project_id"=>"anti-fraud", "id"=>"6"}
+  Rendered watchers/_watchers.html.erb (7.5ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/_related_factors.html.erb (6.0ms)
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (3.6ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_issues/_related_issues.html.erb (6.3ms)
+DEPRECATION WARNING: ApplicationHelper#labelled_tabular_form_for is deprecated and will be removed in Redmine 1.5. Use #labelled_form_for instead. (called from labelled_tabular_form_for at /var/redmine/app/helpers/application_helper.rb:936)
+  Rendered attachments/_form.html.erb (2.0ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_discussions/_form.html.erb (5.9ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decision_discussions/_related_discussions.html.erb (10.8ms)
+  Rendered plugins/redmine_arch_decisions/app/views/arch_decisions/show.html.erb within layouts/base (50.4ms)
+Completed 200 OK in 214ms (Views: 197.4ms | ActiveRecord: 6.9ms)
+
+
+Started POST "/strategies/new/6?arch_decision_id=6" for 186.221.99.83 at 2012-12-07 08:05:55 -0600
+Processing by StrategiesController#new as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "strategy"=>{"short_name"=>"Cliente novo: não ativo", "summary"=>"Clientes inativos ou novos devem ser considerados \"novos\" para esta regra"}, "commit"=>"Salvar", "arch_decision_id"=>"6", "id"=>"6"}
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (10.9ms)
+Completed 200 OK in 41ms (Views: 16.6ms | ActiveRecord: 4.8ms)
+
+
+Started POST "/strategies/new/6?arch_decision_id=6" for 186.221.99.83 at 2012-12-07 08:07:27 -0600
+Processing by StrategiesController#new as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "strategy"=>{"short_name"=>"Cliente novo: não verificado", "summary"=>"Considerar \"novo\" um cliente que não teve sua documentação verificada ainda"}, "commit"=>"Salvar", "arch_decision_id"=>"6", "id"=>"6"}
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (10.3ms)
+Completed 200 OK in 28ms (Views: 11.4ms | ActiveRecord: 5.2ms)
+
+
+Started POST "/strategies/new/6?arch_decision_id=6" for 186.221.99.83 at 2012-12-07 08:08:12 -0600
+Processing by StrategiesController#new as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "strategy"=>{"short_name"=>"Cliente novo: sem contato", "summary"=>"Cliente que não teve treinamento deve ser considerado novo"}, "commit"=>"Salvar", "arch_decision_id"=>"6", "id"=>"6"}
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (13.1ms)
+Completed 200 OK in 32ms (Views: 13.9ms | ActiveRecord: 5.8ms)
+
+
+Started POST "/strategies/new/6?arch_decision_id=6" for 186.221.99.83 at 2012-12-07 08:09:11 -0600
+Processing by StrategiesController#new as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "strategy"=>{"short_name"=>"Cliente novo: tempo mínimo", "summary"=>"Considerar um cliente novo se tiver menos que X meses de ativação"}, "commit"=>"Salvar", "arch_decision_id"=>"6", "id"=>"6"}
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (17.9ms)
+Completed 200 OK in 141ms (Views: 18.6ms | ActiveRecord: 8.7ms)
+
+
+Started POST "/strategies/new/6?arch_decision_id=6" for 186.221.99.83 at 2012-12-07 08:09:53 -0600
+Processing by StrategiesController#new as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "strategy"=>{"short_name"=>"Cliente novo: transações aprovadas", "summary"=>"Considerar novo um cliente com menos que X transações aprovadas"}, "commit"=>"Salvar", "arch_decision_id"=>"6", "id"=>"6"}
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (18.6ms)
+Completed 200 OK in 37ms (Views: 19.4ms | ActiveRecord: 5.5ms)
+
+
+Started POST "/strategies/new/6?arch_decision_id=6" for 186.221.99.83 at 2012-12-07 08:10:58 -0600
+Processing by StrategiesController#new as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tprkPs1gFlZGnbbBlt6I3DjtIpK/9PImHellMiGMaeI=", "strategy"=>{"short_name"=>"Limite: valor máximo de transação", "summary"=>"Não permitir cliente novo a fazer uma transação acima de X reais"}, "commit"=>"Salvar", "arch_decision_id"=>"6", "id"=>"6"}
+  Rendered plugins/redmine_arch_decisions/app/views/strategies/_related_strategies.html.erb (18.4ms)
+Completed 200 OK in 36ms (Views: 19.0ms | ActiveRecord: 6.5ms)

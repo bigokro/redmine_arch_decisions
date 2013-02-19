@@ -54,21 +54,13 @@ class ArchDecisionIssuesController < ApplicationController
   
   def refresh_issues_table
     respond_to do |format|
-      format.js do
-        render :update do |page|
-            page.replace_html "related_issues", :partial => "related_issues"
-        end
-      end
+      format.js
     end
   end
   
   def refresh_arch_decisions_table
     respond_to do |format|
-      format.js do
-        render :update do |page|
-            page.replace_html "related_arch_decisions", :partial => "related_arch_decisions"
-        end
-      end
+      format.js
     end
   end
 end

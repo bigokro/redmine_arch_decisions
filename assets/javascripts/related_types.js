@@ -14,31 +14,32 @@ function initializeForm(frm) {
 	cancelForm(frm);
 }
 function showForm(frm) {
-    Element.hide(frm + '_link');
-    Element.show(frm + '_form_row');
-    for (i=0; i < $(frm).elements.length; i++) {
-	if ($(frm).elements[i].type != 'hidden') {
-	    $(frm).elements[i].focus();
+    $("#"+frm + '_link').hide();
+    $("#"+frm + '_form_row').show();
+    var f = $('#'+frm)[0];
+    for (i=0; i < f.elements.length; i++) {
+	if (f.elements[i].type != 'hidden') {
+	    f.elements[i].focus();
 	    break;
 	}
     }
     // TODO: get rid of this hack. Dunno why I can't call scrollTo outside this method.
     if (frm == "new_discussion") {
-	Element.scrollTo('new_discussion_form_row');
+	//scrollTo($('#new_discussion_form_row'));
     }
     deactivateShortcuts();
 }
 function hideForm(frm) {
-	Element.hide(frm + '_form_row');
-	Element.show(frm + '_link');
-	activateShortcuts()
+    $("#"+frm + '_form_row').hide();
+    $("#"+frm + '_link').show();
+    activateShortcuts();
 }
 function cancelForm(frm) {
 	hideForm(frm);
-	Form.reset(frm)
+	$('#'+frm)[0].reset();
 }
 function callOnSubmit(frm) {
-	var code = $(frm).getAttribute('onsubmit');
+	var code = $("#"+frm).attr('onsubmit');
 	eval(code);
 }
 // Hotkey / Shortcut functions
@@ -77,17 +78,14 @@ function deactivateShortcuts() {
  * Functions for Factor prioritization (drag and drop)
  */
 function showDropTarget(target) {
-	Element.setStyle(target, "background-color: #000000;")
+    target.css("background-color", "#000000");
 }
 function showDropped(target) {
-	Element.setStyle(target, "background-color: #FF0000;")
+    target.css("background-color", "#FF0000");
 }
 
-/*
- * Document intialization actions
- */
-// Note: this takes too long and looks chunky. For better visuals, include a call to initializeForm()
-// right in your page
-//Event.observe(window, 'load',
-//      function() { initializeForm() }
-//    );
+function scrollTo(target) {
+    $('html, body').animate({
+	    scrollTop: target.offset().top
+		}, 1000);
+}

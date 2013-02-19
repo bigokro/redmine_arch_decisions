@@ -17,7 +17,7 @@
 	</th>
     <th>
 <% if authorize_for(:arch_decisions, :add_factor) %>
-    	<%= link_to l(:label_factor_add), {:controller => 'factors', :project_id => @project.id, :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision.id}, :popup => ['choose_factor', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_factor_link' %>
+    	<%= link_to t(:label_factor_add_html), {:controller => 'factors', :project_id => @project.id, :action => 'index', :mode => 'popup', :arch_decision_id => @arch_decision.id}, :popup => ['choose_factor', 'height=400,width=680,scrollbars=1'], :class => 'icon icon-add', :id => 'add_factor_link' %>
 <% end %>		
 	</th>
   </tr></thead>
@@ -32,40 +32,66 @@
 	<td><%= factor.id %></td>
     <td align="center" <%= "class='rejected'" if factor.refuted? %> style="width:10%; white-space:nowrap;"><%= l(factor.status.name_key) %></td>
 	<td><div id="<%= factor_div_id %>" <%= "class='rejected'" if factor.refuted? %> style="cursor: -moz-grab;">
-		<%= link_to(h(factor.summary) + " " + text_for_discussion_count(factor), {}, :href => "#", 
+		<%= link_to(h(factor.summary) + " " + text_for_discussion_count(factor).html_safe, {}, :href => "#", 
 				:onmouseup => "if (!isDrop) window.location.href='" + url_for(:controller => 'factors', :project_id => @project.id, :action => 'show', :id => factor.id) + "';") %>
 	</div></td>
     <td align="center" style="width:10%; white-space:nowrap;">
-      <small><%= link_to_remote_if_authorized l(:button_remove), 
-								{ :url => { :project_id => @project.id, :action => 'remove_factor', :id => @arch_decision.id, :factor_id => factor.id},
-									:confirm => l(:text_arch_decision_factor_remove_confirmation, :id => factor.id) },
-								:class => 'icon icon-del'  %></small>
-      <small><%= link_to_remote_if_authorized l(:button_delete), 
-								{ :url => { :project_id => @project.id, :action => 'destroy_factor', :id => @arch_decision.id, :factor_id => factor.id},
-									:confirm => l(:text_factor_destroy_confirmation, :id => factor.id) },  
-								:class => 'icon icon-del' %></small>
+      <small><%= link_to_if_authorized l(:button_remove), 
+		 { :project_id => @project.id, :action => 'remove_factor', :id => @arch_decision.id, :factor_id => factor.id },
+  		:confirm => l(:text_arch_decision_factor_remove_confirmation, :id => factor.id),
+                :remote => true,
+	        :class => 'icon icon-del'  %></small>
+      <small><%= link_to_if_authorized l(:button_delete), 
+		{ :project_id => @project.id, :action => 'destroy_factor', :id => @arch_decision.id, :factor_id => factor.id},
+		:confirm => l(:text_factor_destroy_confirmation, :id => factor.id),  
+	        :remote => true,
+		:class => 'icon icon-del' %></small>
     </td>
   </tr>
 <% if authorize_for(:arch_decisions, :reorder_factors) %>
-  <%= draggable_element(factor_div_id, :revert => true, 
-	  :onStart => "function(draggable_element, droppable_element, event) { isDrop = true }",
-	  :onEnd => "function(draggable_element, droppable_element, event) { isDrop = false }") %>
-  <%= drop_receiving_element(factor_target_id,		# The id of the receiving element
-	  :with   => "'above=' + (element.id.split('_').last()) + '&below=#{factor.id};'",     		# The query string parameters
-	  :url    => {:action=> 'reorder_factors', :project_id => @project.id, :id => @arch_decision.id}, # The action to call
-	  :hoverclass => "drag-drop-target-hover"
-  )%>
+<script>
+  $('#<%= factor_div_id %>').draggable({
+    revert: true,
+    start: function(event, ui) { isDrop = true; },
+    end: function(event, ui) { isDrop = false; }
+  });
+  $('#<%= factor_target_id %>').droppable({
+    hoverClass: "drag-drop-target-hover",
+    drop: function(event, ui) { 
+      $.ajax({
+        type: "GET",
+        url: "<%= url_for :action=> 'reorder_factors', :project_id => @project.id, :id => @arch_decision.id %>?above=" + (ui.draggable.attr("id").split('_')[1]) + "&below=<%= factor.id %>",
+        dataType: 'script',
+        success: function(data){
+          $('#ajax-indicator').hide();
+          var response = eval("(" + data + ")");
+        }
+      });
+    }
+  });
+</script>
 <% end %>
 
 <% end %>
 <% if authorize_for(:arch_decisions, :reorder_factors) %>
   <% row_class = cycle("odd", "even") %>
   <tr class="<%= row_class %>"><td colspan="4"><div id="drop-to-bottom" class="drag-drop-target"></div></td></tr>
-  <%= drop_receiving_element('drop-to-bottom',
-	  :with   => "'below=' + (element.id.split('_').last()) + ';'",
-	  :url    => {:action=> 'reorder_factors', :project_id => @project.id, :id => @arch_decision.id},
-	  :hoverclass => "drag-drop-target-hover"
-  )%>
+<script>
+  $('#drop-to-bottom').droppable({
+    hoverClass: "drag-drop-target-hover",
+    drop: function(event, ui) { 
+      $.ajax({
+        type: "GET",
+        url: "<%= url_for :action=> 'reorder_factors', :project_id => @project.id, :id => @arch_decision.id %>?below=" + (ui.draggable.attr("id").split('_')[1]),
+        dataType: 'script',
+        success: function(data){
+          $('#ajax-indicator').hide();
+          var response = eval("(" + data + ")");
+        }
+      });
+    }
+  });
+</script>
 <% end %>
 
 <% if authorize_for(:factors, :new) %>
@@ -73,7 +99,7 @@
 	<td></td>
 	<!-- td align="center" style="width:10%; white-space:nowrap;"></td-->
 	<td colspan="3">
-<% remote_form_for(:factor, @factor, :url => { :project_id => @project.id, :action => "new_factor", :id => @arch_decision.id }, :html => { :id => "new_factor" }) do |f| %>
+<%= form_for(@factor || Factor.new, :remote => true, :url => { :project_id => @project.id, :action => "new_factor", :id => @arch_decision.id }, :html => { :id => "new_factor" }) do |f| %>
 	<%= f.select :status_id, (@factor_statuses.collect {|s| [s.name, s.id]}) %>
 	  <%= f.text_field :summary, :size => 100, :required => true %>
 	  <small>
@@ -89,7 +115,7 @@
 
 <% if authorize_for(:factors, :new) %>
 <div id="new_factor_link">
-	<%= link_to_function l(:label_factor_new), "showForm('new_factor')", :class => 'icon icon-add' %>
+	<%= link_to_function t(:label_factor_new_html), "showForm('new_factor')", :class => 'icon icon-add' %>
 </div>
 
 <%= javascript_tag "initializeForm('new_factor');" %>
